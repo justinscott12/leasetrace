@@ -1,0 +1,2 @@
+"""LegalTrace Backend Package."""
+

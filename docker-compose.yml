@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: legaltrace_postgres
+    environment:
+      POSTGRES_USER: legaltrace_user
+      POSTGRES_PASSWORD: legaltrace_pass
+      POSTGRES_DB: legaltrace_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U legaltrace_user -d legaltrace_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - legaltrace_network
+
+  redis:
+    image: redis:7-alpine
+    container_name: legaltrace_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - legaltrace_network
+
+  backend:
+    build:
+      context: .
+      dockerfile: ./backend/Dockerfile
+    container_name: legaltrace_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://legaltrace_user:legaltrace_pass@postgres:5432/legaltrace_db
+      - CHECKPOINT_DB_URL=postgresql://legaltrace_user:legaltrace_pass@postgres:5432/legaltrace_db
+      - REDIS_URL=redis://redis:6379/0
+    env_file:
+      - ./backend/.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - legaltrace_network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  legaltrace_network:
+    driver: bridge
+
