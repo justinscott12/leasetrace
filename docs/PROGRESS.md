@@ -11,7 +11,8 @@ Resume: read `BUILD_PROMPT.md` → `docs/DECISIONS.md` → this file. Then `npm 
   - Handles the Legislature's compound numbering (`(1)(a)` on an unnumbered parent, e.g. 83.491)
 - [x] Rule set: 18 rules in `src/rules/rules.ts`, each with a statute quote verified against the corpus by `tests/corpus.test.ts`
 - [x] Unit tests: 75 passing (boundaries, silence, unclear, near-misses like the SFH/duplex 83.51(1) waiver)
-- [ ] Not yet: rename the GitHub repo to `leasetrace` (GitHub redirects the old URL) and keep v1 on a `v1-legacy` branch (v1 is `justinscott12/legaltrace` @ 4f605fb on GitHub — needs Justin's OK before pushing anything)
+- [x] GitHub: repo renamed to `justinscott12/leasetrace` (old URL redirects); v1 saved on `v1-legacy` @ 4f605fb; v2 work lives on the `v2` branch.
+- [ ] At launch (Milestone C deploy): swap `main` to v2 and update the repo description (it still says "commercial lease… LangGraph").
 
 ### Rules (id → citation)
 deposit-holding 83.49(1) · deposit-disclosure 83.49(2) · deposit-return-deadline 83.49(3)(a) · deposit-claim-deadline 83.49(3)(a) ·
@@ -64,4 +65,5 @@ A private precision check on a real lease lives in `private/` (gitignored; see `
   Upgrade Node to the current LTS and unpin them.
 
 ## Session log
-- 2026-10-28: Milestone A done except v1-legacy branch. Extraction pipeline built and unit-tested (no real API call yet). Nothing committed. Renamed LegalTrace → LeaseTrace locally (package, docs, decision logs). Folder rename `workspace/legaltrace` → `workspace/leasetrace` still pending: it was locked by the session's own MCP servers; do it with the session closed. GitHub repo still `justinscott12/legaltrace`; rename it there when v2 is pushed.
+- 2026-10-28: Milestone A done except v1-legacy branch. Extraction pipeline built and unit-tested (no real API call yet). Nothing committed. Renamed LegalTrace → LeaseTrace locally (package, docs, decision logs). Folder renamed to `workspace/leasetrace`. GitHub repo still `justinscott12/legaltrace`; rename it there when v2 is pushed.
+- 2026-10-30: First commit on `v2`, pushed. Personal lease notes moved to gitignored `private/NOTES.md` before pushing.
