@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.env
+.env.*
+*.log
+
+# Real leases with personal info. Never commit, never publish.
+private/
