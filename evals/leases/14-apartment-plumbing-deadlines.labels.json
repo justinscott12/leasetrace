@@ -1,0 +1,45 @@
+{
+  "lease": "14-apartment-plumbing-deadlines.txt",
+  "split": "test",
+  "summary": "Apartment: plumbing shifted to the tenant (multi-unit, so void) and both deposit deadlines too long.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "maintenance-waiver",
+      "citation": "83.51(1)",
+      "severity": "void",
+      "quote": "Tenant is responsible for all plumbing repairs inside the Premises, including pipes, drains, water lines, and fixtures, regardless of cause",
+      "note": "multi-unit: can't shift plumbing"
+    },
+    {
+      "ruleId": "maintenance-waiver",
+      "citation": "83.51(1)",
+      "severity": "void",
+      "quote": "Landlord will maintain the roof, exterior walls, and building systems other than plumbing.",
+      "note": "restates the plumbing shift from the landlord's side",
+      "optional": true
+    },
+    {
+      "ruleId": "deposit-return-deadline",
+      "citation": "83.49(3)(a)",
+      "severity": "void",
+      "quote": "the deposit will be returned within 45 days after the lease ends",
+      "note": "45 > 15 days"
+    },
+    {
+      "ruleId": "deposit-claim-deadline",
+      "citation": "83.49(3)(a)",
+      "severity": "void",
+      "quote": "Landlord will send written notice within 60 days after the lease ends",
+      "note": "60 > 30 days"
+    }
+  ],
+  "outOfScope": [],
+  "nearMisses": [
+    {
+      "quote": "allowing Tenant 5 days, excluding Saturday, Sunday, and legal holidays, to pay or surrender possession",
+      "note": "more notice than required"
+    }
+  ],
+  "approved": false
+}

@@ -1,0 +1,10 @@
+{
+  "lease": "08-commercial-office.txt",
+  "split": "dev",
+  "summary": "Commercial office lease. Out of Part II entirely: no findings even though the terms would violate it.",
+  "scope": "not_residential",
+  "findings": [],
+  "outOfScope": [],
+  "nearMisses": [],
+  "approved": false
+}

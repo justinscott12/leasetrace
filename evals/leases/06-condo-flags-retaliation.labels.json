@@ -1,0 +1,46 @@
+{
+  "lease": "06-condo-flags-retaliation.txt",
+  "split": "dev",
+  "summary": "Condo in a large building: blanket flag ban and a retaliation clause.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "flag-ban",
+      "citation": "83.67(4)",
+      "severity": "void",
+      "quote": "No flags, banners, or signs of any kind may be displayed on the balcony or in any window of the Unit.",
+      "note": "bans all flags"
+    },
+    {
+      "ruleId": "maintenance-waiver",
+      "citation": "83.51(1)",
+      "severity": "void",
+      "quote": "Tenant is responsible, at Tenant's expense, for repairing or replacing the Unit's windows, sliding glass doors, and water heater, whatever the cause of the damage.",
+      "note": "multi-unit building: windows and plumbing can't be shifted"
+    },
+    {
+      "ruleId": "retaliation",
+      "citation": "83.64(1)",
+      "severity": "violation",
+      "quote": "If Tenant files a complaint about the Unit with any code enforcement or other governmental agency, Landlord may increase the rent by 10 percent or terminate this lease on 30 days' notice.",
+      "note": "penalizes code complaints"
+    }
+  ],
+  "outOfScope": [
+    {
+      "topic": "condo association rules",
+      "quote": "Tenant agrees to comply with the Declaration, Bylaws, and Rules of the Harbor View Towers Condominium Association"
+    },
+    {
+      "topic": "jury waiver",
+      "quote": "Landlord and Tenant each waive the right to a jury trial in any action arising from this lease."
+    }
+  ],
+  "nearMisses": [
+    {
+      "quote": "Either party may decline to renew by giving written notice at least 45 days before December 31, 2027.",
+      "note": "45 is inside 30-60"
+    }
+  ],
+  "approved": false
+}

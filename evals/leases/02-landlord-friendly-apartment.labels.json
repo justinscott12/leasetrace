@@ -1,0 +1,70 @@
+{
+  "lease": "02-landlord-friendly-apartment.txt",
+  "split": "dev",
+  "summary": "Apartment lease with deposit, default and self-help violations.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "deposit-holding",
+      "citation": "83.49(1)",
+      "severity": "violation",
+      "quote": "Landlord may deposit the security deposit in its general operating account and may use those funds for property expenses during the Lease Term.",
+      "note": "commingled and spent before due"
+    },
+    {
+      "ruleId": "deposit-disclosure",
+      "citation": "83.49(2)",
+      "severity": "notice",
+      "quote": null,
+      "note": "Deposit taken, no disclosure anywhere in the lease."
+    },
+    {
+      "ruleId": "deposit-return-deadline",
+      "citation": "83.49(3)(a)",
+      "severity": "void",
+      "quote": "within 30 days after Resident vacates if no claim is made",
+      "note": "30 > 15 days"
+    },
+    {
+      "ruleId": "deposit-claim-deadline",
+      "citation": "83.49(3)(a)",
+      "severity": "void",
+      "quote": "Landlord will notify Resident in writing within 45 days after Resident vacates",
+      "note": "45 > 30 days"
+    },
+    {
+      "ruleId": "nonpayment-notice",
+      "citation": "83.56(3)",
+      "severity": "void",
+      "quote": "the 3 days are calendar days and include Saturdays, Sundays, and holidays",
+      "note": "counts weekends/holidays"
+    },
+    {
+      "ruleId": "lockout",
+      "citation": "83.67(2)",
+      "severity": "violation",
+      "quote": "If rent is more than 10 days late, Landlord may change the locks to the Unit until all amounts owed are paid in full.",
+      "note": "self-help lockout"
+    },
+    {
+      "ruleId": "utility-shutoff",
+      "citation": "83.67(1)",
+      "severity": "violation",
+      "quote": "Landlord may shut off water service to the Unit if Resident's account is more than 15 days past due.",
+      "note": "shutoff for nonpayment"
+    }
+  ],
+  "outOfScope": [
+    {
+      "topic": "late fee",
+      "quote": "A late fee of $100.00 applies to any rent received after the 3rd of the month."
+    }
+  ],
+  "nearMisses": [
+    {
+      "quote": "Resident will promptly report leaks and will pay for repairs to damage Resident or Resident's guests cause.",
+      "note": "tenant-caused damage"
+    }
+  ],
+  "approved": false
+}

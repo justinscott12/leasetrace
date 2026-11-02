@@ -1,0 +1,44 @@
+{
+  "lease": "20-forwarded-email.txt",
+  "split": "test",
+  "summary": "Lease pasted from a forwarded email with quote markers: commingled deposit, calendar-day notice, storm clause.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "deposit-holding",
+      "citation": "83.49(1)",
+      "severity": "violation",
+      "quote": "regular business checking account along with our operating funds.",
+      "note": "commingled"
+    },
+    {
+      "ruleId": "deposit-disclosure",
+      "citation": "83.49(2)",
+      "severity": "notice",
+      "quote": null,
+      "note": "Deposit taken, no disclosure anywhere in the lease."
+    },
+    {
+      "ruleId": "nonpayment-notice",
+      "citation": "83.56(3)",
+      "severity": "void",
+      "quote": "a 3-day written notice. The 3 days are calendar days, weekends",
+      "note": "counts weekends"
+    },
+    {
+      "ruleId": "liability-exculpation",
+      "citation": "83.47(1)(b)",
+      "severity": "review",
+      "quote": "Landlord is excused from performing its obligations",
+      "note": "label policy row 6"
+    }
+  ],
+  "outOfScope": [
+    {
+      "topic": "pets",
+      "quote": "dogs under 30 lbs only, $50/month pet rent."
+    }
+  ],
+  "nearMisses": [],
+  "approved": false
+}

@@ -1,0 +1,34 @@
+{
+  "lease": "21-duplex-fee-carveout-flags.txt",
+  "split": "test",
+  "summary": "Duplex with surety bond: allowed plumbing shift, punitive-damages fee carve-out, ban on all national flags.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "flag-ban",
+      "citation": "83.67(4)",
+      "severity": "void",
+      "quote": "No flags of any nation, including the United States flag, may be displayed from the premises.",
+      "note": "bans the US flag"
+    },
+    {
+      "ruleId": "attorney-fee-waiver",
+      "citation": "83.48",
+      "severity": "void",
+      "quote": "except that no attorney fees shall be awarded in any action in which punitive or exemplary damages are sought.",
+      "note": "label policy row 3"
+    }
+  ],
+  "outOfScope": [],
+  "nearMisses": [
+    {
+      "quote": "Tenants will repair and maintain the plumbing fixtures and drains in the upstairs unit.",
+      "note": "allowed for a duplex"
+    },
+    {
+      "quote": "Landlord has posted a surety bond with the Marion County clerk of court as provided by law",
+      "note": "surety bond is an allowed holding method"
+    }
+  ],
+  "approved": false
+}

@@ -1,0 +1,30 @@
+{
+  "lease": "15-house-holdover-lockout.txt",
+  "split": "test",
+  "summary": "Single-family house: allowed repair shift, holdover lockout, deposit with no disclosure.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "lockout",
+      "citation": "83.67(2)",
+      "severity": "violation",
+      "quote": "Landlord may change the locks and remove the Tenants from the Residence.",
+      "note": "self-help eviction"
+    },
+    {
+      "ruleId": "deposit-disclosure",
+      "citation": "83.49(2)",
+      "severity": "notice",
+      "quote": null,
+      "note": "Deposit taken, no disclosure anywhere in the lease."
+    }
+  ],
+  "outOfScope": [],
+  "nearMisses": [
+    {
+      "quote": "Tenants will keep the roof, gutters, and plumbing in good repair at Tenants' cost during the term.",
+      "note": "allowed for a single-family home"
+    }
+  ],
+  "approved": false
+}

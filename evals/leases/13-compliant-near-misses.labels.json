@@ -1,0 +1,60 @@
+{
+  "lease": "13-compliant-near-misses.txt",
+  "split": "dev",
+  "summary": "Long compliant lease built from near-misses. The only finding is the label-policy review on repair shutoffs.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "utility-shutoff",
+      "citation": "83.67(1)",
+      "severity": "review",
+      "quote": "We may need to shut off water to your building briefly when we repair a main line.",
+      "note": "label policy row 1"
+    }
+  ],
+  "outOfScope": [
+    {
+      "topic": "late fee",
+      "quote": "a $60 late fee applies"
+    },
+    {
+      "topic": "pets",
+      "quote": "Up to two pets are allowed with a pet addendum"
+    }
+  ],
+  "nearMisses": [
+    {
+      "quote": "You may not change or add locks without our written consent",
+      "note": "not a lockout"
+    },
+    {
+      "quote": "We are not responsible for loss or injury caused by the criminal acts of other people",
+      "note": "label policy row 8"
+    },
+    {
+      "quote": "Nothing in this lease limits either party's liability to the other under law.",
+      "note": "anti-exculpation"
+    },
+    {
+      "quote": "pay for any repair needed because of damage you, your occupants, or your guests cause",
+      "note": "tenant-caused damage"
+    },
+    {
+      "quote": "We will only remove personal property you leave in the apartment after you surrender or abandon it, or after a lawful eviction.",
+      "note": "compliant removal"
+    },
+    {
+      "quote": "We will not raise your rent, reduce services, or threaten eviction because you did so.",
+      "note": "anti-retaliation"
+    },
+    {
+      "quote": "Political signs and banners may not be attached to the building exterior.",
+      "note": "US flag expressly allowed"
+    },
+    {
+      "quote": "We may enter at any time in an emergency or to protect or preserve the premises.",
+      "note": "statute allows this"
+    }
+  ],
+  "approved": false
+}

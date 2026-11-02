@@ -1,0 +1,50 @@
+{
+  "lease": "04-room-month-to-month.txt",
+  "split": "dev",
+  "summary": "Informal month-to-month room rental in a fourplex: no-notice entry, short termination notice, no address.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "repair-entry-notice",
+      "citation": "83.53(2)",
+      "severity": "void",
+      "quote": "The owner may enter the room at any time, without notice, to make repairs or check on the room.",
+      "note": "no notice"
+    },
+    {
+      "ruleId": "repair-entry-hours",
+      "citation": "83.53(2)",
+      "severity": "void",
+      "quote": "The owner may enter the room at any time, without notice, to make repairs or check on the room.",
+      "note": "any time"
+    },
+    {
+      "ruleId": "periodic-termination-notice",
+      "citation": "83.57(3)",
+      "severity": "void",
+      "quote": "Either the owner or the renter may end this agreement by giving the other 15 days' notice.",
+      "note": "15 < 30 days, month-to-month"
+    },
+    {
+      "ruleId": "landlord-address",
+      "citation": "83.50",
+      "severity": "notice",
+      "quote": null,
+      "note": "No separate notice address; the owner may live at the property (shared kitchen), so its address may count.",
+      "optional": true
+    }
+  ],
+  "outOfScope": [
+    {
+      "topic": "guest limits",
+      "quote": "No overnight guests more than 3 nights in a row."
+    }
+  ],
+  "nearMisses": [
+    {
+      "quote": "No security deposit is required.",
+      "note": "$0 deposit: no disclosure needed"
+    }
+  ],
+  "approved": false
+}

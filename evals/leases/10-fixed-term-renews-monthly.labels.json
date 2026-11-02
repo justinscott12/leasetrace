@@ -1,0 +1,23 @@
+{
+  "lease": "10-fixed-term-renews-monthly.txt",
+  "split": "dev",
+  "summary": "Fixed term that rolls month-to-month with 10-day termination notice. Known rule gap: the periodic rule skips fixed-term leases.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "periodic-termination-notice",
+      "citation": "83.57(3)",
+      "severity": "void",
+      "quote": "During any month-to-month renewal period, either party may terminate the tenancy by giving the other party at least 10 days' written notice.",
+      "note": "10 < 30 days for the month-to-month period"
+    }
+  ],
+  "outOfScope": [],
+  "nearMisses": [
+    {
+      "quote": "Unless either party gives written notice of non-renewal at least 30 days before the end of the initial term",
+      "note": "30 is inside 30-60"
+    }
+  ],
+  "approved": false
+}

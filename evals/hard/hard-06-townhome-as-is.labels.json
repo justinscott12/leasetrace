@@ -1,0 +1,65 @@
+{
+  "lease": "hard-06-townhome-as-is.txt",
+  "split": "test",
+  "summary": "Townhome community lease: 'as is' with no repair duty, 75-day move-out notice, a fee carve-out for any personal-injury claim, and a utility clause 'as permitted by law'.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "maintenance-waiver",
+      "citation": "83.51(1)",
+      "severity": "void",
+      "quote": "Except as expressly provided in this Lease, Landlord will not be required to make any repairs to the Townhome.",
+      "note": "multi-unit community; no repair duty is provided elsewhere"
+    },
+    {
+      "ruleId": "utility-shutoff",
+      "citation": "83.67(1)",
+      "severity": "review",
+      "quote": "Landlord may suspend utility services furnished by Landlord only as permitted by applicable law.",
+      "note": "label policy row 7"
+    },
+    {
+      "ruleId": "end-of-term-notice",
+      "citation": "83.575(1)",
+      "severity": "void",
+      "quote": "Tenant must give Landlord written notice of intent to vacate at least seventy-five (75) days before the end of the Lease term.",
+      "note": "75 > 60 days"
+    },
+    {
+      "ruleId": "attorney-fee-waiver",
+      "citation": "83.48",
+      "severity": "void",
+      "quote": "however, no attorney fees may be recovered by either party in any claim for personal injury.",
+      "note": "label policy row 3: broader than 83.48's own carve-out"
+    }
+  ],
+  "outOfScope": [
+    {
+      "topic": "late fees",
+      "quote": "If any rent is not received by 11:59 p.m. on the third day of the month, Tenant will pay an initial late charge of $75.00 plus $10.00 per day thereafter until paid, not to exceed $150.00 in total for any month. A $50.00 fee applies to any returned payment."
+    },
+    {
+      "topic": "pet rules and fees",
+      "quote": "No animals of any kind, including visiting animals, are allowed in the Townhome without a signed animal addendum, except assistance animals approved as required by law. Approved pets require a nonrefundable pet fee of $350 and monthly pet rent of $35 per animal."
+    },
+    {
+      "topic": "guest limits",
+      "quote": "Guests may not stay in the Townhome more than 7 consecutive nights or more than 14 nights in any six-month period without Landlord's written consent."
+    },
+    {
+      "topic": "jury-trial waiver",
+      "quote": "To the extent permitted by law, Landlord and Tenant waive trial by jury in any lawsuit arising out of this Lease or Tenant's occupancy of the Townhome."
+    }
+  ],
+  "nearMisses": [
+    {
+      "quote": "Tenant must obtain and keep in force during the Lease term a renter's insurance policy with personal liability coverage of at least $100,000 and must provide proof of coverage before move-in and upon request. Landlord's property insurance covers the building, not Tenant's furniture, clothing, electronics or other belongings, and does not provide liability coverage for Tenant.",
+      "note": "landlord's insurance doesn't cover tenant property: a fact, not a release"
+    },
+    {
+      "quote": "Tenant will pay Landlord for the reasonable cost of repairing any damage to the Townhome or the community, including stopped-up drains and broken windows, that is caused by Tenant, occupants, guests or animals, whether by negligence, misuse or violation of this Lease. Normal wear and tear is excepted.",
+      "note": "reimbursing tenant-caused damage: not a maintenance waiver"
+    }
+  ],
+  "approved": false
+}

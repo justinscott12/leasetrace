@@ -1,0 +1,10 @@
+{
+  "lease": "19-commercial-retail.txt",
+  "split": "test",
+  "summary": "Retail shopping-center lease: not residential, so no findings.",
+  "scope": "not_residential",
+  "findings": [],
+  "outOfScope": [],
+  "nearMisses": [],
+  "approved": false
+}

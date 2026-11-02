@@ -1,0 +1,3834 @@
+{
+  "meta": {
+    "createdAt": "2026-11-02T19:27:01.328Z",
+    "model": "claude-sonnet-5-5",
+    "effort": "low",
+    "runsPerCase": 2,
+    "split": "test",
+    "gitCommit": "66d2227",
+    "labelsApproved": false
+  },
+  "report": {
+    "meta": {
+      "createdAt": "2026-11-02T19:27:01.328Z",
+      "model": "claude-sonnet-5-5",
+      "effort": "low",
+      "runsPerCase": 2,
+      "split": "test",
+      "gitCommit": "66d2227",
+      "labelsApproved": false
+    },
+    "totals": {
+      "dev": {
+        "strict": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0
+        },
+        "lenient": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0
+        },
+        "cases": 0,
+        "runs": 0,
+        "precision": null,
+        "recall": null,
+        "lenientPrecision": null,
+        "lenientRecall": null,
+        "fabricatedCitationRate": null,
+        "unlocatedQuoteRate": null,
+        "scopeAccuracy": null,
+        "outOfScopeRecall": null,
+        "invalidRendered": 0,
+        "errors": 0
+      },
+      "test": {
+        "strict": {
+          "tp": 26,
+          "fp": 2,
+          "fn": 2
+        },
+        "lenient": {
+          "tp": 28,
+          "fp": 0,
+          "fn": 0
+        },
+        "cases": 4,
+        "runs": 8,
+        "precision": 0.9285714285714286,
+        "recall": 0.9285714285714286,
+        "lenientPrecision": 1,
+        "lenientRecall": 1,
+        "fabricatedCitationRate": 0,
+        "unlocatedQuoteRate": 0,
+        "scopeAccuracy": 1,
+        "outOfScopeRecall": 1,
+        "invalidRendered": 0,
+        "errors": 0
+      },
+      "all": {
+        "strict": {
+          "tp": 26,
+          "fp": 2,
+          "fn": 2
+        },
+        "lenient": {
+          "tp": 28,
+          "fp": 0,
+          "fn": 0
+        },
+        "cases": 4,
+        "runs": 8,
+        "precision": 0.9285714285714286,
+        "recall": 0.9285714285714286,
+        "lenientPrecision": 1,
+        "lenientRecall": 1,
+        "fabricatedCitationRate": 0,
+        "unlocatedQuoteRate": 0,
+        "scopeAccuracy": 1,
+        "outOfScopeRecall": 1,
+        "invalidRendered": 0,
+        "errors": 0
+      }
+    },
+    "rules": {
+      "dev": [
+        {
+          "ruleId": "deposit-holding",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "deposit-disclosure",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "deposit-return-deadline",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "deposit-claim-deadline",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "nonpayment-notice",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "repair-entry-notice",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "repair-entry-hours",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "periodic-termination-notice",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "end-of-term-notice",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "maintenance-waiver",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "attorney-fee-waiver",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "liability-exculpation",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "utility-shutoff",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "lockout",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "flag-ban",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "retaliation",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "property-removal",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "landlord-address",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        }
+      ],
+      "test": [
+        {
+          "ruleId": "deposit-holding",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "deposit-disclosure",
+          "strict": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "deposit-return-deadline",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "deposit-claim-deadline",
+          "strict": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "nonpayment-notice",
+          "strict": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "repair-entry-notice",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "repair-entry-hours",
+          "strict": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "periodic-termination-notice",
+          "strict": {
+            "tp": 0,
+            "fp": 2,
+            "fn": 2
+          },
+          "lenient": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "end-of-term-notice",
+          "strict": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "maintenance-waiver",
+          "strict": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "attorney-fee-waiver",
+          "strict": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "liability-exculpation",
+          "strict": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "utility-shutoff",
+          "strict": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "lockout",
+          "strict": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "flag-ban",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "retaliation",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "property-removal",
+          "strict": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "landlord-address",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        }
+      ],
+      "all": [
+        {
+          "ruleId": "deposit-holding",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "deposit-disclosure",
+          "strict": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "deposit-return-deadline",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "deposit-claim-deadline",
+          "strict": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "nonpayment-notice",
+          "strict": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "repair-entry-notice",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "repair-entry-hours",
+          "strict": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "periodic-termination-notice",
+          "strict": {
+            "tp": 0,
+            "fp": 2,
+            "fn": 2
+          },
+          "lenient": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "end-of-term-notice",
+          "strict": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "maintenance-waiver",
+          "strict": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "attorney-fee-waiver",
+          "strict": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "liability-exculpation",
+          "strict": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "utility-shutoff",
+          "strict": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "lockout",
+          "strict": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "flag-ban",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "retaliation",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "property-removal",
+          "strict": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 0
+          }
+        },
+        {
+          "ruleId": "landlord-address",
+          "strict": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          },
+          "lenient": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0
+          }
+        }
+      ]
+    },
+    "cases": [
+      {
+        "id": "hard-05-lakefront-community",
+        "split": "test",
+        "summary": "Large community lease. Two removal rights hide in the entry-purpose list, a rekey-on-default remedy hides in the default section, plus force majeure and a crime-only disclaimer.",
+        "runs": 2,
+        "errors": 0,
+        "strict": {
+          "tp": 8,
+          "fp": 0,
+          "fn": 0
+        },
+        "agreement": 1,
+        "hitRate": [
+          {
+            "label": 0,
+            "ruleId": "property-removal",
+            "severity": "violation",
+            "optional": false,
+            "rate": 1
+          },
+          {
+            "label": 1,
+            "ruleId": "property-removal",
+            "severity": "violation",
+            "optional": false,
+            "rate": 1
+          },
+          {
+            "label": 2,
+            "ruleId": "lockout",
+            "severity": "violation",
+            "optional": false,
+            "rate": 1
+          },
+          {
+            "label": 3,
+            "ruleId": "liability-exculpation",
+            "severity": "review",
+            "optional": false,
+            "rate": 1
+          }
+        ],
+        "falsePositives": [],
+        "wrongSeverity": [],
+        "duplicates": 0
+      },
+      {
+        "id": "hard-06-townhome-as-is",
+        "split": "test",
+        "summary": "Townhome community lease: 'as is' with no repair duty, 75-day move-out notice, a fee carve-out for any personal-injury claim, and a utility clause 'as permitted by law'.",
+        "runs": 2,
+        "errors": 0,
+        "strict": {
+          "tp": 8,
+          "fp": 0,
+          "fn": 0
+        },
+        "agreement": 1,
+        "hitRate": [
+          {
+            "label": 0,
+            "ruleId": "maintenance-waiver",
+            "severity": "void",
+            "optional": false,
+            "rate": 1
+          },
+          {
+            "label": 1,
+            "ruleId": "utility-shutoff",
+            "severity": "review",
+            "optional": false,
+            "rate": 1
+          },
+          {
+            "label": 2,
+            "ruleId": "end-of-term-notice",
+            "severity": "void",
+            "optional": false,
+            "rate": 1
+          },
+          {
+            "label": 3,
+            "ruleId": "attorney-fee-waiver",
+            "severity": "void",
+            "optional": false,
+            "rate": 1
+          }
+        ],
+        "falsePositives": [],
+        "wrongSeverity": [],
+        "duplicates": 0
+      },
+      {
+        "id": "hard-07-duplex-month-to-month",
+        "split": "test",
+        "summary": "Month-to-month duplex with addenda. Termination notice 'by the 15th' (about 15 days), a 35-day claim deadline in the deposit addendum, and a disclosure without the statutory notice.",
+        "runs": 2,
+        "errors": 0,
+        "strict": {
+          "tp": 4,
+          "fp": 2,
+          "fn": 2
+        },
+        "agreement": 1,
+        "hitRate": [
+          {
+            "label": 0,
+            "ruleId": "periodic-termination-notice",
+            "severity": "void",
+            "optional": false,
+            "rate": 0
+          },
+          {
+            "label": 1,
+            "ruleId": "deposit-claim-deadline",
+            "severity": "void",
+            "optional": false,
+            "rate": 1
+          },
+          {
+            "label": 2,
+            "ruleId": "deposit-disclosure",
+            "severity": "notice",
+            "optional": false,
+            "rate": 1
+          }
+        ],
+        "falsePositives": [],
+        "wrongSeverity": [
+          {
+            "ruleId": "periodic-termination-notice",
+            "expected": "void",
+            "got": "review",
+            "runs": 2
+          }
+        ],
+        "duplicates": 0
+      },
+      {
+        "id": "hard-08-scanned-condo",
+        "split": "test",
+        "summary": "Scanned condo lease. Two-business-day pay-or-quit, repair entry from 7:00 a.m., and a release from all claims buried in an indemnity paragraph; the U.S. flag is expressly allowed.",
+        "runs": 2,
+        "errors": 0,
+        "strict": {
+          "tp": 6,
+          "fp": 0,
+          "fn": 0
+        },
+        "agreement": 1,
+        "hitRate": [
+          {
+            "label": 0,
+            "ruleId": "nonpayment-notice",
+            "severity": "void",
+            "optional": false,
+            "rate": 1
+          },
+          {
+            "label": 1,
+            "ruleId": "liability-exculpation",
+            "severity": "void",
+            "optional": false,
+            "rate": 1
+          },
+          {
+            "label": 2,
+            "ruleId": "repair-entry-hours",
+            "severity": "void",
+            "optional": false,
+            "rate": 1
+          }
+        ],
+        "falsePositives": [],
+        "wrongSeverity": [],
+        "duplicates": 0
+      }
+    ],
+    "cost": {
+      "totalUsd": 0.29222640000000005,
+      "perRunUsd": 0.03652830000000001,
+      "latencyP50Ms": 10077,
+      "latencyP90Ms": 13041
+    }
+  },
+  "cases": [
+    {
+      "id": "hard-05-lakefront-community",
+      "split": "test",
+      "leaseSha256": "c36ab8df71bfd2155a0461530cb0ca31656efe6d97cece67d63ac022b73740d0",
+      "runs": [
+        {
+          "ok": true,
+          "scope": "residential",
+          "findings": [
+            {
+              "ruleId": "liability-exculpation",
+              "citation": "83.47(1)(b)",
+              "title": "Limit on landlord liability",
+              "severity": "review",
+              "problem": "The lease excuses the landlord's performance after events beyond its control. That isn't a release of liability by itself, but if it's used to skip duties Florida says can't be waived (like maintenance under s. 83.51), it would be void. A person should check.",
+              "span": {
+                "start": 12256,
+                "end": 12501,
+                "quote": "Management will not be in default of this Lease, and its obligations will be suspended, while performance is prevented by hurricane, flood, fire, pandemic, governmental order, labor dispute or other causes beyond Management's reasonable control."
+              },
+              "suggestedFix": "Add: Nothing in this clause excuses Landlord's obligations under Part II of Chapter 83, Florida Statutes.",
+              "path": "code_rule"
+            },
+            {
+              "ruleId": "lockout",
+              "citation": "83.67(2)",
+              "title": "Lockout",
+              "severity": "violation",
+              "problem": "The lease allows the landlord to change the locks or otherwise keep the tenant out. Florida prohibits self-help lockouts; only a court eviction can remove a tenant.",
+              "span": {
+                "start": 12089,
+                "end": 12214,
+                "quote": "upon termination of Resident's right of occupancy for default Management may change or rekey the locks to the Apartment Home."
+              },
+              "suggestedFix": "Delete the clause. Landlord may recover possession only through a court eviction.",
+              "path": "code_rule"
+            },
+            {
+              "ruleId": "property-removal",
+              "citation": "83.67(5)",
+              "title": "Removing the tenant's belongings",
+              "severity": "violation",
+              "problem": "The lease lets the landlord remove the tenant's belongings without a surrender, abandonment or court eviction. Florida prohibits this.",
+              "span": {
+                "start": 7384,
+                "end": 7465,
+                "quote": "(d) removing perishable food from a refrigerator or freezer after a power outage;"
+              },
+              "suggestedFix": "Landlord may remove Tenant's personal property only after surrender, abandonment, or a lawful eviction.",
+              "path": "code_rule"
+            },
+            {
+              "ruleId": "property-removal",
+              "citation": "83.67(5)",
+              "title": "Removing the tenant's belongings",
+              "severity": "violation",
+              "problem": "The lease lets the landlord remove the tenant's belongings without a surrender, abandonment or court eviction. Florida prohibits this.",
+              "span": {
+                "start": 7466,
+                "end": 7535,
+                "quote": "(e) removing any item that blocks a smoke detector or fire sprinkler;"
+              },
+              "suggestedFix": "Landlord may remove Tenant's personal property only after surrender, abandonment, or a lawful eviction.",
+              "path": "code_rule"
+            }
+          ],
+          "dropped": [],
+          "outOfScope": [
+            {
+              "topic": "Late fees",
+              "reason": "Fee amounts not evaluated under Part II.",
+              "span": {
+                "start": 945,
+                "end": 1084,
+                "quote": "Resident will pay an initial late charge of $75.00 plus $10.00 per day thereafter until paid, not to exceed $150.00 in total for any month."
+              }
+            },
+            {
+              "topic": "Administrative and application fees",
+              "reason": "Fee amounts not evaluated.",
+              "span": {
+                "start": 1156,
+                "end": 1219,
+                "quote": "Resident has paid a nonrefundable administrative fee of $250.00"
+              }
+            },
+            {
+              "topic": "Guest limits",
+              "reason": "Guest limits not evaluated.",
+              "span": {
+                "start": 3992,
+                "end": 4149,
+                "quote": "Guests may not stay in the Apartment Home more than 7 consecutive nights or more than 14 nights in any six-month period without Management's written consent."
+              }
+            },
+            {
+              "topic": "Pet rules and fees",
+              "reason": "Pet rules and fees not evaluated.",
+              "span": {
+                "start": 11689,
+                "end": 11782,
+                "quote": "Approved pets require a nonrefundable pet fee of $350 and monthly pet rent of $35 per animal."
+              }
+            },
+            {
+              "topic": "Jury trial waiver",
+              "reason": "Jury waivers not evaluated.",
+              "span": {
+                "start": 13209,
+                "end": 13340,
+                "quote": "Management and Resident waive trial by jury in any lawsuit arising out of this Lease or Resident's occupancy of the Apartment Home."
+              }
+            }
+          ],
+          "locates": [
+            {
+              "fact": "propertyType",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "tenancyType",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "securityDeposit",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositHolding",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositDisclosure",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositReturnDays",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositClaimNoticeDays",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "nonpaymentNotice",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "repairEntryNoticeHours",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "repairEntryWindow",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "endOfTermNoticeDays",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "liabilityExculpation",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "liabilityExculpation",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "liabilityExculpation",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "lockoutClause",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "propertyRemovalClause",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "propertyRemovalClause",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "propertyRemovalClause",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "landlordNoticeAddress",
+              "method": "exact",
+              "score": 1
+            }
+          ],
+          "facts": {
+            "propertyType": {
+              "status": "present",
+              "value": "multi_unit",
+              "span": {
+                "start": 367,
+                "end": 397,
+                "quote": "a 264-unit apartment community"
+              }
+            },
+            "tenancyType": {
+              "status": "present",
+              "value": "fixed_term",
+              "span": {
+                "start": 399,
+                "end": 464,
+                "quote": "The Lease term begins September 1, 2028 and ends August 31, 2029."
+              }
+            },
+            "securityDeposit": {
+              "status": "present",
+              "value": {
+                "amount": 800
+              },
+              "span": {
+                "start": 1399,
+                "end": 1438,
+                "quote": "Resident's security deposit is $800.00."
+              }
+            },
+            "depositHolding": {
+              "status": "present",
+              "value": "separate_non_interest",
+              "span": {
+                "start": 1439,
+                "end": 1569,
+                "quote": "Management holds it in a separate non-interest-bearing account at Polk Lakes Bank, 220 S. Florida Avenue, Lakeland, Florida 33801."
+              }
+            },
+            "depositDisclosure": {
+              "status": "present",
+              "value": {
+                "depositoryNamedOrBond": true,
+                "interestStated": true,
+                "statutoryNoticeIncluded": true
+              },
+              "span": {
+                "start": 1439,
+                "end": 1569,
+                "quote": "Management holds it in a separate non-interest-bearing account at Polk Lakes Bank, 220 S. Florida Avenue, Lakeland, Florida 33801."
+              }
+            },
+            "depositReturnDays": {
+              "status": "present",
+              "value": 15,
+              "span": {
+                "start": 1618,
+                "end": 1769,
+                "quote": "Management will return the deposit within 15 days after move-out if it makes no claim, and will send notice of any claim within 30 days after move-out."
+              }
+            },
+            "depositClaimNoticeDays": {
+              "status": "present",
+              "value": 30,
+              "span": {
+                "start": 1618,
+                "end": 1769,
+                "quote": "Management will return the deposit within 15 days after move-out if it makes no claim, and will send notice of any claim within 30 days after move-out."
+              }
+            },
+            "nonpaymentNotice": {
+              "status": "present",
+              "value": {
+                "days": 3,
+                "excludesWeekendsAndHolidays": true
+              },
+              "span": {
+                "start": 11810,
+                "end": 11984,
+                "quote": "If Resident fails to pay rent when due, Management may deliver a written notice demanding payment or possession within 3 days, excluding Saturday, Sunday, and legal holidays."
+              }
+            },
+            "repairEntryNoticeHours": {
+              "status": "present",
+              "value": 24,
+              "span": {
+                "start": 7082,
+                "end": 7229,
+                "quote": "Management may enter the Apartment Home after giving at least 24 hours' notice, between 7:30 a.m. and 8:00 p.m., for any of the following purposes:"
+              }
+            },
+            "repairEntryWindow": {
+              "status": "present",
+              "value": {
+                "startMinute": 450,
+                "endMinute": 1200
+              },
+              "span": {
+                "start": 7082,
+                "end": 7229,
+                "quote": "Management may enter the Apartment Home after giving at least 24 hours' notice, between 7:30 a.m. and 8:00 p.m., for any of the following purposes:"
+              }
+            },
+            "periodicTerminationNoticeDays": {
+              "status": "absent"
+            },
+            "endOfTermNoticeDays": {
+              "status": "present",
+              "value": {
+                "tenant": 60,
+                "landlord": 60
+              },
+              "span": {
+                "start": 12525,
+                "end": 12645,
+                "quote": "If either party does not intend to renew, it must give written notice at least 60 days before the end of the Lease term."
+              }
+            },
+            "structuralMaintenanceWaiver": [],
+            "attorneyFeeWaiver": [],
+            "liabilityExculpation": [
+              {
+                "status": "present",
+                "value": {
+                  "scope": "third_party_crime"
+                },
+                "span": {
+                  "start": 6943,
+                  "end": 7069,
+                  "quote": "Management is not liable for loss or injury caused by the criminal conduct of other persons, unless otherwise provided by law."
+                }
+              },
+              {
+                "status": "present",
+                "value": {
+                  "scope": "force_majeure"
+                },
+                "span": {
+                  "start": 12256,
+                  "end": 12501,
+                  "quote": "Management will not be in default of this Lease, and its obligations will be suspended, while performance is prevented by hurricane, flood, fire, pandemic, governmental order, labor dispute or other causes beyond Management's reasonable control."
+                }
+              },
+              {
+                "status": "present",
+                "value": {
+                  "scope": "stored_property"
+                },
+                "span": {
+                  "start": 12825,
+                  "end": 13159,
+                  "quote": "BY SIGNING THIS RENTAL AGREEMENT, THE TENANT AGREES THAT UPON SURRENDER, ABANDONMENT, OR RECOVERY OF POSSESSION OF THE DWELLING UNIT DUE TO THE DEATH OF THE LAST REMAINING TENANT, AS PROVIDED BY CHAPTER 83, FLORIDA STATUTES, THE LANDLORD SHALL NOT BE LIABLE OR RESPONSIBLE FOR STORAGE OR DISPOSITION OF THE TENANT'S PERSONAL PROPERTY."
+                }
+              }
+            ],
+            "utilityShutoffClause": [],
+            "lockoutClause": [
+              {
+                "status": "present",
+                "value": true,
+                "span": {
+                  "start": 12089,
+                  "end": 12214,
+                  "quote": "upon termination of Resident's right of occupancy for default Management may change or rekey the locks to the Apartment Home."
+                }
+              }
+            ],
+            "flagBan": [],
+            "retaliationClause": [],
+            "propertyRemovalClause": [
+              {
+                "status": "present",
+                "value": {
+                  "onlyAfterSurrenderAbandonmentOrEviction": true,
+                  "legendPresent": true
+                },
+                "span": {
+                  "start": 12685,
+                  "end": 12823,
+                  "quote": "Management will remove personal property from the Apartment Home only after Resident surrenders or abandons it or after a lawful eviction."
+                }
+              },
+              {
+                "status": "present",
+                "value": {
+                  "onlyAfterSurrenderAbandonmentOrEviction": false,
+                  "legendPresent": true
+                },
+                "span": {
+                  "start": 7384,
+                  "end": 7465,
+                  "quote": "(d) removing perishable food from a refrigerator or freezer after a power outage;"
+                }
+              },
+              {
+                "status": "present",
+                "value": {
+                  "onlyAfterSurrenderAbandonmentOrEviction": false,
+                  "legendPresent": true
+                },
+                "span": {
+                  "start": 7466,
+                  "end": 7535,
+                  "quote": "(e) removing any item that blocks a smoke detector or fire sprinkler;"
+                }
+              }
+            ],
+            "landlordNoticeAddress": {
+              "status": "present",
+              "value": "Trellis Property Services, Lake Mirror Residences Leasing Office, 1200 Lake Mirror Drive, Lakeland, Florida 33801",
+              "span": {
+                "start": 14310,
+                "end": 14467,
+                "quote": "Notices to Management must be delivered to Trellis Property Services, Lake Mirror Residences Leasing Office, 1200 Lake Mirror Drive, Lakeland, Florida 33801."
+              }
+            }
+          },
+          "problems": [],
+          "model": "claude-sonnet-5-5",
+          "usage": {
+            "inputTokens": 5780,
+            "outputTokens": 2694,
+            "cacheWriteTokens": 0,
+            "cacheReadTokens": 32674,
+            "costUsd": 0.0450348
+          },
+          "latencyMs": 13041
+        },
+        {
+          "ok": true,
+          "scope": "residential",
+          "findings": [
+            {
+              "ruleId": "liability-exculpation",
+              "citation": "83.47(1)(b)",
+              "title": "Limit on landlord liability",
+              "severity": "review",
+              "problem": "The lease excuses the landlord's performance after events beyond its control. That isn't a release of liability by itself, but if it's used to skip duties Florida says can't be waived (like maintenance under s. 83.51), it would be void. A person should check.",
+              "span": {
+                "start": 12256,
+                "end": 12501,
+                "quote": "Management will not be in default of this Lease, and its obligations will be suspended, while performance is prevented by hurricane, flood, fire, pandemic, governmental order, labor dispute or other causes beyond Management's reasonable control."
+              },
+              "suggestedFix": "Add: Nothing in this clause excuses Landlord's obligations under Part II of Chapter 83, Florida Statutes.",
+              "path": "code_rule"
+            },
+            {
+              "ruleId": "lockout",
+              "citation": "83.67(2)",
+              "title": "Lockout",
+              "severity": "violation",
+              "problem": "The lease allows the landlord to change the locks or otherwise keep the tenant out. Florida prohibits self-help lockouts; only a court eviction can remove a tenant.",
+              "span": {
+                "start": 12089,
+                "end": 12214,
+                "quote": "upon termination of Resident's right of occupancy for default Management may change or rekey the locks to the Apartment Home."
+              },
+              "suggestedFix": "Delete the clause. Landlord may recover possession only through a court eviction.",
+              "path": "code_rule"
+            },
+            {
+              "ruleId": "property-removal",
+              "citation": "83.67(5)",
+              "title": "Removing the tenant's belongings",
+              "severity": "violation",
+              "problem": "The lease lets the landlord remove the tenant's belongings without a surrender, abandonment or court eviction. Florida prohibits this.",
+              "span": {
+                "start": 7384,
+                "end": 7465,
+                "quote": "(d) removing perishable food from a refrigerator or freezer after a power outage;"
+              },
+              "suggestedFix": "Landlord may remove Tenant's personal property only after surrender, abandonment, or a lawful eviction.",
+              "path": "code_rule"
+            },
+            {
+              "ruleId": "property-removal",
+              "citation": "83.67(5)",
+              "title": "Removing the tenant's belongings",
+              "severity": "violation",
+              "problem": "The lease lets the landlord remove the tenant's belongings without a surrender, abandonment or court eviction. Florida prohibits this.",
+              "span": {
+                "start": 7466,
+                "end": 7535,
+                "quote": "(e) removing any item that blocks a smoke detector or fire sprinkler;"
+              },
+              "suggestedFix": "Landlord may remove Tenant's personal property only after surrender, abandonment, or a lawful eviction.",
+              "path": "code_rule"
+            }
+          ],
+          "dropped": [],
+          "outOfScope": [
+            {
+              "topic": "Late fees",
+              "reason": "Fee amounts are not evaluated under Part II.",
+              "span": {
+                "start": 945,
+                "end": 1084,
+                "quote": "Resident will pay an initial late charge of $75.00 plus $10.00 per day thereafter until paid, not to exceed $150.00 in total for any month."
+              }
+            },
+            {
+              "topic": "Administrative and application fees",
+              "reason": "Fee amounts are not evaluated.",
+              "span": {
+                "start": 1156,
+                "end": 1219,
+                "quote": "Resident has paid a nonrefundable administrative fee of $250.00"
+              }
+            },
+            {
+              "topic": "Pet rules and fees",
+              "reason": "Pet rules and fees are out of scope.",
+              "span": {
+                "start": 11689,
+                "end": 11782,
+                "quote": "Approved pets require a nonrefundable pet fee of $350 and monthly pet rent of $35 per animal."
+              }
+            },
+            {
+              "topic": "Guest limits",
+              "reason": "Guest limits are out of scope.",
+              "span": {
+                "start": 3992,
+                "end": 4149,
+                "quote": "Guests may not stay in the Apartment Home more than 7 consecutive nights or more than 14 nights in any six-month period without Management's written consent."
+              }
+            },
+            {
+              "topic": "Jury trial waiver",
+              "reason": "Jury waivers are out of scope.",
+              "span": {
+                "start": 13209,
+                "end": 13340,
+                "quote": "Management and Resident waive trial by jury in any lawsuit arising out of this Lease or Resident's occupancy of the Apartment Home."
+              }
+            }
+          ],
+          "locates": [
+            {
+              "fact": "propertyType",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "tenancyType",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "securityDeposit",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositHolding",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositDisclosure",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositReturnDays",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositClaimNoticeDays",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "nonpaymentNotice",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "repairEntryNoticeHours",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "repairEntryWindow",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "endOfTermNoticeDays",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "liabilityExculpation",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "liabilityExculpation",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "lockoutClause",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "propertyRemovalClause",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "propertyRemovalClause",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "propertyRemovalClause",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "landlordNoticeAddress",
+              "method": "exact",
+              "score": 1
+            }
+          ],
+          "facts": {
+            "propertyType": {
+              "status": "present",
+              "value": "multi_unit",
+              "span": {
+                "start": 367,
+                "end": 397,
+                "quote": "a 264-unit apartment community"
+              }
+            },
+            "tenancyType": {
+              "status": "present",
+              "value": "fixed_term",
+              "span": {
+                "start": 399,
+                "end": 464,
+                "quote": "The Lease term begins September 1, 2028 and ends August 31, 2029."
+              }
+            },
+            "securityDeposit": {
+              "status": "present",
+              "value": {
+                "amount": 800
+              },
+              "span": {
+                "start": 1399,
+                "end": 1438,
+                "quote": "Resident's security deposit is $800.00."
+              }
+            },
+            "depositHolding": {
+              "status": "present",
+              "value": "separate_non_interest",
+              "span": {
+                "start": 1439,
+                "end": 1569,
+                "quote": "Management holds it in a separate non-interest-bearing account at Polk Lakes Bank, 220 S. Florida Avenue, Lakeland, Florida 33801."
+              }
+            },
+            "depositDisclosure": {
+              "status": "present",
+              "value": {
+                "depositoryNamedOrBond": true,
+                "interestStated": true,
+                "statutoryNoticeIncluded": true
+              },
+              "span": {
+                "start": 1570,
+                "end": 1617,
+                "quote": "Resident does not earn interest on the deposit."
+              }
+            },
+            "depositReturnDays": {
+              "status": "present",
+              "value": 15,
+              "span": {
+                "start": 1618,
+                "end": 1769,
+                "quote": "Management will return the deposit within 15 days after move-out if it makes no claim, and will send notice of any claim within 30 days after move-out."
+              }
+            },
+            "depositClaimNoticeDays": {
+              "status": "present",
+              "value": 30,
+              "span": {
+                "start": 1618,
+                "end": 1769,
+                "quote": "Management will return the deposit within 15 days after move-out if it makes no claim, and will send notice of any claim within 30 days after move-out."
+              }
+            },
+            "nonpaymentNotice": {
+              "status": "present",
+              "value": {
+                "days": 3,
+                "excludesWeekendsAndHolidays": true
+              },
+              "span": {
+                "start": 11850,
+                "end": 11984,
+                "quote": "Management may deliver a written notice demanding payment or possession within 3 days, excluding Saturday, Sunday, and legal holidays."
+              }
+            },
+            "repairEntryNoticeHours": {
+              "status": "present",
+              "value": 24,
+              "span": {
+                "start": 7082,
+                "end": 7229,
+                "quote": "Management may enter the Apartment Home after giving at least 24 hours' notice, between 7:30 a.m. and 8:00 p.m., for any of the following purposes:"
+              }
+            },
+            "repairEntryWindow": {
+              "status": "present",
+              "value": {
+                "startMinute": 450,
+                "endMinute": 1200
+              },
+              "span": {
+                "start": 7082,
+                "end": 7229,
+                "quote": "Management may enter the Apartment Home after giving at least 24 hours' notice, between 7:30 a.m. and 8:00 p.m., for any of the following purposes:"
+              }
+            },
+            "periodicTerminationNoticeDays": {
+              "status": "absent"
+            },
+            "endOfTermNoticeDays": {
+              "status": "present",
+              "value": {
+                "tenant": 60,
+                "landlord": 60
+              },
+              "span": {
+                "start": 12525,
+                "end": 12645,
+                "quote": "If either party does not intend to renew, it must give written notice at least 60 days before the end of the Lease term."
+              }
+            },
+            "structuralMaintenanceWaiver": [],
+            "attorneyFeeWaiver": [],
+            "liabilityExculpation": [
+              {
+                "status": "present",
+                "value": {
+                  "scope": "third_party_crime"
+                },
+                "span": {
+                  "start": 6943,
+                  "end": 7069,
+                  "quote": "Management is not liable for loss or injury caused by the criminal conduct of other persons, unless otherwise provided by law."
+                }
+              },
+              {
+                "status": "present",
+                "value": {
+                  "scope": "force_majeure"
+                },
+                "span": {
+                  "start": 12256,
+                  "end": 12501,
+                  "quote": "Management will not be in default of this Lease, and its obligations will be suspended, while performance is prevented by hurricane, flood, fire, pandemic, governmental order, labor dispute or other causes beyond Management's reasonable control."
+                }
+              }
+            ],
+            "utilityShutoffClause": [],
+            "lockoutClause": [
+              {
+                "status": "present",
+                "value": true,
+                "span": {
+                  "start": 12089,
+                  "end": 12214,
+                  "quote": "upon termination of Resident's right of occupancy for default Management may change or rekey the locks to the Apartment Home."
+                }
+              }
+            ],
+            "flagBan": [],
+            "retaliationClause": [],
+            "propertyRemovalClause": [
+              {
+                "status": "present",
+                "value": {
+                  "onlyAfterSurrenderAbandonmentOrEviction": true,
+                  "legendPresent": true
+                },
+                "span": {
+                  "start": 12685,
+                  "end": 12823,
+                  "quote": "Management will remove personal property from the Apartment Home only after Resident surrenders or abandons it or after a lawful eviction."
+                }
+              },
+              {
+                "status": "present",
+                "value": {
+                  "onlyAfterSurrenderAbandonmentOrEviction": false,
+                  "legendPresent": true
+                },
+                "span": {
+                  "start": 7384,
+                  "end": 7465,
+                  "quote": "(d) removing perishable food from a refrigerator or freezer after a power outage;"
+                }
+              },
+              {
+                "status": "present",
+                "value": {
+                  "onlyAfterSurrenderAbandonmentOrEviction": false,
+                  "legendPresent": true
+                },
+                "span": {
+                  "start": 7466,
+                  "end": 7535,
+                  "quote": "(e) removing any item that blocks a smoke detector or fire sprinkler;"
+                }
+              }
+            ],
+            "landlordNoticeAddress": {
+              "status": "present",
+              "value": "Trellis Property Services, Lake Mirror Residences Leasing Office, 1200 Lake Mirror Drive, Lakeland, Florida 33801",
+              "span": {
+                "start": 14310,
+                "end": 14467,
+                "quote": "Notices to Management must be delivered to Trellis Property Services, Lake Mirror Residences Leasing Office, 1200 Lake Mirror Drive, Lakeland, Florida 33801."
+              }
+            }
+          },
+          "problems": [],
+          "model": "claude-sonnet-5-5",
+          "usage": {
+            "inputTokens": 5780,
+            "outputTokens": 2373,
+            "cacheWriteTokens": 0,
+            "cacheReadTokens": 32674,
+            "costUsd": 0.0418248
+          },
+          "latencyMs": 11618
+        }
+      ]
+    },
+    {
+      "id": "hard-06-townhome-as-is",
+      "split": "test",
+      "leaseSha256": "9a455d069480185233c560a4ce74019d137395d0d641ebf874148108c782dfec",
+      "runs": [
+        {
+          "ok": true,
+          "scope": "residential",
+          "findings": [
+            {
+              "ruleId": "end-of-term-notice",
+              "citation": "83.575(1)",
+              "title": "Notice before the end of a fixed term",
+              "severity": "void",
+              "problem": "The lease requires 75 days' notice from the tenant before the term ends. Florida allows only 30 to 60 days.",
+              "span": {
+                "start": 10904,
+                "end": 11030,
+                "quote": "Tenant must give Landlord written notice of intent to vacate at least seventy-five (75) days before the end of the Lease term."
+              },
+              "suggestedFix": "Either party must give written notice at least 30 days (and no more than 60 days) before the end of the lease term if they do not intend to renew.",
+              "path": "code_rule"
+            },
+            {
+              "ruleId": "maintenance-waiver",
+              "citation": "83.51(1)",
+              "title": "Waiver of landlord's maintenance duties",
+              "severity": "void",
+              "problem": "The lease shifts the landlord's code, structural or plumbing duties to the tenant. For a unit that is not a single-family home or duplex, these duties can't be waived.",
+              "span": {
+                "start": 2928,
+                "end": 3038,
+                "quote": "Except as expressly provided in this Lease, Landlord will not be required to make any repairs to the Townhome."
+              },
+              "suggestedFix": "Landlord will comply with applicable building, housing, and health codes and keep the structural components and plumbing in good repair as required by s. 83.51(1), Florida Statutes.",
+              "path": "code_rule"
+            },
+            {
+              "ruleId": "attorney-fee-waiver",
+              "citation": "83.48",
+              "title": "Waiver of attorney fees",
+              "severity": "void",
+              "problem": "The lease waives or limits the tenant's right to recover attorney fees. Florida says this right can't be waived in a lease.",
+              "span": {
+                "start": 11157,
+                "end": 11249,
+                "quote": "however, no attorney fees may be recovered by either party in any claim for personal injury."
+              },
+              "suggestedFix": "In any action to enforce this lease or Part II of Chapter 83, the prevailing party may recover reasonable attorney fees and court costs.",
+              "path": "code_rule"
+            },
+            {
+              "ruleId": "utility-shutoff",
+              "citation": "83.67(1)",
+              "title": "Utility shutoff",
+              "severity": "review",
+              "problem": "The lease lets the landlord cut off a utility \"according to statute\" or as the law permits, without saying when. Florida bars landlord-caused utility interruptions, so a person should check what this clause is meant to allow.",
+              "span": {
+                "start": 9510,
+                "end": 9606,
+                "quote": "Landlord may suspend utility services furnished by Landlord only as permitted by applicable law."
+              },
+              "suggestedFix": "Name the specific lawful circumstance, or delete the clause.",
+              "path": "code_rule"
+            }
+          ],
+          "dropped": [],
+          "outOfScope": [
+            {
+              "topic": "Late fees",
+              "reason": "Fee amounts are not evaluated under Part II.",
+              "span": {
+                "start": 884,
+                "end": 1021,
+                "quote": "Tenant will pay an initial late charge of $75.00 plus $10.00 per day thereafter until paid, not to exceed $150.00 in total for any month."
+              }
+            },
+            {
+              "topic": "Pet rules and fees",
+              "reason": "Pet rules and fees are out of scope.",
+              "span": {
+                "start": 10416,
+                "end": 10509,
+                "quote": "Approved pets require a nonrefundable pet fee of $350 and monthly pet rent of $35 per animal."
+              }
+            },
+            {
+              "topic": "Jury trial waiver",
+              "reason": "Jury-trial waivers are out of scope.",
+              "span": {
+                "start": 11308,
+                "end": 11427,
+                "quote": "Landlord and Tenant waive trial by jury in any lawsuit arising out of this Lease or Tenant's occupancy of the Townhome."
+              }
+            },
+            {
+              "topic": "Guest limits",
+              "reason": "Guest limits are out of scope.",
+              "span": {
+                "start": 10533,
+                "end": 10682,
+                "quote": "Guests may not stay in the Townhome more than 7 consecutive nights or more than 14 nights in any six-month period without Landlord's written consent."
+              }
+            }
+          ],
+          "locates": [
+            {
+              "fact": "propertyType",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "tenancyType",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "securityDeposit",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositHolding",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositDisclosure",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositReturnDays",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositClaimNoticeDays",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "nonpaymentNotice",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "repairEntryNoticeHours",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "repairEntryWindow",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "endOfTermNoticeDays",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "structuralMaintenanceWaiver",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "attorneyFeeWaiver",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "utilityShutoffClause",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "landlordNoticeAddress",
+              "method": "exact",
+              "score": 1
+            }
+          ],
+          "facts": {
+            "propertyType": {
+              "status": "present",
+              "value": "multi_unit",
+              "span": {
+                "start": 251,
+                "end": 316,
+                "quote": "a community of 48 attached townhomes owned and rented by Landlord"
+              }
+            },
+            "tenancyType": {
+              "status": "present",
+              "value": "fixed_term",
+              "span": {
+                "start": 318,
+                "end": 392,
+                "quote": "The term is twelve months, from January 1, 2029 through December 31, 2029."
+              }
+            },
+            "securityDeposit": {
+              "status": "present",
+              "value": {
+                "amount": 1980
+              },
+              "span": {
+                "start": 1099,
+                "end": 1273,
+                "quote": "Tenant has paid a security deposit of $1,980.00, held in a separate non-interest-bearing account at Capital City Trust Bank, 301 S. Monroe Street, Tallahassee, Florida 32301."
+              }
+            },
+            "depositHolding": {
+              "status": "present",
+              "value": "separate_non_interest",
+              "span": {
+                "start": 1099,
+                "end": 1273,
+                "quote": "Tenant has paid a security deposit of $1,980.00, held in a separate non-interest-bearing account at Capital City Trust Bank, 301 S. Monroe Street, Tallahassee, Florida 32301."
+              }
+            },
+            "depositDisclosure": {
+              "status": "present",
+              "value": {
+                "depositoryNamedOrBond": true,
+                "interestStated": true,
+                "statutoryNoticeIncluded": true
+              },
+              "span": {
+                "start": 1274,
+                "end": 1309,
+                "quote": "Tenant is not entitled to interest."
+              }
+            },
+            "depositReturnDays": {
+              "status": "present",
+              "value": 15,
+              "span": {
+                "start": 1310,
+                "end": 1478,
+                "quote": "Landlord will return the deposit within 15 days after the Lease ends if it makes no claim and will give written notice of any claim within 30 days after the Lease ends."
+              }
+            },
+            "depositClaimNoticeDays": {
+              "status": "present",
+              "value": 30,
+              "span": {
+                "start": 1310,
+                "end": 1478,
+                "quote": "Landlord will return the deposit within 15 days after the Lease ends if it makes no claim and will give written notice of any claim within 30 days after the Lease ends."
+              }
+            },
+            "nonpaymentNotice": {
+              "status": "present",
+              "value": {
+                "days": 3,
+                "excludesWeekendsAndHolidays": true
+              },
+              "span": {
+                "start": 10708,
+                "end": 10871,
+                "quote": "If rent is not paid when due, Landlord may deliver a written demand for payment or possession giving Tenant 3 days, excluding Saturday, Sunday, and legal holidays."
+              }
+            },
+            "repairEntryNoticeHours": {
+              "status": "present",
+              "value": 24,
+              "span": {
+                "start": 9629,
+                "end": 9796,
+                "quote": "Landlord may enter the Townhome to make repairs or inspect it after giving at least 24 hours' notice, between 8:00 a.m. and 8:00 p.m., and at any time in an emergency."
+              }
+            },
+            "repairEntryWindow": {
+              "status": "present",
+              "value": {
+                "startMinute": 480,
+                "endMinute": 1200
+              },
+              "span": {
+                "start": 9629,
+                "end": 9796,
+                "quote": "Landlord may enter the Townhome to make repairs or inspect it after giving at least 24 hours' notice, between 8:00 a.m. and 8:00 p.m., and at any time in an emergency."
+              }
+            },
+            "periodicTerminationNoticeDays": {
+              "status": "absent"
+            },
+            "endOfTermNoticeDays": {
+              "status": "present",
+              "value": {
+                "tenant": 75,
+                "landlord": null
+              },
+              "span": {
+                "start": 10904,
+                "end": 11030,
+                "quote": "Tenant must give Landlord written notice of intent to vacate at least seventy-five (75) days before the end of the Lease term."
+              }
+            },
+            "structuralMaintenanceWaiver": [
+              {
+                "status": "present",
+                "value": true,
+                "span": {
+                  "start": 2928,
+                  "end": 3038,
+                  "quote": "Except as expressly provided in this Lease, Landlord will not be required to make any repairs to the Townhome."
+                }
+              }
+            ],
+            "attorneyFeeWaiver": [
+              {
+                "status": "present",
+                "value": true,
+                "span": {
+                  "start": 11157,
+                  "end": 11249,
+                  "quote": "however, no attorney fees may be recovered by either party in any claim for personal injury."
+                }
+              }
+            ],
+            "liabilityExculpation": [],
+            "utilityShutoffClause": [
+              {
+                "status": "present",
+                "value": {
+                  "purpose": "as_permitted_by_law"
+                },
+                "span": {
+                  "start": 9510,
+                  "end": 9606,
+                  "quote": "Landlord may suspend utility services furnished by Landlord only as permitted by applicable law."
+                }
+              }
+            ],
+            "lockoutClause": [],
+            "flagBan": [],
+            "retaliationClause": [],
+            "propertyRemovalClause": [],
+            "landlordNoticeAddress": {
+              "status": "present",
+              "value": "Willow Run Rentals, LLC, 3300 Willow Run Circle, Office, Tallahassee, Florida 32308",
+              "span": {
+                "start": 11473,
+                "end": 11557,
+                "quote": "Willow Run Rentals, LLC, 3300 Willow Run Circle, Office, Tallahassee, Florida 32308."
+              }
+            }
+          },
+          "problems": [],
+          "model": "claude-sonnet-5-5",
+          "usage": {
+            "inputTokens": 5247,
+            "outputTokens": 2040,
+            "cacheWriteTokens": 0,
+            "cacheReadTokens": 32674,
+            "costUsd": 0.037428800000000005
+          },
+          "latencyMs": 10033
+        },
+        {
+          "ok": true,
+          "scope": "residential",
+          "findings": [
+            {
+              "ruleId": "end-of-term-notice",
+              "citation": "83.575(1)",
+              "title": "Notice before the end of a fixed term",
+              "severity": "void",
+              "problem": "The lease requires 75 days' notice from the tenant before the term ends. Florida allows only 30 to 60 days.",
+              "span": {
+                "start": 10904,
+                "end": 11030,
+                "quote": "Tenant must give Landlord written notice of intent to vacate at least seventy-five (75) days before the end of the Lease term."
+              },
+              "suggestedFix": "Either party must give written notice at least 30 days (and no more than 60 days) before the end of the lease term if they do not intend to renew.",
+              "path": "code_rule"
+            },
+            {
+              "ruleId": "maintenance-waiver",
+              "citation": "83.51(1)",
+              "title": "Waiver of landlord's maintenance duties",
+              "severity": "void",
+              "problem": "The lease shifts the landlord's code, structural or plumbing duties to the tenant. For a unit that is not a single-family home or duplex, these duties can't be waived.",
+              "span": {
+                "start": 2928,
+                "end": 3038,
+                "quote": "Except as expressly provided in this Lease, Landlord will not be required to make any repairs to the Townhome."
+              },
+              "suggestedFix": "Landlord will comply with applicable building, housing, and health codes and keep the structural components and plumbing in good repair as required by s. 83.51(1), Florida Statutes.",
+              "path": "code_rule"
+            },
+            {
+              "ruleId": "attorney-fee-waiver",
+              "citation": "83.48",
+              "title": "Waiver of attorney fees",
+              "severity": "void",
+              "problem": "The lease waives or limits the tenant's right to recover attorney fees. Florida says this right can't be waived in a lease.",
+              "span": {
+                "start": 11157,
+                "end": 11249,
+                "quote": "however, no attorney fees may be recovered by either party in any claim for personal injury."
+              },
+              "suggestedFix": "In any action to enforce this lease or Part II of Chapter 83, the prevailing party may recover reasonable attorney fees and court costs.",
+              "path": "code_rule"
+            },
+            {
+              "ruleId": "utility-shutoff",
+              "citation": "83.67(1)",
+              "title": "Utility shutoff",
+              "severity": "review",
+              "problem": "The lease lets the landlord cut off a utility \"according to statute\" or as the law permits, without saying when. Florida bars landlord-caused utility interruptions, so a person should check what this clause is meant to allow.",
+              "span": {
+                "start": 9510,
+                "end": 9606,
+                "quote": "Landlord may suspend utility services furnished by Landlord only as permitted by applicable law."
+              },
+              "suggestedFix": "Name the specific lawful circumstance, or delete the clause.",
+              "path": "code_rule"
+            }
+          ],
+          "dropped": [],
+          "outOfScope": [
+            {
+              "topic": "Late fees",
+              "reason": "Fee amounts not evaluated under Part II.",
+              "span": {
+                "start": 884,
+                "end": 1021,
+                "quote": "Tenant will pay an initial late charge of $75.00 plus $10.00 per day thereafter until paid, not to exceed $150.00 in total for any month."
+              }
+            },
+            {
+              "topic": "Returned payment fee",
+              "reason": "Fee amount not evaluated.",
+              "span": {
+                "start": 1022,
+                "end": 1067,
+                "quote": "A $50.00 fee applies to any returned payment."
+              }
+            },
+            {
+              "topic": "Pet rules and fees",
+              "reason": "Pet rules and fees not evaluated.",
+              "span": {
+                "start": 10416,
+                "end": 10509,
+                "quote": "Approved pets require a nonrefundable pet fee of $350 and monthly pet rent of $35 per animal."
+              }
+            },
+            {
+              "topic": "Guest limits",
+              "reason": "Guest limits not evaluated.",
+              "span": {
+                "start": 10533,
+                "end": 10682,
+                "quote": "Guests may not stay in the Townhome more than 7 consecutive nights or more than 14 nights in any six-month period without Landlord's written consent."
+              }
+            },
+            {
+              "topic": "Jury trial waiver",
+              "reason": "Jury waivers not evaluated.",
+              "span": {
+                "start": 11276,
+                "end": 11427,
+                "quote": "To the extent permitted by law, Landlord and Tenant waive trial by jury in any lawsuit arising out of this Lease or Tenant's occupancy of the Townhome."
+              }
+            },
+            {
+              "topic": "Key replacement fee",
+              "reason": "Fee amount not evaluated.",
+              "span": {
+                "start": 10141,
+                "end": 10172,
+                "quote": "Replacement fobs cost $25 each."
+              }
+            }
+          ],
+          "locates": [
+            {
+              "fact": "propertyType",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "tenancyType",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "securityDeposit",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositHolding",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositDisclosure",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositReturnDays",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositClaimNoticeDays",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "nonpaymentNotice",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "repairEntryNoticeHours",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "repairEntryWindow",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "endOfTermNoticeDays",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "structuralMaintenanceWaiver",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "attorneyFeeWaiver",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "utilityShutoffClause",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "landlordNoticeAddress",
+              "method": "exact",
+              "score": 1
+            }
+          ],
+          "facts": {
+            "propertyType": {
+              "status": "present",
+              "value": "multi_unit",
+              "span": {
+                "start": 251,
+                "end": 316,
+                "quote": "a community of 48 attached townhomes owned and rented by Landlord"
+              }
+            },
+            "tenancyType": {
+              "status": "present",
+              "value": "fixed_term",
+              "span": {
+                "start": 318,
+                "end": 392,
+                "quote": "The term is twelve months, from January 1, 2029 through December 31, 2029."
+              }
+            },
+            "securityDeposit": {
+              "status": "present",
+              "value": {
+                "amount": 1980
+              },
+              "span": {
+                "start": 1099,
+                "end": 1273,
+                "quote": "Tenant has paid a security deposit of $1,980.00, held in a separate non-interest-bearing account at Capital City Trust Bank, 301 S. Monroe Street, Tallahassee, Florida 32301."
+              }
+            },
+            "depositHolding": {
+              "status": "present",
+              "value": "separate_non_interest",
+              "span": {
+                "start": 1148,
+                "end": 1272,
+                "quote": "held in a separate non-interest-bearing account at Capital City Trust Bank, 301 S. Monroe Street, Tallahassee, Florida 32301"
+              }
+            },
+            "depositDisclosure": {
+              "status": "present",
+              "value": {
+                "depositoryNamedOrBond": true,
+                "interestStated": true,
+                "statutoryNoticeIncluded": true
+              },
+              "span": {
+                "start": 1274,
+                "end": 1309,
+                "quote": "Tenant is not entitled to interest."
+              }
+            },
+            "depositReturnDays": {
+              "status": "present",
+              "value": 15,
+              "span": {
+                "start": 1310,
+                "end": 1478,
+                "quote": "Landlord will return the deposit within 15 days after the Lease ends if it makes no claim and will give written notice of any claim within 30 days after the Lease ends."
+              }
+            },
+            "depositClaimNoticeDays": {
+              "status": "present",
+              "value": 30,
+              "span": {
+                "start": 1310,
+                "end": 1478,
+                "quote": "Landlord will return the deposit within 15 days after the Lease ends if it makes no claim and will give written notice of any claim within 30 days after the Lease ends."
+              }
+            },
+            "nonpaymentNotice": {
+              "status": "present",
+              "value": {
+                "days": 3,
+                "excludesWeekendsAndHolidays": true
+              },
+              "span": {
+                "start": 10708,
+                "end": 10871,
+                "quote": "If rent is not paid when due, Landlord may deliver a written demand for payment or possession giving Tenant 3 days, excluding Saturday, Sunday, and legal holidays."
+              }
+            },
+            "repairEntryNoticeHours": {
+              "status": "present",
+              "value": 24,
+              "span": {
+                "start": 9629,
+                "end": 9796,
+                "quote": "Landlord may enter the Townhome to make repairs or inspect it after giving at least 24 hours' notice, between 8:00 a.m. and 8:00 p.m., and at any time in an emergency."
+              }
+            },
+            "repairEntryWindow": {
+              "status": "present",
+              "value": {
+                "startMinute": 480,
+                "endMinute": 1200
+              },
+              "span": {
+                "start": 9629,
+                "end": 9796,
+                "quote": "Landlord may enter the Townhome to make repairs or inspect it after giving at least 24 hours' notice, between 8:00 a.m. and 8:00 p.m., and at any time in an emergency."
+              }
+            },
+            "periodicTerminationNoticeDays": {
+              "status": "absent"
+            },
+            "endOfTermNoticeDays": {
+              "status": "present",
+              "value": {
+                "tenant": 75,
+                "landlord": null
+              },
+              "span": {
+                "start": 10904,
+                "end": 11030,
+                "quote": "Tenant must give Landlord written notice of intent to vacate at least seventy-five (75) days before the end of the Lease term."
+              }
+            },
+            "structuralMaintenanceWaiver": [
+              {
+                "status": "present",
+                "value": true,
+                "span": {
+                  "start": 2928,
+                  "end": 3038,
+                  "quote": "Except as expressly provided in this Lease, Landlord will not be required to make any repairs to the Townhome."
+                }
+              }
+            ],
+            "attorneyFeeWaiver": [
+              {
+                "status": "present",
+                "value": true,
+                "span": {
+                  "start": 11157,
+                  "end": 11249,
+                  "quote": "however, no attorney fees may be recovered by either party in any claim for personal injury."
+                }
+              }
+            ],
+            "liabilityExculpation": [],
+            "utilityShutoffClause": [
+              {
+                "status": "present",
+                "value": {
+                  "purpose": "as_permitted_by_law"
+                },
+                "span": {
+                  "start": 9510,
+                  "end": 9606,
+                  "quote": "Landlord may suspend utility services furnished by Landlord only as permitted by applicable law."
+                }
+              }
+            ],
+            "lockoutClause": [],
+            "flagBan": [],
+            "retaliationClause": [],
+            "propertyRemovalClause": [],
+            "landlordNoticeAddress": {
+              "status": "present",
+              "value": "Willow Run Rentals, LLC, 3300 Willow Run Circle, Office, Tallahassee, Florida 32308",
+              "span": {
+                "start": 11452,
+                "end": 11557,
+                "quote": "Notices to Landlord: Willow Run Rentals, LLC, 3300 Willow Run Circle, Office, Tallahassee, Florida 32308."
+              }
+            }
+          },
+          "problems": [],
+          "model": "claude-sonnet-5-5",
+          "usage": {
+            "inputTokens": 5247,
+            "outputTokens": 2135,
+            "cacheWriteTokens": 0,
+            "cacheReadTokens": 32674,
+            "costUsd": 0.038378800000000005
+          },
+          "latencyMs": 10746
+        }
+      ]
+    },
+    {
+      "id": "hard-07-duplex-month-to-month",
+      "split": "test",
+      "leaseSha256": "71562eba3598267a629e544968caf1e2fdc40a9e5f66ff390784ddc3ce109f6e",
+      "runs": [
+        {
+          "ok": true,
+          "scope": "residential",
+          "findings": [
+            {
+              "ruleId": "deposit-disclosure",
+              "citation": "83.49(2)",
+              "title": "Security deposit disclosure",
+              "severity": "notice",
+              "problem": "The deposit disclosure is missing the statutory notice text from s. 83.49(2)(d). This can also be given in a separate written notice within 30 days, and doesn't apply to landlords with fewer than five units.",
+              "span": {
+                "start": 1314,
+                "end": 1362,
+                "quote": "Tenant will not receive interest on the deposit."
+              },
+              "path": "code_rule"
+            },
+            {
+              "ruleId": "deposit-claim-deadline",
+              "citation": "83.49(3)(a)",
+              "title": "Deposit claim notice deadline",
+              "severity": "void",
+              "problem": "The lease gives the landlord 35 days to send written notice of a claim on the deposit. Florida requires 30 days or less, so this term is void.",
+              "span": {
+                "start": 6300,
+                "end": 6445,
+                "quote": "If Owner intends to impose a claim on the deposit, Owner will mail written notice of the claim within thirty-five (35) days after Tenant vacates."
+              },
+              "suggestedFix": "Landlord will send written notice of a claim on the deposit within 30 days after the termination of the rental agreement.",
+              "path": "code_rule"
+            },
+            {
+              "ruleId": "periodic-termination-notice",
+              "citation": "83.57(3)",
+              "title": "Notice to end a periodic tenancy",
+              "severity": "review",
+              "problem": "The lease mentions notice to end the tenancy, but the terms are unclear: Notice is tied to the 15th of the month, not a fixed number of days.",
+              "span": {
+                "start": 331,
+                "end": 493,
+                "quote": "Either party may end this month-to-month tenancy by written notice delivered on or before the fifteenth (15th) day of a month, effective at the end of that month."
+              },
+              "path": "code_rule"
+            }
+          ],
+          "dropped": [],
+          "outOfScope": [
+            {
+              "topic": "Late fees",
+              "reason": "Fee amounts are not evaluated under Part II.",
+              "span": {
+                "start": 856,
+                "end": 1066,
+                "quote": "If any rent is not received by 11:59 p.m. on the third day of the month, Tenant will pay an initial late charge of $75.00 plus $10.00 per day thereafter until paid, not to exceed $150.00 in total for any month."
+              }
+            },
+            {
+              "topic": "Returned payment fee",
+              "reason": "Fee amounts are not evaluated.",
+              "span": {
+                "start": 1067,
+                "end": 1112,
+                "quote": "A $50.00 fee applies to any returned payment."
+              }
+            },
+            {
+              "topic": "Pet rules and fees",
+              "reason": "Pet rules and fees are out of scope.",
+              "span": {
+                "start": 5111,
+                "end": 5204,
+                "quote": "Approved pets require a nonrefundable pet fee of $350 and monthly pet rent of $35 per animal."
+              }
+            },
+            {
+              "topic": "Guest limits",
+              "reason": "Guest limits are out of scope.",
+              "span": {
+                "start": 5213,
+                "end": 5360,
+                "quote": "Guests may not stay in the Residence more than 7 consecutive nights or more than 14 nights in any six-month period without Owner's written consent."
+              }
+            }
+          ],
+          "locates": [
+            {
+              "fact": "propertyType",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "tenancyType",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "securityDeposit",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositHolding",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositDisclosure",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositReturnDays",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositClaimNoticeDays",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "nonpaymentNotice",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "repairEntryNoticeHours",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "repairEntryWindow",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "periodicTerminationNoticeDays",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "landlordNoticeAddress",
+              "method": "exact",
+              "score": 1
+            }
+          ],
+          "facts": {
+            "propertyType": {
+              "status": "present",
+              "value": "duplex",
+              "span": {
+                "start": 112,
+                "end": 201,
+                "quote": "Residence: the north unit of the duplex at 812 Tamarind Avenue, Fort Myers, Florida 33901"
+              }
+            },
+            "tenancyType": {
+              "status": "present",
+              "value": "month_to_month",
+              "span": {
+                "start": 221,
+                "end": 281,
+                "quote": "This is a month-to-month tenancy beginning February 1, 2029."
+              }
+            },
+            "securityDeposit": {
+              "status": "present",
+              "value": {
+                "amount": 1350
+              },
+              "span": {
+                "start": 1131,
+                "end": 1313,
+                "quote": "Tenant has paid a security deposit of $1,350.00, which Owner holds in a separate non-interest-bearing account at Caloosa Community Bank, 2040 First Street, Fort Myers, Florida 33901."
+              }
+            },
+            "depositHolding": {
+              "status": "present",
+              "value": "separate_non_interest",
+              "span": {
+                "start": 1131,
+                "end": 1313,
+                "quote": "Tenant has paid a security deposit of $1,350.00, which Owner holds in a separate non-interest-bearing account at Caloosa Community Bank, 2040 First Street, Fort Myers, Florida 33901."
+              }
+            },
+            "depositDisclosure": {
+              "status": "present",
+              "value": {
+                "depositoryNamedOrBond": true,
+                "interestStated": true,
+                "statutoryNoticeIncluded": false
+              },
+              "span": {
+                "start": 1314,
+                "end": 1362,
+                "quote": "Tenant will not receive interest on the deposit."
+              }
+            },
+            "depositReturnDays": {
+              "status": "present",
+              "value": 15,
+              "span": {
+                "start": 6199,
+                "end": 6296,
+                "quote": "If Owner makes no claim on the deposit, Owner will return it within 15 days after Tenant vacates."
+              }
+            },
+            "depositClaimNoticeDays": {
+              "status": "present",
+              "value": 35,
+              "span": {
+                "start": 6300,
+                "end": 6445,
+                "quote": "If Owner intends to impose a claim on the deposit, Owner will mail written notice of the claim within thirty-five (35) days after Tenant vacates."
+              }
+            },
+            "nonpaymentNotice": {
+              "status": "present",
+              "value": {
+                "days": 3,
+                "excludesWeekendsAndHolidays": true
+              },
+              "span": {
+                "start": 5374,
+                "end": 5522,
+                "quote": "If rent is not paid when due, Owner may give Tenant a written notice to pay or vacate within 3 days, excluding Saturday, Sunday, and legal holidays."
+              }
+            },
+            "repairEntryNoticeHours": {
+              "status": "present",
+              "value": 24,
+              "span": {
+                "start": 4660,
+                "end": 4817,
+                "quote": "Owner will give Tenant at least 24 hours' notice before entering to make repairs and will enter only between 8:00 a.m. and 8:00 p.m., except in an emergency."
+              }
+            },
+            "repairEntryWindow": {
+              "status": "present",
+              "value": {
+                "startMinute": 480,
+                "endMinute": 1200
+              },
+              "span": {
+                "start": 4660,
+                "end": 4817,
+                "quote": "Owner will give Tenant at least 24 hours' notice before entering to make repairs and will enter only between 8:00 a.m. and 8:00 p.m., except in an emergency."
+              }
+            },
+            "periodicTerminationNoticeDays": {
+              "status": "unclear",
+              "note": "Notice is tied to the 15th of the month, not a fixed number of days.",
+              "span": {
+                "start": 331,
+                "end": 493,
+                "quote": "Either party may end this month-to-month tenancy by written notice delivered on or before the fifteenth (15th) day of a month, effective at the end of that month."
+              }
+            },
+            "endOfTermNoticeDays": {
+              "status": "absent"
+            },
+            "structuralMaintenanceWaiver": [],
+            "attorneyFeeWaiver": [],
+            "liabilityExculpation": [],
+            "utilityShutoffClause": [],
+            "lockoutClause": [],
+            "flagBan": [],
+            "retaliationClause": [],
+            "propertyRemovalClause": [],
+            "landlordNoticeAddress": {
+              "status": "present",
+              "value": "Rafael Montoya, 15 Edison Avenue, Fort Myers, Florida 33901",
+              "span": {
+                "start": 6531,
+                "end": 6591,
+                "quote": "Rafael Montoya, 15 Edison Avenue, Fort Myers, Florida 33901."
+              }
+            }
+          },
+          "problems": [],
+          "model": "claude-sonnet-5-5",
+          "usage": {
+            "inputTokens": 2399,
+            "outputTokens": 1898,
+            "cacheWriteTokens": 0,
+            "cacheReadTokens": 32674,
+            "costUsd": 0.0303128
+          },
+          "latencyMs": 9305
+        },
+        {
+          "ok": true,
+          "scope": "residential",
+          "findings": [
+            {
+              "ruleId": "deposit-disclosure",
+              "citation": "83.49(2)",
+              "title": "Security deposit disclosure",
+              "severity": "notice",
+              "problem": "The deposit disclosure is missing the statutory notice text from s. 83.49(2)(d). This can also be given in a separate written notice within 30 days, and doesn't apply to landlords with fewer than five units.",
+              "span": {
+                "start": 1314,
+                "end": 1362,
+                "quote": "Tenant will not receive interest on the deposit."
+              },
+              "path": "code_rule"
+            },
+            {
+              "ruleId": "deposit-claim-deadline",
+              "citation": "83.49(3)(a)",
+              "title": "Deposit claim notice deadline",
+              "severity": "void",
+              "problem": "The lease gives the landlord 35 days to send written notice of a claim on the deposit. Florida requires 30 days or less, so this term is void.",
+              "span": {
+                "start": 6300,
+                "end": 6445,
+                "quote": "If Owner intends to impose a claim on the deposit, Owner will mail written notice of the claim within thirty-five (35) days after Tenant vacates."
+              },
+              "suggestedFix": "Landlord will send written notice of a claim on the deposit within 30 days after the termination of the rental agreement.",
+              "path": "code_rule"
+            },
+            {
+              "ruleId": "periodic-termination-notice",
+              "citation": "83.57(3)",
+              "title": "Notice to end a periodic tenancy",
+              "severity": "review",
+              "problem": "The lease mentions notice to end the tenancy, but the terms are unclear: Notice is tied to the 15th of the month, not a fixed number of days.",
+              "span": {
+                "start": 331,
+                "end": 493,
+                "quote": "Either party may end this month-to-month tenancy by written notice delivered on or before the fifteenth (15th) day of a month, effective at the end of that month."
+              },
+              "path": "code_rule"
+            }
+          ],
+          "dropped": [],
+          "outOfScope": [
+            {
+              "topic": "Late fees",
+              "reason": "Fee amounts are not evaluated under Part II.",
+              "span": {
+                "start": 856,
+                "end": 1066,
+                "quote": "If any rent is not received by 11:59 p.m. on the third day of the month, Tenant will pay an initial late charge of $75.00 plus $10.00 per day thereafter until paid, not to exceed $150.00 in total for any month."
+              }
+            },
+            {
+              "topic": "Returned payment fee",
+              "reason": "Fee amounts are not evaluated.",
+              "span": {
+                "start": 1067,
+                "end": 1112,
+                "quote": "A $50.00 fee applies to any returned payment."
+              }
+            },
+            {
+              "topic": "Pet rules and fees",
+              "reason": "Pet rules and fees are out of scope.",
+              "span": {
+                "start": 5111,
+                "end": 5204,
+                "quote": "Approved pets require a nonrefundable pet fee of $350 and monthly pet rent of $35 per animal."
+              }
+            },
+            {
+              "topic": "Guest limits",
+              "reason": "Guest limits are out of scope.",
+              "span": {
+                "start": 5213,
+                "end": 5360,
+                "quote": "Guests may not stay in the Residence more than 7 consecutive nights or more than 14 nights in any six-month period without Owner's written consent."
+              }
+            }
+          ],
+          "locates": [
+            {
+              "fact": "propertyType",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "tenancyType",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "securityDeposit",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositHolding",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositDisclosure",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositReturnDays",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositClaimNoticeDays",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "nonpaymentNotice",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "repairEntryNoticeHours",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "repairEntryWindow",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "periodicTerminationNoticeDays",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "landlordNoticeAddress",
+              "method": "exact",
+              "score": 1
+            }
+          ],
+          "facts": {
+            "propertyType": {
+              "status": "present",
+              "value": "duplex",
+              "span": {
+                "start": 112,
+                "end": 201,
+                "quote": "Residence: the north unit of the duplex at 812 Tamarind Avenue, Fort Myers, Florida 33901"
+              }
+            },
+            "tenancyType": {
+              "status": "present",
+              "value": "month_to_month",
+              "span": {
+                "start": 221,
+                "end": 281,
+                "quote": "This is a month-to-month tenancy beginning February 1, 2029."
+              }
+            },
+            "securityDeposit": {
+              "status": "present",
+              "value": {
+                "amount": 1350
+              },
+              "span": {
+                "start": 1131,
+                "end": 1313,
+                "quote": "Tenant has paid a security deposit of $1,350.00, which Owner holds in a separate non-interest-bearing account at Caloosa Community Bank, 2040 First Street, Fort Myers, Florida 33901."
+              }
+            },
+            "depositHolding": {
+              "status": "present",
+              "value": "separate_non_interest",
+              "span": {
+                "start": 1131,
+                "end": 1313,
+                "quote": "Tenant has paid a security deposit of $1,350.00, which Owner holds in a separate non-interest-bearing account at Caloosa Community Bank, 2040 First Street, Fort Myers, Florida 33901."
+              }
+            },
+            "depositDisclosure": {
+              "status": "present",
+              "value": {
+                "depositoryNamedOrBond": true,
+                "interestStated": true,
+                "statutoryNoticeIncluded": false
+              },
+              "span": {
+                "start": 1314,
+                "end": 1362,
+                "quote": "Tenant will not receive interest on the deposit."
+              }
+            },
+            "depositReturnDays": {
+              "status": "present",
+              "value": 15,
+              "span": {
+                "start": 6199,
+                "end": 6296,
+                "quote": "If Owner makes no claim on the deposit, Owner will return it within 15 days after Tenant vacates."
+              }
+            },
+            "depositClaimNoticeDays": {
+              "status": "present",
+              "value": 35,
+              "span": {
+                "start": 6300,
+                "end": 6445,
+                "quote": "If Owner intends to impose a claim on the deposit, Owner will mail written notice of the claim within thirty-five (35) days after Tenant vacates."
+              }
+            },
+            "nonpaymentNotice": {
+              "status": "present",
+              "value": {
+                "days": 3,
+                "excludesWeekendsAndHolidays": true
+              },
+              "span": {
+                "start": 5374,
+                "end": 5522,
+                "quote": "If rent is not paid when due, Owner may give Tenant a written notice to pay or vacate within 3 days, excluding Saturday, Sunday, and legal holidays."
+              }
+            },
+            "repairEntryNoticeHours": {
+              "status": "present",
+              "value": 24,
+              "span": {
+                "start": 4660,
+                "end": 4817,
+                "quote": "Owner will give Tenant at least 24 hours' notice before entering to make repairs and will enter only between 8:00 a.m. and 8:00 p.m., except in an emergency."
+              }
+            },
+            "repairEntryWindow": {
+              "status": "present",
+              "value": {
+                "startMinute": 480,
+                "endMinute": 1200
+              },
+              "span": {
+                "start": 4660,
+                "end": 4817,
+                "quote": "Owner will give Tenant at least 24 hours' notice before entering to make repairs and will enter only between 8:00 a.m. and 8:00 p.m., except in an emergency."
+              }
+            },
+            "periodicTerminationNoticeDays": {
+              "status": "unclear",
+              "note": "Notice is tied to the 15th of the month, not a fixed number of days.",
+              "span": {
+                "start": 331,
+                "end": 493,
+                "quote": "Either party may end this month-to-month tenancy by written notice delivered on or before the fifteenth (15th) day of a month, effective at the end of that month."
+              }
+            },
+            "endOfTermNoticeDays": {
+              "status": "absent"
+            },
+            "structuralMaintenanceWaiver": [],
+            "attorneyFeeWaiver": [],
+            "liabilityExculpation": [],
+            "utilityShutoffClause": [],
+            "lockoutClause": [],
+            "flagBan": [],
+            "retaliationClause": [],
+            "propertyRemovalClause": [],
+            "landlordNoticeAddress": {
+              "status": "present",
+              "value": "Rafael Montoya, 15 Edison Avenue, Fort Myers, Florida 33901",
+              "span": {
+                "start": 6531,
+                "end": 6591,
+                "quote": "Rafael Montoya, 15 Edison Avenue, Fort Myers, Florida 33901."
+              }
+            }
+          },
+          "problems": [],
+          "model": "claude-sonnet-5-5",
+          "usage": {
+            "inputTokens": 2399,
+            "outputTokens": 1898,
+            "cacheWriteTokens": 0,
+            "cacheReadTokens": 32674,
+            "costUsd": 0.0303128
+          },
+          "latencyMs": 10077
+        }
+      ]
+    },
+    {
+      "id": "hard-08-scanned-condo",
+      "split": "test",
+      "leaseSha256": "d7e937751f1a5428f5b8a2af9983240fda2aeca72667c4f80f51095e642f099d",
+      "runs": [
+        {
+          "ok": true,
+          "scope": "residential",
+          "findings": [
+            {
+              "ruleId": "nonpayment-notice",
+              "citation": "83.56(3)",
+              "title": "Notice for unpaid rent",
+              "severity": "void",
+              "problem": "The lease allows termination after 2 day(s) of notice for unpaid rent. Florida requires a 3-day written notice.",
+              "span": {
+                "start": 3193,
+                "end": 3281,
+                "quote": "allowing Renter two (2) business days to pay the rent or\ndeliver possession of the Unit."
+              },
+              "suggestedFix": "If rent is unpaid, Landlord may terminate this lease only after delivering a written 3-day notice; the 3 days exclude Saturday, Sunday, and court-observed legal holidays.",
+              "path": "code_rule"
+            },
+            {
+              "ruleId": "repair-entry-hours",
+              "citation": "83.53(2)",
+              "title": "Hours for entry to make repairs",
+              "severity": "void",
+              "problem": "The lease lets the landlord enter for repairs outside 7:30 a.m.–8:00 p.m. Florida limits repair entry to those hours (entry to protect or preserve the premises is separate).",
+              "span": {
+                "start": 8009,
+                "end": 8040,
+                "quote": "between 7:00 a.m. and 7:00 p.m."
+              },
+              "suggestedFix": "Landlord may enter to make repairs between 7:30 a.m. and 8:00 p.m. with at least 24 hours' notice, and at any time to protect or preserve the premises.",
+              "path": "code_rule"
+            },
+            {
+              "ruleId": "liability-exculpation",
+              "citation": "83.47(1)(b)",
+              "title": "Limit on landlord liability",
+              "severity": "void",
+              "problem": "The lease tries to release the landlord from liability the law imposes. Florida makes this kind of clause void.",
+              "span": {
+                "start": 5497,
+                "end": 5677,
+                "quote": "Renter releases Unit Owner and the Association\nfrom all claims for injury, loss or damage to persons or property in or about the Unit\nor the condominium, from any cause whatsoever."
+              },
+              "suggestedFix": "Delete the clause. Each party remains responsible for its own obligations and liability under law.",
+              "path": "code_rule"
+            }
+          ],
+          "dropped": [],
+          "outOfScope": [
+            {
+              "topic": "Late fees",
+              "reason": "Fee amounts are not evaluated under Part II.",
+              "span": {
+                "start": 855,
+                "end": 934,
+                "quote": "Renter will pay an initial late charge of $75.00 plus $10.00 per day thereafter"
+              }
+            },
+            {
+              "topic": "Association rules",
+              "reason": "HOA/condo association rules are out of scope.",
+              "span": {
+                "start": 2825,
+                "end": 2940,
+                "quote": "Renter must comply with the Declaration of Condominium and the rules of\nthe Bayview Terrace Condominium Association"
+              }
+            },
+            {
+              "topic": "Pet rules and fees",
+              "reason": "Pet rules and fees are out of scope.",
+              "span": {
+                "start": 8995,
+                "end": 9088,
+                "quote": "Approved pets require a nonrefundable pet fee of $350 and monthly pet rent of $35 per\nanimal."
+              }
+            },
+            {
+              "topic": "Guest limits",
+              "reason": "Guest limits are out of scope.",
+              "span": {
+                "start": 9102,
+                "end": 9249,
+                "quote": "Guests may not stay in the Unit more than 7 consecutive nights or more than\n14 nights in any six-month period without Unit Owner's written consent."
+              }
+            },
+            {
+              "topic": "Jury trial waiver",
+              "reason": "Jury-trial waivers are out of scope.",
+              "span": {
+                "start": 9658,
+                "end": 9775,
+                "quote": "Unit Owner and Renter waive trial by\njury in any lawsuit arising out of this Lease or Renter's occupancy of the Unit."
+              }
+            }
+          ],
+          "locates": [
+            {
+              "fact": "propertyType",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "tenancyType",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "securityDeposit",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositHolding",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositDisclosure",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositReturnDays",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositClaimNoticeDays",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "nonpaymentNotice",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "repairEntryNoticeHours",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "repairEntryWindow",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "endOfTermNoticeDays",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "liabilityExculpation",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "landlordNoticeAddress",
+              "method": "exact",
+              "score": 1
+            }
+          ],
+          "facts": {
+            "propertyType": {
+              "status": "present",
+              "value": "multi_unit",
+              "span": {
+                "start": 0,
+                "end": 35,
+                "quote": "CONDOMINIUM LEASE - BAYVIEW TERRACE"
+              }
+            },
+            "tenancyType": {
+              "status": "present",
+              "value": "fixed_term",
+              "span": {
+                "start": 336,
+                "end": 374,
+                "quote": "Term: April 1, 2029 to\nMarch 31, 2030."
+              }
+            },
+            "securityDeposit": {
+              "status": "present",
+              "value": {
+                "amount": 2950
+              },
+              "span": {
+                "start": 1061,
+                "end": 1253,
+                "quote": "Renter has paid a security deposit of $2,950.00, which Unit Owner\nholds in a separate non-interest-bearing account at New River Savings Bank, 100 SE 3rd\nAvenue, Fort Lauderdale, Florida 33301."
+              }
+            },
+            "depositHolding": {
+              "status": "present",
+              "value": "separate_non_interest",
+              "span": {
+                "start": 1127,
+                "end": 1201,
+                "quote": "holds in a separate non-interest-bearing account at New River Savings Bank"
+              }
+            },
+            "depositDisclosure": {
+              "status": "present",
+              "value": {
+                "depositoryNamedOrBond": true,
+                "interestStated": true,
+                "statutoryNoticeIncluded": true
+              },
+              "span": {
+                "start": 1254,
+                "end": 1289,
+                "quote": "Renter is not entitled to interest."
+              }
+            },
+            "depositReturnDays": {
+              "status": "present",
+              "value": 15,
+              "span": {
+                "start": 1290,
+                "end": 1374,
+                "quote": "The deposit\nwill be returned within 15 days after the Lease ends if no claim is made"
+              }
+            },
+            "depositClaimNoticeDays": {
+              "status": "present",
+              "value": 30,
+              "span": {
+                "start": 1380,
+                "end": 1449,
+                "quote": "notice of\nany claim will be sent within 30 days after the Lease ends."
+              }
+            },
+            "nonpaymentNotice": {
+              "status": "present",
+              "value": {
+                "days": 2,
+                "excludesWeekendsAndHolidays": true
+              },
+              "span": {
+                "start": 3193,
+                "end": 3281,
+                "quote": "allowing Renter two (2) business days to pay the rent or\ndeliver possession of the Unit."
+              }
+            },
+            "repairEntryNoticeHours": {
+              "status": "present",
+              "value": 24,
+              "span": {
+                "start": 8042,
+                "end": 8075,
+                "quote": "on not less than 24 hours' notice"
+              }
+            },
+            "repairEntryWindow": {
+              "status": "present",
+              "value": {
+                "startMinute": 420,
+                "endMinute": 1140
+              },
+              "span": {
+                "start": 8009,
+                "end": 8040,
+                "quote": "between 7:00 a.m. and 7:00 p.m."
+              }
+            },
+            "periodicTerminationNoticeDays": {
+              "status": "absent"
+            },
+            "endOfTermNoticeDays": {
+              "status": "present",
+              "value": {
+                "tenant": 45,
+                "landlord": 45
+              },
+              "span": {
+                "start": 9268,
+                "end": 9360,
+                "quote": "The party not renewing must give written notice at least 45 days before\nthe end of the term."
+              }
+            },
+            "structuralMaintenanceWaiver": [],
+            "attorneyFeeWaiver": [],
+            "liabilityExculpation": [
+              {
+                "status": "present",
+                "value": {
+                  "scope": "broad"
+                },
+                "span": {
+                  "start": 5497,
+                  "end": 5677,
+                  "quote": "Renter releases Unit Owner and the Association\nfrom all claims for injury, loss or damage to persons or property in or about the Unit\nor the condominium, from any cause whatsoever."
+                }
+              }
+            ],
+            "utilityShutoffClause": [],
+            "lockoutClause": [],
+            "flagBan": [],
+            "retaliationClause": [],
+            "propertyRemovalClause": [],
+            "landlordNoticeAddress": {
+              "status": "present",
+              "value": "Whitcombe Holdings, LLC, 2600 E. Las Olas Boulevard, Suite 3, Fort Lauderdale, Florida 33301",
+              "span": {
+                "start": 9492,
+                "end": 9608,
+                "quote": "Notices to Unit Owner: Whitcombe Holdings, LLC, 2600 E. Las Olas Boulevard,\nSuite 3, Fort Lauderdale, Florida 33301."
+              }
+            }
+          },
+          "problems": [],
+          "model": "claude-sonnet-5-5",
+          "usage": {
+            "inputTokens": 4301,
+            "outputTokens": 1877,
+            "cacheWriteTokens": 0,
+            "cacheReadTokens": 32674,
+            "costUsd": 0.0339068
+          },
+          "latencyMs": 9607
+        },
+        {
+          "ok": true,
+          "scope": "residential",
+          "findings": [
+            {
+              "ruleId": "nonpayment-notice",
+              "citation": "83.56(3)",
+              "title": "Notice for unpaid rent",
+              "severity": "void",
+              "problem": "The lease allows termination after 2 day(s) of notice for unpaid rent. Florida requires a 3-day written notice.",
+              "span": {
+                "start": 3193,
+                "end": 3281,
+                "quote": "allowing Renter two (2) business days to pay the rent or\ndeliver possession of the Unit."
+              },
+              "suggestedFix": "If rent is unpaid, Landlord may terminate this lease only after delivering a written 3-day notice; the 3 days exclude Saturday, Sunday, and court-observed legal holidays.",
+              "path": "code_rule"
+            },
+            {
+              "ruleId": "repair-entry-hours",
+              "citation": "83.53(2)",
+              "title": "Hours for entry to make repairs",
+              "severity": "void",
+              "problem": "The lease lets the landlord enter for repairs outside 7:30 a.m.–8:00 p.m. Florida limits repair entry to those hours (entry to protect or preserve the premises is separate).",
+              "span": {
+                "start": 8009,
+                "end": 8040,
+                "quote": "between 7:00 a.m. and 7:00 p.m."
+              },
+              "suggestedFix": "Landlord may enter to make repairs between 7:30 a.m. and 8:00 p.m. with at least 24 hours' notice, and at any time to protect or preserve the premises.",
+              "path": "code_rule"
+            },
+            {
+              "ruleId": "liability-exculpation",
+              "citation": "83.47(1)(b)",
+              "title": "Limit on landlord liability",
+              "severity": "void",
+              "problem": "The lease tries to release the landlord from liability the law imposes. Florida makes this kind of clause void.",
+              "span": {
+                "start": 5497,
+                "end": 5677,
+                "quote": "Renter releases Unit Owner and the Association\nfrom all claims for injury, loss or damage to persons or property in or about the Unit\nor the condominium, from any cause whatsoever."
+              },
+              "suggestedFix": "Delete the clause. Each party remains responsible for its own obligations and liability under law.",
+              "path": "code_rule"
+            }
+          ],
+          "dropped": [],
+          "outOfScope": [
+            {
+              "topic": "Late fees",
+              "reason": "Fee amounts are not evaluated under Part II.",
+              "span": {
+                "start": 855,
+                "end": 992,
+                "quote": "Renter will pay an initial late charge of $75.00 plus $10.00 per day thereafter\nuntil paid, not to exceed $150.00 in total for any month."
+              }
+            },
+            {
+              "topic": "Returned payment fee",
+              "reason": "Fee amounts are not evaluated.",
+              "span": {
+                "start": 993,
+                "end": 1038,
+                "quote": "A $50.00 fee applies to any\nreturned payment."
+              }
+            },
+            {
+              "topic": "Association rules",
+              "reason": "Condo association rules are out of scope.",
+              "span": {
+                "start": 2825,
+                "end": 3012,
+                "quote": "Renter must comply with the Declaration of Condominium and the rules of\nthe Bayview Terrace Condominium Association, including its move-in fee, elevator\nreservation and two-vehicle limit."
+              }
+            },
+            {
+              "topic": "Pet rules and fees",
+              "reason": "Pet rules and fees are out of scope.",
+              "span": {
+                "start": 8995,
+                "end": 9088,
+                "quote": "Approved pets require a nonrefundable pet fee of $350 and monthly pet rent of $35 per\nanimal."
+              }
+            },
+            {
+              "topic": "Guest limits",
+              "reason": "Guest limits are out of scope.",
+              "span": {
+                "start": 9102,
+                "end": 9249,
+                "quote": "Guests may not stay in the Unit more than 7 consecutive nights or more than\n14 nights in any six-month period without Unit Owner's written consent."
+              }
+            },
+            {
+              "topic": "Jury trial waiver",
+              "reason": "Jury waivers are out of scope.",
+              "span": {
+                "start": 9658,
+                "end": 9775,
+                "quote": "Unit Owner and Renter waive trial by\njury in any lawsuit arising out of this Lease or Renter's occupancy of the Unit."
+              }
+            }
+          ],
+          "locates": [
+            {
+              "fact": "propertyType",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "tenancyType",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "securityDeposit",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositHolding",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositDisclosure",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositReturnDays",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "depositClaimNoticeDays",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "nonpaymentNotice",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "repairEntryNoticeHours",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "repairEntryWindow",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "endOfTermNoticeDays",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "liabilityExculpation",
+              "method": "exact",
+              "score": 1
+            },
+            {
+              "fact": "landlordNoticeAddress",
+              "method": "exact",
+              "score": 1
+            }
+          ],
+          "facts": {
+            "propertyType": {
+              "status": "present",
+              "value": "multi_unit",
+              "span": {
+                "start": 199,
+                "end": 321,
+                "quote": "Unit 806, Bayview Terrace Condominium, 700 Bayshore Drive, Fort Lauderdale,\nFlorida 33304, a 140-unit condominium building"
+              }
+            },
+            "tenancyType": {
+              "status": "present",
+              "value": "fixed_term",
+              "span": {
+                "start": 336,
+                "end": 374,
+                "quote": "Term: April 1, 2029 to\nMarch 31, 2030."
+              }
+            },
+            "securityDeposit": {
+              "status": "present",
+              "value": {
+                "amount": 2950
+              },
+              "span": {
+                "start": 1061,
+                "end": 1108,
+                "quote": "Renter has paid a security deposit of $2,950.00"
+              }
+            },
+            "depositHolding": {
+              "status": "present",
+              "value": "separate_non_interest",
+              "span": {
+                "start": 1110,
+                "end": 1253,
+                "quote": "which Unit Owner\nholds in a separate non-interest-bearing account at New River Savings Bank, 100 SE 3rd\nAvenue, Fort Lauderdale, Florida 33301."
+              }
+            },
+            "depositDisclosure": {
+              "status": "present",
+              "value": {
+                "depositoryNamedOrBond": true,
+                "interestStated": true,
+                "statutoryNoticeIncluded": true
+              },
+              "span": {
+                "start": 1254,
+                "end": 1289,
+                "quote": "Renter is not entitled to interest."
+              }
+            },
+            "depositReturnDays": {
+              "status": "present",
+              "value": 15,
+              "span": {
+                "start": 1290,
+                "end": 1374,
+                "quote": "The deposit\nwill be returned within 15 days after the Lease ends if no claim is made"
+              }
+            },
+            "depositClaimNoticeDays": {
+              "status": "present",
+              "value": 30,
+              "span": {
+                "start": 1380,
+                "end": 1449,
+                "quote": "notice of\nany claim will be sent within 30 days after the Lease ends."
+              }
+            },
+            "nonpaymentNotice": {
+              "status": "present",
+              "value": {
+                "days": 2,
+                "excludesWeekendsAndHolidays": true
+              },
+              "span": {
+                "start": 3193,
+                "end": 3281,
+                "quote": "allowing Renter two (2) business days to pay the rent or\ndeliver possession of the Unit."
+              }
+            },
+            "repairEntryNoticeHours": {
+              "status": "present",
+              "value": 24,
+              "span": {
+                "start": 8042,
+                "end": 8075,
+                "quote": "on not less than 24 hours' notice"
+              }
+            },
+            "repairEntryWindow": {
+              "status": "present",
+              "value": {
+                "startMinute": 420,
+                "endMinute": 1140
+              },
+              "span": {
+                "start": 8009,
+                "end": 8040,
+                "quote": "between 7:00 a.m. and 7:00 p.m."
+              }
+            },
+            "periodicTerminationNoticeDays": {
+              "status": "absent"
+            },
+            "endOfTermNoticeDays": {
+              "status": "present",
+              "value": {
+                "tenant": 45,
+                "landlord": 45
+              },
+              "span": {
+                "start": 9268,
+                "end": 9360,
+                "quote": "The party not renewing must give written notice at least 45 days before\nthe end of the term."
+              }
+            },
+            "structuralMaintenanceWaiver": [],
+            "attorneyFeeWaiver": [],
+            "liabilityExculpation": [
+              {
+                "status": "present",
+                "value": {
+                  "scope": "broad"
+                },
+                "span": {
+                  "start": 5497,
+                  "end": 5677,
+                  "quote": "Renter releases Unit Owner and the Association\nfrom all claims for injury, loss or damage to persons or property in or about the Unit\nor the condominium, from any cause whatsoever."
+                }
+              }
+            ],
+            "utilityShutoffClause": [],
+            "lockoutClause": [],
+            "flagBan": [],
+            "retaliationClause": [],
+            "propertyRemovalClause": [],
+            "landlordNoticeAddress": {
+              "status": "present",
+              "value": "Whitcombe Holdings, LLC, 2600 E. Las Olas Boulevard, Suite 3, Fort Lauderdale, Florida 33301",
+              "span": {
+                "start": 9492,
+                "end": 9608,
+                "quote": "Notices to Unit Owner: Whitcombe Holdings, LLC, 2600 E. Las Olas Boulevard,\nSuite 3, Fort Lauderdale, Florida 33301."
+              }
+            }
+          },
+          "problems": [],
+          "model": "claude-sonnet-5-5",
+          "usage": {
+            "inputTokens": 4301,
+            "outputTokens": 1989,
+            "cacheWriteTokens": 0,
+            "cacheReadTokens": 32674,
+            "costUsd": 0.035026800000000004
+          },
+          "latencyMs": 9967
+        }
+      ]
+    }
+  ]
+}

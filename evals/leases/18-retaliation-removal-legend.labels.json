@@ -1,0 +1,41 @@
+{
+  "lease": "18-retaliation-removal-legend.txt",
+  "split": "test",
+  "summary": "Apartment: code-complaint gag, removal for late rent, short move-out notice; compliant abandoned-property clause with legend.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "retaliation",
+      "citation": "83.64(1)",
+      "severity": "violation",
+      "quote": "Tenant agrees not to contact code enforcement or any other governmental agency about the condition of the Unit without first giving Landlord 30 days to address the issue. Any such contact before then is a default under this lease, and Landlord may terminate the lease.",
+      "note": "penalizes code complaints"
+    },
+    {
+      "ruleId": "property-removal",
+      "citation": "83.67(5)",
+      "severity": "violation",
+      "quote": "If rent is more than 15 days late, Landlord may remove Tenant's belongings from the Unit and hold them until Tenant pays all rent due.",
+      "note": "removal for nonpayment"
+    },
+    {
+      "ruleId": "end-of-term-notice",
+      "citation": "83.575(1)",
+      "severity": "void",
+      "quote": "Tenant must notify Landlord in writing at least 15 days before the end of the term if Tenant will not renew.",
+      "note": "15 < 30 days"
+    }
+  ],
+  "outOfScope": [],
+  "nearMisses": [
+    {
+      "quote": "After Tenant surrenders or abandons the Unit, or after a lawful eviction, Landlord may remove and dispose of any personal property Tenant leaves behind.",
+      "note": "compliant, legend present"
+    },
+    {
+      "quote": "Landlord will return the deposit within 10 days after the lease ends",
+      "note": "10 < 15: fine"
+    }
+  ],
+  "approved": false
+}

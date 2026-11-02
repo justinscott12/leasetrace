@@ -1,0 +1,62 @@
+{
+  "lease": "hard-08-scanned-condo.txt",
+  "split": "test",
+  "summary": "Scanned condo lease. Two-business-day pay-or-quit, repair entry from 7:00 a.m., and a release from all claims buried in an indemnity paragraph; the U.S. flag is expressly allowed.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "nonpayment-notice",
+      "citation": "83.56(3)",
+      "severity": "void",
+      "quote": "allowing Renter two (2) business days to pay the rent or deliver possession of the Unit.",
+      "note": "2 < 3 days"
+    },
+    {
+      "ruleId": "liability-exculpation",
+      "citation": "83.47(1)(b)",
+      "severity": "void",
+      "quote": "Renter releases Unit Owner and the Association from all claims for injury, loss or damage to persons or property in or about the Unit or the condominium, from any cause whatsoever.",
+      "note": "broad release"
+    },
+    {
+      "ruleId": "repair-entry-hours",
+      "citation": "83.53(2)",
+      "severity": "void",
+      "quote": "Unit Owner or its contractors may enter the Unit to make repairs between 7:00 a.m. and 7:00 p.m., on not less than 24 hours' notice, and at any time in an emergency.",
+      "note": "starts before 7:30 a.m."
+    }
+  ],
+  "outOfScope": [
+    {
+      "topic": "late fees",
+      "quote": "If any rent is not received by 11:59 p.m. on the third day of the month, Renter will pay an initial late charge of $75.00 plus $10.00 per day thereafter until paid, not to exceed $150.00 in total for any month. A $50.00 fee applies to any returned payment."
+    },
+    {
+      "topic": "condominium association rules",
+      "quote": "Renter must comply with the Declaration of Condominium and the rules of the Bayview Terrace Condominium Association, including its move-in fee, elevator reservation and two-vehicle limit. The Association must approve this Lease before occupancy."
+    },
+    {
+      "topic": "pet rules and fees",
+      "quote": "No animals of any kind, including visiting animals, are allowed in the Unit without a signed animal addendum, except assistance animals approved as required by law. Approved pets require a nonrefundable pet fee of $350 and monthly pet rent of $35 per animal."
+    },
+    {
+      "topic": "guest limits",
+      "quote": "Guests may not stay in the Unit more than 7 consecutive nights or more than 14 nights in any six-month period without Unit Owner's written consent."
+    },
+    {
+      "topic": "jury-trial waiver",
+      "quote": "To the extent permitted by law, Unit Owner and Renter waive trial by jury in any lawsuit arising out of this Lease or Renter's occupancy of the Unit."
+    }
+  ],
+  "nearMisses": [
+    {
+      "quote": "Renter must obtain and keep in force during the Lease term a renter's insurance policy with personal liability coverage of at least $100,000 and must provide proof of coverage before move-in and upon request. Unit Owner's property insurance covers the building, not Renter's furniture, clothing, electronics or other belongings, and does not provide liability coverage for Renter.",
+      "note": "landlord's insurance doesn't cover tenant property: a fact, not a release"
+    },
+    {
+      "quote": "Notwithstanding any Association rule, Renter may display one portable, removable United States flag, not larger than 4 1/2 feet by 6 feet, in a respectful manner.",
+      "note": "the statutory flag right, expressly kept"
+    }
+  ],
+  "approved": false
+}

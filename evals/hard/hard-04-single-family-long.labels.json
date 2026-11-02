@@ -1,0 +1,58 @@
+{
+  "lease": "hard-04-single-family-long.txt",
+  "split": "dev",
+  "summary": "Long single-family house lease. Plumbing shift is allowed for a house; 12-hour entry notice, a gag on code complaints, and a water cutoff for unpaid utility bills are not.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "utility-shutoff",
+      "citation": "83.67(1)",
+      "severity": "violation",
+      "quote": "If Tenant does not reimburse those charges when due, Landlord may have water service to the Home discontinued until Tenant pays.",
+      "note": "cutoff for nonpayment"
+    },
+    {
+      "ruleId": "repair-entry-notice",
+      "citation": "83.53(2)",
+      "severity": "void",
+      "quote": "Landlord may enter the Home to inspect it, make repairs, or show it to prospective tenants or buyers upon at least twelve (12) hours' notice to Tenant, between 9:00 a.m. and 6:00 p.m.",
+      "note": "12 < 24 hours"
+    },
+    {
+      "ruleId": "retaliation",
+      "citation": "83.64(1)",
+      "severity": "violation",
+      "quote": "If Tenant reports a condition to a governmental authority before that period ends, Landlord may terminate this Lease on thirty (30) days' notice.",
+      "note": "penalizes a complaint to a government agency"
+    }
+  ],
+  "outOfScope": [
+    {
+      "topic": "late fees",
+      "quote": "If any rent is not received by 11:59 p.m. on the third day of the month, Tenant will pay an initial late charge of $75.00 plus $10.00 per day thereafter until paid, not to exceed $150.00 in total for any month. A $50.00 fee applies to any returned payment."
+    },
+    {
+      "topic": "pet rules and fees",
+      "quote": "No animals of any kind, including visiting animals, are allowed in the Home without a signed animal addendum, except assistance animals approved as required by law. Approved pets require a nonrefundable pet fee of $350 and monthly pet rent of $35 per animal."
+    },
+    {
+      "topic": "guest limits",
+      "quote": "Guests may not stay in the Home more than 7 consecutive nights or more than 14 nights in any six-month period without Landlord's written consent."
+    },
+    {
+      "topic": "jury-trial waiver",
+      "quote": "To the extent permitted by law, Landlord and Tenant waive trial by jury in any lawsuit arising out of this Lease or Tenant's occupancy of the Home."
+    }
+  ],
+  "nearMisses": [
+    {
+      "quote": "Tenant must obtain and keep in force during the Lease term a renter's insurance policy with personal liability coverage of at least $100,000 and must provide proof of coverage before move-in and upon request. Landlord's property insurance covers the building, not Tenant's furniture, clothing, electronics or other belongings, and does not provide liability coverage for Tenant.",
+      "note": "landlord's insurance doesn't cover tenant property: a fact, not a release"
+    },
+    {
+      "quote": "Because the Home is a single-family residence, Landlord and Tenant agree in writing that Tenant will maintain and repair the plumbing system, including drains, fixtures and the water heater, at Tenant's expense. Landlord will maintain the roof, foundation and exterior walls. Tenant will mow the lawn and keep the yard free of debris.",
+      "note": "allowed in writing for a single-family home (83.51(1))"
+    }
+  ],
+  "approved": false
+}

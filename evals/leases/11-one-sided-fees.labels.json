@@ -1,0 +1,35 @@
+{
+  "lease": "11-one-sided-fees.txt",
+  "split": "dev",
+  "summary": "Townhome community: landlord-only fees, 'as permitted by statute' utility clause, and the reimbursement near-miss.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "attorney-fee-waiver",
+      "citation": "83.48",
+      "severity": "void",
+      "quote": "If Management brings any action against Resident, Resident shall pay Management's attorney fees and costs. Resident shall not be entitled to recover attorney fees from Management in any action.",
+      "note": "only landlord recovers fees"
+    },
+    {
+      "ruleId": "utility-shutoff",
+      "citation": "83.67(1)",
+      "severity": "review",
+      "quote": "Management may interrupt utility service to the townhome as permitted by Florida statute.",
+      "note": "label policy row 7"
+    }
+  ],
+  "outOfScope": [
+    {
+      "topic": "guest limits",
+      "quote": "Guests may not stay more than 14 days in any 6-month period without written approval."
+    }
+  ],
+  "nearMisses": [
+    {
+      "quote": "Resident shall reimburse Management for the reasonable cost of repairing any damage to the townhome, its fixtures, or its plumbing caused by Resident",
+      "note": "the real-lease false positive: reimbursement is not a waiver"
+    }
+  ],
+  "approved": false
+}

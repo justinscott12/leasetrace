@@ -1,0 +1,40 @@
+{
+  "lease": "01-clean-apartment.txt",
+  "split": "dev",
+  "summary": "Compliant mid-length apartment lease; every clause is a near-miss for some rule.",
+  "scope": "residential",
+  "findings": [],
+  "outOfScope": [
+    {
+      "topic": "late fee",
+      "quote": "Tenant will owe a late charge of $75.00"
+    },
+    {
+      "topic": "pets",
+      "quote": "No pets are allowed without a signed pet addendum"
+    }
+  ],
+  "nearMisses": [
+    {
+      "quote": "Tenant may not add or change locks without Landlord's written consent.",
+      "note": "tenant can't change locks: not a lockout"
+    },
+    {
+      "quote": "reimburse Landlord for the cost of repairing damage caused by Tenant, occupants, or guests",
+      "note": "reimbursing tenant-caused damage: not a maintenance waiver"
+    },
+    {
+      "quote": "Landlord may enter at any time in an emergency or to protect or preserve the Premises.",
+      "note": "statute allows this"
+    },
+    {
+      "quote": "the prevailing party may recover reasonable attorney fees and court costs",
+      "note": "mutual fee clause"
+    },
+    {
+      "quote": "Tenant may display one portable, removable United States flag in a respectful manner.",
+      "note": "flag allowed"
+    }
+  ],
+  "approved": false
+}

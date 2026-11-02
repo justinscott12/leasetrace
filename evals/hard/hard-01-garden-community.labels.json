@@ -1,0 +1,74 @@
+{
+  "lease": "hard-01-garden-community.txt",
+  "split": "dev",
+  "summary": "Long garden-community lease. Entry-purpose list hides a removal right and a repair shutoff; a broad liability limit hides behind 'unless otherwise required by law'.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "liability-exculpation",
+      "citation": "83.47(1)(b)",
+      "severity": "void",
+      "quote": "Unless otherwise required by law, Owner is not liable to Resident, occupants or guests for any personal injury or for any damage to or loss of personal property, from any cause, including fire, smoke, rain, flood, water leaks, hail, lightning, wind, explosions, theft, or the acts of other residents.",
+      "note": "label policy row 2: broad limit with a savings phrase"
+    },
+    {
+      "ruleId": "property-removal",
+      "citation": "83.67(5)",
+      "severity": "violation",
+      "quote": "(e) to remove window coverings, decorations or other items that violate the Community Policies;",
+      "note": "label policy row 5: entry purpose that removes the tenant's things"
+    },
+    {
+      "ruleId": "utility-shutoff",
+      "citation": "83.67(1)",
+      "severity": "review",
+      "quote": "(f) to interrupt water or electrical service when needed to complete repairs.",
+      "note": "label policy row 1: repair interruption"
+    }
+  ],
+  "outOfScope": [
+    {
+      "topic": "late fees",
+      "quote": "If any rent is not received by 11:59 p.m. on the third day of the month, Resident will pay an initial late charge of $75.00 plus $10.00 per day thereafter until paid, not to exceed $150.00 in total for any month. A $50.00 fee applies to any returned payment."
+    },
+    {
+      "topic": "guest limits",
+      "quote": "Guests may not stay in the Apartment more than 7 consecutive nights or more than 14 nights in any six-month period without Owner's written consent."
+    },
+    {
+      "topic": "pet rules and fees",
+      "quote": "No animals of any kind, including visiting animals, are allowed in the Apartment without a signed animal addendum, except assistance animals approved as required by law. Approved pets require a nonrefundable pet fee of $350 and monthly pet rent of $35 per animal."
+    },
+    {
+      "topic": "jury-trial waiver",
+      "quote": "To the extent permitted by law, Owner and Resident waive trial by jury in any lawsuit arising out of this Lease or Resident's occupancy of the Apartment."
+    }
+  ],
+  "nearMisses": [
+    {
+      "quote": "Resident must obtain and keep in force during the Lease term a renter's insurance policy with personal liability coverage of at least $100,000 and must provide proof of coverage before move-in and upon request. Owner's property insurance covers the building, not Resident's furniture, clothing, electronics or other belongings, and does not provide liability coverage for Resident.",
+      "note": "landlord's insurance doesn't cover tenant property: a fact, not a release"
+    },
+    {
+      "quote": "Owner does not provide and has no duty to provide security guards or patrol services. Any gates, cameras or lighting are provided for convenience and may not work at all times. Resident should call 911 in any emergency and should take steps to protect Resident's own safety and property.",
+      "note": "no duty to provide guards: not a release of liability the law imposes"
+    },
+    {
+      "quote": "If Resident is locked out of the Apartment, Resident may call the office during business hours, or the after-hours courtesy line, and a staff member will let Resident in after verifying identity. A $50.00 service charge applies to after-hours lockouts.",
+      "note": "tenant locked out by accident; landlord lets them in: not a lockout"
+    },
+    {
+      "quote": "Resident will pay Owner for the reasonable cost of repairing any damage to the Apartment or the community, including stopped-up drains and broken windows, that is caused by Resident, occupants, guests or animals, whether by negligence, misuse or violation of this Lease. Normal wear and tear is excepted.",
+      "note": "reimbursing tenant-caused damage: not a maintenance waiver"
+    },
+    {
+      "quote": "If either party does not intend to renew this Lease, that party must give the other written notice at least 60 days before the end of the Lease term. If neither party gives notice, this Lease will continue month-to-month, and either party may end the month-to-month tenancy by written notice given at least 30 days before the end of a monthly period.",
+      "note": "60 days is the statutory maximum; 30 days for the month-to-month renewal is the minimum"
+    },
+    {
+      "quote": "If Resident surrenders or abandons the Apartment, Owner may remove and dispose of personal property Resident leaves behind.",
+      "note": "removal only after surrender/abandonment, with the statutory legend"
+    }
+  ],
+  "approved": false
+}

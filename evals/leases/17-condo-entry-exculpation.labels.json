@@ -1,0 +1,42 @@
+{
+  "lease": "17-condo-entry-exculpation.txt",
+  "split": "test",
+  "summary": "Condo tower: 2-hour any-time entry, broad exculpation with a savings phrase.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "repair-entry-notice",
+      "citation": "83.53(2)",
+      "severity": "void",
+      "quote": "Owner or Owner's contractors may enter the Unit at any time to make repairs after giving Renter at least 2 hours' notice by text message.",
+      "note": "2 < 24 hours"
+    },
+    {
+      "ruleId": "repair-entry-hours",
+      "citation": "83.53(2)",
+      "severity": "void",
+      "quote": "Owner or Owner's contractors may enter the Unit at any time to make repairs after giving Renter at least 2 hours' notice by text message.",
+      "note": "any time"
+    },
+    {
+      "ruleId": "liability-exculpation",
+      "citation": "83.47(1)(b)",
+      "severity": "void",
+      "quote": "Owner will not be liable for any injury, loss, or damage to Renter or Renter's property occurring in the Unit or the building, from any cause, unless otherwise required by law.",
+      "note": "label policy row 2"
+    }
+  ],
+  "outOfScope": [
+    {
+      "topic": "condo association rules",
+      "quote": "Renter must register with the Gulf Breeze Residences Condominium Association and follow its rules"
+    }
+  ],
+  "nearMisses": [
+    {
+      "quote": "Renter may display one portable United States flag on the balcony in a respectful manner.",
+      "note": "flag allowed"
+    }
+  ],
+  "approved": false
+}

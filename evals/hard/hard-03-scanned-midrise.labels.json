@@ -1,0 +1,68 @@
+{
+  "lease": "hard-03-scanned-midrise.txt",
+  "split": "dev",
+  "summary": "Scanned-looking mid-rise lease (wrapped lines, page headers). Deposit may sit in the operating account, notice counts weekends, a balcony rule bans flags, abandoned-property clause lacks the legend.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "deposit-holding",
+      "citation": "83.49(1)",
+      "severity": "violation",
+      "quote": "The deposit may be held in any account maintained by Lessor, including Lessor's operating account,",
+      "note": "commingled with operating funds"
+    },
+    {
+      "ruleId": "nonpayment-notice",
+      "citation": "83.56(3)",
+      "severity": "void",
+      "quote": "allowing Lessee three (3) calendar days, including weekends and holidays, to comply.",
+      "note": "counts weekends and holidays"
+    },
+    {
+      "ruleId": "flag-ban",
+      "citation": "83.67(4)",
+      "severity": "void",
+      "quote": "Nothing may be hung from, attached to, or displayed on any balcony, patio, railing or window, including flags of any kind, banners, signs, laundry or towels.",
+      "note": "bans flags of any kind"
+    },
+    {
+      "ruleId": "property-removal",
+      "citation": "83.67(5)",
+      "severity": "void",
+      "quote": "After Lessee surrenders or abandons the Apartment, Lessor may remove and dispose of any personal property remaining in it, and Lessor will have no liability for that property.",
+      "note": "waiver without the 83.67(5) legend"
+    },
+    {
+      "ruleId": "deposit-disclosure",
+      "citation": "83.49(2)",
+      "severity": "notice",
+      "quote": null,
+      "note": "bank and interest stated, but no 83.49(2)(d) statutory notice"
+    }
+  ],
+  "outOfScope": [
+    {
+      "topic": "late fees",
+      "quote": "If any rent is not received by 11:59 p.m. on the third day of the month, Lessee will pay an initial late charge of $75.00 plus $10.00 per day thereafter until paid, not to exceed $150.00 in total for any month. A $50.00 fee applies to any returned payment."
+    },
+    {
+      "topic": "pet rules and fees",
+      "quote": "No animals of any kind, including visiting animals, are allowed in the Apartment without a signed animal addendum, except assistance animals approved as required by law. Approved pets require a nonrefundable pet fee of $350 and monthly pet rent of $35 per animal."
+    },
+    {
+      "topic": "jury-trial waiver",
+      "quote": "To the extent permitted by law, Lessor and Lessee waive trial by jury in any lawsuit arising out of this Lease or Lessee's occupancy of the Apartment."
+    }
+  ],
+  "nearMisses": [
+    {
+      "quote": "Lessee must obtain and keep in force during the Lease term a renter's insurance policy with personal liability coverage of at least $100,000 and must provide proof of coverage before move-in and upon request. Lessor's property insurance covers the building, not Lessee's furniture, clothing, electronics or other belongings, and does not provide liability coverage for Lessee.",
+      "note": "landlord's insurance doesn't cover tenant property: a fact, not a release"
+    },
+    {
+      "quote": "Lessee will pay Lessor for the reasonable cost of repairing any damage to the Apartment or the community, including stopped-up drains and broken windows, that is caused by Lessee, occupants, guests or animals, whether by negligence, misuse or violation of this Lease. Normal wear and tear is excepted.",
+      "note": "reimbursing tenant-caused damage: not a maintenance waiver"
+    }
+  ],
+  "approved": false
+}

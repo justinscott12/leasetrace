@@ -1,7 +1,7 @@
 # Progress
 
 Resume: read `BUILD_PROMPT.md` → `docs/DECISIONS.md` → this file. Then `npm i && npm test`.
-(`npm run eval` doesn't exist yet; it arrives in Milestone B.)
+`npm run eval -- --dry` lists the golden set for free; live eval runs cost money (ask Justin first).
 
 ## A. Foundations
 - [x] Teach-mode Decisions 1–3 (+ 2b silence semantics) — see DECISIONS.md
@@ -70,14 +70,85 @@ federal fair housing, jury waivers, commercial leases.
   - **Lesson:** stop tuning on one lease. Further prompt changes need the golden set and repeated runs to show a real delta;
     otherwise this is overfitting to a single example.
 - [x] Justin answered round 2 of label questions; rules, schema, prompt and tests updated (not re-run live).
-- [ ] **Next unchecked item:** Decisions 4–5 (eval grading, citation safety), then the golden set with each case run several
-      times and consistency reported. Known open precision issue: the "reimburse damage you cause" clause is still flagged as a
-      maintenance waiver; measure it in evals before changing the prompt again.
-- [ ] Out-of-scope items: extracted and located; not yet shown anywhere.
-- [ ] Teach-mode Decisions 4–5 (eval grading, fabricated-citation prevention)
-- [ ] Golden set (Justin approves labels), dev/test split
-- [ ] `npm run eval`
-- [ ] First honest scores → recall ≥ 0.9, fabricated citations = 0
+- [x] Decisions 4–5 decided and logged (teach mode off): deterministic grading against hand labels; the model emits no
+      citations at all. See DECISIONS.md.
+- [x] Golden set: 22 fictional leases in `evals/leases/` (13 dev, 9 test), each with `*.labels.json`. Varied form: plain,
+      articled, a scanned-looking one with page headers and broken lines, a texted rental, a lease pasted from a forwarded
+      email with `>` markers, two commercial leases (must produce no findings). 56 expected findings (4 optional), 35
+      near-misses (compliant clauses that look like violations), 16 out-of-scope items. Every rule has a required label
+      in dev and in test (except landlord-address in test, optional only). Case 10 deliberately exercises a known rule gap:
+      a fixed term that rolls month-to-month with 10 days' notice (the periodic rule skips fixed-term leases), and case 11
+      repeats the real lease's "reimburse damage" false-positive pattern.
+- [x] Scorer + runner: `src/evals/{golden,score,report}.ts`, `scripts/eval.ts`.
+  - Match = rule + citation + span overlap (spanless labels match on rule + citation). Strict headline: wrong severity
+    = miss + false positive. Duplicates on an already-matched clause are counted separately, not as false positives.
+  - Reports per split and per rule: precision, recall, fabricated-citation rate, unlocated-quote rate, scope accuracy,
+    out-of-scope recall, per-label hit rate across runs, run-to-run agreement, false positives tagged by near-miss, cost
+    and latency p50/p90.
+  - `--rescore <results.json>` re-runs current rules on stored extractions: rule changes get an eval delta for $0.
+  - `npm run labels:review` writes `evals/REVIEW.md`, a readable sheet of every label for approval.
+  - Tests: 132 passing (label integrity, rule coverage per split, perfect-run = 1.0, scorer edge cases).
+- [x] Pre-spend hardening (free): audited every label as the scorer would see it and fixed 7 that would have marked a
+      correct answer wrong. Label convention now: quote the *whole* clause (any sentence of it counts), use a spanless label
+      when the finding can legitimately come with or without a clause (e.g. a bare bank name read as "no disclosure" or as a
+      partial one), mark genuinely arguable ones optional, and grade commercial cases on scope only. Runner now checkpoints
+      after every call (`*.partial.json`), resumes without re-paying (`--resume`), extends a finished file (`--resume f.json
+      --runs 3`), stops after the first call if it fails, after 3 failures in a row or on an auth error, and stops starting
+      calls at `--max-usd` (default $15). Fail-fast and resume verified with an invalid key ($0).
+- [x] **First eval run** (2026-11-02, dev, 1 pass, Opus 5.5 medium): `evals/results/2026-11-02-02-30-claude-opus-5-5-medium.json`.
+  - **$0.97 total**: $0.22 for the cache-writing call, then $0.04–0.08 per lease (32.7K prefix tokens read from cache,
+    1.6–3.3K output). Latency p50 18.8 s, p90 21.6 s. Far below the estimate, which came from the 79K-char real lease.
+  - Strict P 96.9% / R 93.9% (tp 31, fp 1, fn 2). Fabricated citations 0%, unlocated quotes 0%, scope 100%,
+    out-of-scope recall 100%, no false positive on any of the 35 near-misses (including case 11's reimbursement clause).
+  - Both errors were in the rules; the extraction was right both times:
+    1. Case 10: extracted perfectly (fixed term + 10 days' notice in the month-to-month renewal), but the periodic rule
+       skipped every fixed-term lease. Now a fixed term's renewal notice is checked against 83.57(3).
+    2. Case 12: manager named, no address → extractor said `unclear` (correct), rule turned it into `review`. A
+       disclosure duty is only met by a clear disclosure, so landlord-address now reports `notice` for unclear too.
+  - **Eval delta (free `--rescore`, `…-medium-rescored.json`): strict P 100% / R 100% (tp 33, fp 0, fn 0).** 134 tests.
+  - Caveats, honestly: one pass only (no variance yet); two rules were changed after seeing dev, so dev is no longer a
+    clean measure; Claude wrote these leases, so they may be cleaner than real ones (the real lease had 13 findings with
+    interpretation questions; a perfect score here doesn't settle those). The held-out test split is untouched.
+- [x] **Full eval** (2026-11-02, Opus 5.5 medium, 3 passes per case, current rules):
+  - dev (13 cases, 39 runs, `…02-30…-medium-rescored.json`): strict P 100% / R 100% (tp 99), every case 100% run-to-run agreement.
+  - **test (9 held-out cases, 27 runs, `…19-03…-medium-test.json`): strict P 100% / R 100% (tp 57, fp 0, fn 0)**, 100%
+    agreement. Fabricated citations 0%, unlocated quotes 0%, scope 100%, out-of-scope recall 100% on both splits.
+  - Cost: dev $2.70 (39 runs), test $1.55 (27 runs) → **$0.057–0.069 per audit**, latency p50 19 s / p90 29 s.
+  - Optional labels: 3 of 4 always hit; the §3 plumbing restatement in case 14 was never flagged (fine either way).
+  - **Reading it honestly: the set is saturated.** A perfect, perfectly consistent score means these leases no longer
+    discriminate. Claude wrote leases and labels with the rules in view, so violations are stated plainly, one per clause.
+    The real 79K-char lease is the counterexample: same pipeline, 13 findings, several of them interpretation calls.
+- [x] **Hard set** (`evals/hard/`, built by `npm run hard:build` from `evals/hard/source/{library,specs}.ts`): 8 leases
+      of 7–16K chars (4 dev / 4 test), 29 labels. Boilerplate library plus per-lease target clauses buried in it: entry-purpose
+      lists, savings phrases, rekey-on-default, force majeure, AS-IS, deadlines in later sections, scanned layout.
+  - Opus 5.5 medium ×3 (old prompt): dev P 95.5 / R 100; **test P 92.9 / R 92.9**. Errors: (dev) the AS-IS "no obligation to
+    make repairs" clause also reported as a broad liability limit, because the exculpation definition included "excused from
+    its obligations"; (test, hard-07) "notice by the 15th, effective month-end" → model correctly reasoned "13–16 days" but
+    reported `unclear` (single-integer fact), so `review` instead of `void`. Test failure left as is (no tuning on test).
+  - Dev fix: exculpation definition now excludes pure repair-duty removals (they belong to structuralMaintenanceWaiver).
+    Confirmed: hard dev ×3 → **P 100 / R 100** (tp 42). Results files now record `promptSha`; the site never pools prompts.
+- [x] **Model/effort sweep** (test splits, 2 runs each, mostly on the earlier prompt): Opus low, Sonnet 5.5 medium/low,
+      Haiku 5.5 medium. All between ~89–97% P/R; Haiku costs $0.002–0.004 per audit. Differences of 1–2 findings are noise.
+- [x] **Demo site** (Vite + React, static, hash routes; `npm run dev`): home with sample cards, recorded-audit replay with
+      trace + highlighted lease + statute pop-ups, check-your-own-lease (BYOK, PDF/txt/paste; Decision 6), evals page and
+      how-it-works generated from `public/data/*.json` (`npm run site:data`, rescored from stored runs, $0). GitHub Pages
+      workflow in `.github/workflows/pages.yml` (runs on push to main; not enabled yet).
+- [x] Credit added; finished on the final prompt (`promptSha` d5b46574916a), Opus 5.5 medium, 3 runs per lease:
+  - Tuning: first set 13 leases → P/R 100 (tp 33, 1 run); hard set 4 leases ×3 → P/R 100 (tp 42).
+  - **Held out: first set 9 ×3 → P/R 100 (tp 57); hard set 4 ×3 → P/R 92.9 (tp 39, fp 3, fn 3); all → P/R 97.0 (96/99).**
+    Only error: hard-07 "notice by the 15th" → review instead of void, identical in all 3 runs (left unfixed: test lease).
+  - Fabricated citations 0, unlocated quotes 0, scope 100%. $0.06–0.10 per audit, p50 19–27 s.
+  - Replays recorded (`public/replays/*.json`, $0.51): every sample's findings match its labels. Playback runs at 4× or 8×
+    (labeled) so the longest, 42 s, plays in ~5 s.
+  - Total project API spend ≈ $16.82 (evals $14.77, replays $0.51, early real-lease runs $1.54). README rewritten. 135 tests; production build OK (first load 64 KB gzip).
+- [ ] **Next unchecked item:** Justin approves labels (`evals/REVIEW.md`, 30 cases); commit + push v2; swap `main` to v2,
+      enable GitHub Pages (Actions source), update the repo description; portfolio card + case study.
+- [ ] Possible v2.1: deadline-style notice ("by the 15th") → report the shortest notice it allows; needs fresh held-out
+      leases to re-measure, since the failure was found on a test lease. Re-run the model sweep on the final prompt (~$3).
+- [x] First honest scores → test recall ≥ 0.9, fabricated citations = 0 (met on the current set; see the saturation caveat)
+- [ ] Effort/model sweep on the eval set; publish the cost-quality table
+- [ ] Minor: the corpus's `83.49(2)(d)` subsection text omits the quoted disclosure block (it's only in the section
+      text). Matters for linking citations in the UI.
 
 ### Label policy — answered 2026-11-01, see docs/LABEL_POLICY.md
 Utility interruption for repairs only → review · broad exculpation with "unless required by law" → void · attorney-fee
@@ -109,3 +180,8 @@ A private precision check on a real lease lives in `private/` (gitignored; see `
 - 2026-11-01 (later): multi-instance clause facts built; 110 tests. No paid runs since the last two.
 - 2026-11-01 (later): live run with clause instances — recall fixed, precision exposed new label questions. Spend ≈ $1.54.
 - 2026-11-01 (later): label policy round 2 encoded (scope/purpose values); 116 tests. Not re-run live.
+- 2026-11-01 (night): Decisions 4–5; golden set (22 leases, labels unapproved); eval scorer, runner, rescore, review sheet; 132 tests. No paid calls.
+- 2026-11-02: first paid eval (dev ×1, $0.97): P 96.9 / R 93.9 → two rule fixes → rescored P 100 / R 100. 134 tests.
+- 2026-11-02: 3-pass eval on both splits: dev and test both P 100 / R 100, 100% agreement, $4.25 for 66 runs. Set saturated → next: harder set.
+- 2026-11-02 (later): hard set + sweep + demo site; prompt fix confirmed on hard dev (100/100); out of API credit mid-run.
+- 2026-11-02 (evening): final held-out runs on the final prompt (all P/R 97.0), replays recorded, README. Spend ≈ $16.82.

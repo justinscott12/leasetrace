@@ -287,8 +287,12 @@ const periodicTermination: Rule = {
   basis: Object.values(PERIODIC).map(({ citation, quote }) => ({ citation, quote })),
   facts: ["tenancyType", "periodicTerminationNoticeDays"],
   check({ tenancyType: t, periodicTerminationNoticeDays: n }) {
-    if (t.status !== "present" || t.value === "fixed_term") return [];
-    const req = PERIODIC[t.value];
+    if (t.status !== "present") return [];
+    // A fixed term that rolls over: the fact is defined as the month-to-month renewal's
+    // notice (prompt.ts), so it's checked against 83.57(3). Plain fixed terms have none.
+    const fixed = t.value === "fixed_term";
+    if (fixed && n.status !== "present") return [];
+    const req = PERIODIC[fixed ? "month_to_month" : t.value];
     if (!req) return [];
     const base = { ruleId: this.id, citation: req.citation, title: this.title };
     if (n.status !== "present") return unclear(base, n, "notice to end the tenancy");
@@ -297,7 +301,7 @@ const periodicTermination: Rule = {
       return d !== null && d < req.days;
     });
     if (short.length === 0) return [];
-    const period = t.value.replace(/_/g, "-");
+    const period = fixed ? "month-to-month renewal" : t.value.replace(/_/g, "-");
     return [
       finding(
         base,
@@ -584,19 +588,16 @@ const landlordAddress: Rule = {
     },
   ],
   facts: ["landlordNoticeAddress"],
+  // A disclosure duty is met only by a clear disclosure, so an unclear one (e.g. a name
+  // with no address) is the same `notice` gap as a missing one, not a `review`.
   check({ landlordNoticeAddress: a }) {
     const base = { ruleId: this.id, citation: "83.50", title: this.title };
+    if (a.status === "present") return [];
+    const fix = "Notices to Landlord shall be sent to: [name], [street address], [city], Florida [ZIP].";
+    const tail = " Florida requires the landlord's (or agent's) name and address in writing at or before move-in; it may be given in a separate document.";
     if (a.status === "absent")
-      return [
-        finding(
-          base,
-          "notice",
-          "The lease doesn't give the landlord's (or agent's) name and address for notices. Florida requires this in writing at or before move-in; it may be given in a separate document.",
-          undefined,
-          "Notices to Landlord shall be sent to: [name], [street address], [city], Florida [ZIP].",
-        ),
-      ];
-    return unclear(base, a, "a notice address");
+      return [finding(base, "notice", "The lease doesn't give a name and address for notices to the landlord." + tail, undefined, fix)];
+    return [finding(base, "notice", `The lease doesn't clearly give a name and address for notices to the landlord (${a.note}).` + tail, a.span, fix)];
   },
 };
 

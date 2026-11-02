@@ -67,3 +67,35 @@ Made in teach mode. Don't re-decide these without a new entry. Also logged in `w
 - Why: A pushes severity judgment into the model (against Decision 2) and still hides clauses. Single-valued facts (notice days, deposit amount) keep one slot: two different answers there are a contradiction, so they stay `unclear`.
 - Concept tags: data-modeling, cardinality, one-to-many, nondeterminism, separation-of-concerns
 - **Built:** `Clauses<T>` / `CLAUSE_FACTS` in `src/facts/schema.ts`; the mapper turns each non-absent entry into an instance and merges same-span duplicates; the clause rules use `flatMap` over instances. The prompt marks "(clause fact)" and asks for one entry per distinct clause. Same change also: repair-entry window no longer re-reports the no-notice branch (that double-count lived in two rules), and the maintenance-waiver definition now says outright that reimbursing tenant-caused damage is never a waiver.
+
+## 2026-11-01 · leasetrace · Decision 4: how evals are graded (teach mode off)
+- Context: need precision/recall on a golden set that can run repeatedly and be re-scored for free when rules change.
+- Options: A) hand-labeled golden set, exact matching on (rule ID, subsection, span overlap) B) LLM judge with a rubric C) exact matching for findings plus a judge for explanation/fix quality
+- Decided: A, with severity scored strictly.
+- Why: after Decision 2 the model never writes a finding: rule ID, citation, severity, problem text and fix all come from code, so there is no free text for a judge to grade and C collapses to A. A judge (B) would add cost, its own variance and a second model to trust. A is deterministic, so a results file can be re-scored at $0.
+- Concept tags: evaluation, precision-recall, golden-set, deterministic-grading, llm-as-judge, held-out-test-set
+- **Built:** labels name the expected clause by quote (resolved to a span at load, must be unique), not hand-counted offsets. A predicted finding matches an expected one on rule ID + citation + any span overlap (spanless expected findings, like a missing disclosure, match on rule + citation). Headline numbers are *strict*: a matched finding with the wrong severity counts as a miss and a false positive; *lenient* numbers are reported beside them. Labels can mark a finding `optional` (genuinely arguable; neither rewarded nor penalized). Each lease runs N times; the report gives per-finding hit rate and run-to-run agreement. Results store the extracted facts, so `--rescore` re-runs current rules on old extractions without an API call. dev/test split: prompts are tuned on dev only; test numbers are the ones published.
+
+## 2026-11-01 · leasetrace · Decision 5: how fabricated citations are prevented (teach mode off)
+- Context: v1 cited statute text that wasn't there. The model must not be able to invent a subsection.
+- Options: A) the model may only cite from a closed list of subsection IDs (schema enum), checked in code B) Claude API citations on the statute documents (can't combine with structured outputs) C) free-form answer, then a validator rejects citations not in the corpus
+- Decided: stronger than A: the model emits no citations at all.
+- Why: citations are constants in rule code (Decision 2). `tests/corpus.test.ts` checks every rule's quote against the corpus, and `runRules` drops any finding whose citation isn't in the corpus or whose span doesn't match the lease, with a logged reason. B would need a second call and still leaves the model choosing what to cite; C catches a fake ID only after it's generated and still lets the model pick the wrong real one. The remaining risk moves to the lease side (a quote that isn't in the lease), which the locator handles: an unfound quote makes the fact `unclear`.
+- Concept tags: hallucination, constrained-generation, closed-vocabulary, defense-in-depth, validation
+- **Measured anyway:** the eval reports fabricated-citation rate (findings whose citation isn't in the corpus, before dropping) and unlocated-quote rate per run, so the claim is a number, not an argument.
+
+## 2026-11-02 · leasetrace · Two rule fixes from the first eval run (teach mode off)
+- Context: first dev pass missed 2 of 33 findings; both extractions were correct and the rules mis-handled them.
+- Decided: (1) a fixed term that renews month-to-month has its renewal notice checked against 83.57(3) (the fact was
+  already defined that way in the prompt; the rule ignored it). (2) An unclear landlord notice address is a `notice` gap,
+  not `review`: a disclosure duty is only met by a clear disclosure.
+- Why: both fixes follow the statute's text, not the eval's labels. Verified free with `--rescore` on the stored extractions,
+  which is exactly what Decision 4's "store the facts" was for.
+- Concept tags: eval-driven-development, regression-testing, offline-replay, overfitting-risk
+
+## 2026-11-02 · leasetrace · Decision 6: how a visitor's lease gets in (teach mode off)
+- Context: "check your own lease" needs text the model reads and character offsets the highlights point into; most real leases arrive as PDFs.
+- Options: A) paste text only B) PDF/DOCX parsed in the browser into text C) send the PDF to the model as a document block
+- Decided: B for PDF (pdf.js, lazy-loaded) and .txt, plus paste; DOCX left out for now.
+- Why: the extracted text is exactly what the model sees and what highlights index into, so spans line up and the lease never leaves the browser except in the direct API call. C would make the model read a layout we can't map back to offsets. A alone fails most visitors, who have a PDF. Scans without a text layer are detected (almost no text) and the page asks for pasted text instead of guessing.
+- Concept tags: input-handling, client-side-parsing, offsets, privacy, progressive-enhancement

@@ -1,0 +1,23 @@
+{
+  "lease": "22-clean-short.txt",
+  "split": "test",
+  "summary": "Short compliant apartment lease with a $0 deposit.",
+  "scope": "residential",
+  "findings": [],
+  "outOfScope": [],
+  "nearMisses": [
+    {
+      "quote": "Tenant may not change the locks.",
+      "note": "not a lockout"
+    },
+    {
+      "quote": "Security deposit: none ($0).",
+      "note": "$0 deposit: no disclosure needed"
+    },
+    {
+      "quote": "will enter only between 7:30 a.m. and 8:00 p.m.",
+      "note": "exactly the statutory window"
+    }
+  ],
+  "approved": false
+}

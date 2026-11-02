@@ -1,0 +1,57 @@
+{
+  "lease": "09-messy-scan.txt",
+  "split": "dev",
+  "summary": "Scanned-looking lease: page headers, odd spacing, broken lines. 2-day notice, 20-day return, 7am-9pm entry, partial disclosure.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "deposit-disclosure",
+      "citation": "83.49(2)",
+      "severity": "notice",
+      "quote": null,
+      "note": "names the bank, but no interest statement or statutory notice"
+    },
+    {
+      "ruleId": "deposit-return-deadline",
+      "citation": "83.49(3)(a)",
+      "severity": "void",
+      "quote": "Landlord will return the deposit within 20 days after Tenant moves out",
+      "note": "20 > 15 days"
+    },
+    {
+      "ruleId": "nonpayment-notice",
+      "citation": "83.56(3)",
+      "severity": "void",
+      "quote": "giving Tenant 2 days written notice to pay or move out.",
+      "note": "2 < 3 days"
+    },
+    {
+      "ruleId": "repair-entry-hours",
+      "citation": "83.53(2)",
+      "severity": "void",
+      "quote": "between the hours of 7:00 a.m. and 9:00 p.m.",
+      "note": "outside 7:30-8:00"
+    },
+    {
+      "ruleId": "deposit-holding",
+      "citation": "83.49(1)",
+      "severity": "review",
+      "quote": "holds at First Polk Savings Bank, 211 S. Florida Ave., Lakeland FL 33801.",
+      "note": "doesn't say separate account; unclear is fair, silence is fair",
+      "optional": true
+    }
+  ],
+  "outOfScope": [
+    {
+      "topic": "pets",
+      "quote": "No pets of any kind"
+    }
+  ],
+  "nearMisses": [
+    {
+      "quote": "pay for any damage caused by Tenant or guests.",
+      "note": "tenant-caused damage"
+    }
+  ],
+  "approved": false
+}

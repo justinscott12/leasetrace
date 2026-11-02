@@ -10,7 +10,22 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "types": ["node"]
+    "types": [
+      "node",
+      "vite/client"
+    ],
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "jsx": "react-jsx"
   },
-  "include": ["src", "scripts", "tests"]
+  "include": [
+    "src",
+    "scripts",
+    "tests",
+    "evals/hard/source",
+    "vite.config.ts"
+  ]
 }

@@ -1,0 +1,58 @@
+{
+  "lease": "hard-07-duplex-month-to-month.txt",
+  "split": "test",
+  "summary": "Month-to-month duplex with addenda. Termination notice 'by the 15th' (about 15 days), a 35-day claim deadline in the deposit addendum, and a disclosure without the statutory notice.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "periodic-termination-notice",
+      "citation": "83.57(3)",
+      "severity": "void",
+      "quote": "Either party may end this month-to-month tenancy by written notice delivered on or before the fifteenth (15th) day of a month, effective at the end of that month.",
+      "note": "about 15 days, < 30"
+    },
+    {
+      "ruleId": "deposit-claim-deadline",
+      "citation": "83.49(3)(a)",
+      "severity": "void",
+      "quote": "Owner will mail written notice of the claim within thirty-five (35) days after Tenant vacates.",
+      "note": "35 > 30 days"
+    },
+    {
+      "ruleId": "deposit-disclosure",
+      "citation": "83.49(2)",
+      "severity": "notice",
+      "quote": null,
+      "note": "bank and interest stated, but no 83.49(2)(d) statutory notice"
+    }
+  ],
+  "outOfScope": [
+    {
+      "topic": "late fees",
+      "quote": "If any rent is not received by 11:59 p.m. on the third day of the month, Tenant will pay an initial late charge of $75.00 plus $10.00 per day thereafter until paid, not to exceed $150.00 in total for any month. A $50.00 fee applies to any returned payment."
+    },
+    {
+      "topic": "pet rules and fees",
+      "quote": "No animals of any kind, including visiting animals, are allowed in the Residence without a signed animal addendum, except assistance animals approved as required by law. Approved pets require a nonrefundable pet fee of $350 and monthly pet rent of $35 per animal."
+    },
+    {
+      "topic": "guest limits",
+      "quote": "Guests may not stay in the Residence more than 7 consecutive nights or more than 14 nights in any six-month period without Owner's written consent."
+    }
+  ],
+  "nearMisses": [
+    {
+      "quote": "Tenant must obtain and keep in force during the Lease term a renter's insurance policy with personal liability coverage of at least $100,000 and must provide proof of coverage before move-in and upon request. Owner's property insurance covers the building, not Tenant's furniture, clothing, electronics or other belongings, and does not provide liability coverage for Tenant.",
+      "note": "landlord's insurance doesn't cover tenant property: a fact, not a release"
+    },
+    {
+      "quote": "Because the Residence is one half of a duplex, Owner and Tenant agree in writing that Tenant will make and pay for repairs to the plumbing fixtures and drains inside the Residence. Owner will maintain the roof, foundation, exterior walls and the plumbing lines outside the Residence.",
+      "note": "allowed in writing for a duplex (83.51(1))"
+    },
+    {
+      "quote": "Tenant may not add or change locks without Owner's consent and must give Owner a key to any approved lock.",
+      "note": "the tenant can't change locks: not a lockout"
+    }
+  ],
+  "approved": false
+}

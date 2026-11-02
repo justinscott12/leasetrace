@@ -115,8 +115,14 @@ describe("periodic-termination-notice — 83.57", () => {
   });
   it("year-to-year needs 60", () =>
     expect(severities("periodic-termination-notice", p(present("year_to_year"), 30, 60))).toEqual(["void"]));
-  it("fixed term is out of this rule", () =>
-    expect(run("periodic-termination-notice", p(present("fixed_term"), 1, 1))).toEqual([]));
+  it("fixed term with no renewal notice → nothing", () =>
+    expect(run("periodic-termination-notice", { tenancyType: present("fixed_term") })).toEqual([]));
+  it("fixed term renewing month-to-month: renewal notice is held to 83.57(3)", () => {
+    expect(run("periodic-termination-notice", p(present("fixed_term"), 30, 30))).toEqual([]);
+    const [f] = run("periodic-termination-notice", p(present("fixed_term"), 10, 10));
+    expect(f).toMatchObject({ severity: "void", citation: "83.57(3)" });
+    expect(f?.problem).toContain("month-to-month renewal");
+  });
 });
 
 describe("end-of-term-notice — 83.575(1): 30 to 60 days", () => {
@@ -212,6 +218,10 @@ describe("property-removal — 83.67(5)", () => {
 describe("landlord-address — 83.50", () => {
   it("present ok", () => expect(run("landlord-address", { landlordNoticeAddress: present("PO Box 1") })).toEqual([]));
   it("absent → notice gap", () => expect(severities("landlord-address", {})).toEqual(["notice"]));
+  it("unclear (name, no address) → notice, not review", () => {
+    const [f] = run("landlord-address", { landlordNoticeAddress: { status: "unclear", note: "no address", span } });
+    expect(f).toMatchObject({ severity: "notice", span });
+  });
 });
 
 describe("engine validation", () => {

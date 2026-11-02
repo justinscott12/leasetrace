@@ -1,0 +1,35 @@
+{
+  "lease": "03-single-family-house.txt",
+  "split": "dev",
+  "summary": "Single-family house: written repair shift is allowed; fee waiver and 90-day notice are not.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "end-of-term-notice",
+      "citation": "83.575(1)",
+      "severity": "void",
+      "quote": "Tenant must give Owner written notice at least 90 days before the end of the term if Tenant will not renew.",
+      "note": "90 > 60 days"
+    },
+    {
+      "ruleId": "attorney-fee-waiver",
+      "citation": "83.48",
+      "severity": "void",
+      "quote": "Each party shall bear its own attorney fees and costs in any dispute arising out of this Agreement.",
+      "note": "waives fee recovery"
+    }
+  ],
+  "outOfScope": [
+    {
+      "topic": "HOA rules",
+      "quote": "Tenant shall follow the HOA's parking and trash rules"
+    }
+  ],
+  "nearMisses": [
+    {
+      "quote": "Tenant is responsible for routine repairs to the plumbing",
+      "note": "allowed in writing for a single-family home (83.51(1))"
+    }
+  ],
+  "approved": false
+}

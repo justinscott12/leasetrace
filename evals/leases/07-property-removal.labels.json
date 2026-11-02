@@ -1,0 +1,49 @@
+{
+  "lease": "07-property-removal.txt",
+  "split": "dev",
+  "summary": "Apartment: removal for nonpayment, abandoned-property clause without the legend, repair interruption, force majeure.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "property-removal",
+      "citation": "83.67(5)",
+      "severity": "violation",
+      "quote": "If rent is more than five days late, Owner may enter the Dwelling and remove Residents' personal property to a storage facility until all past-due rent is paid.",
+      "note": "removal without surrender/abandonment/eviction"
+    },
+    {
+      "ruleId": "property-removal",
+      "citation": "83.67(5)",
+      "severity": "void",
+      "quote": "After Residents move out, Owner is not responsible for storing or disposing of any personal property Residents leave in the Dwelling.",
+      "note": "waiver without the 83.67(5) legend"
+    },
+    {
+      "ruleId": "utility-shutoff",
+      "citation": "83.67(1)",
+      "severity": "review",
+      "quote": "Owner may temporarily interrupt water or electricity to the Dwelling when necessary to make repairs to the building.",
+      "note": "label policy row 1"
+    },
+    {
+      "ruleId": "liability-exculpation",
+      "citation": "83.47(1)(b)",
+      "severity": "review",
+      "quote": "Owner is excused from further performance of its obligations under this Lease Contract for the duration of the event.",
+      "note": "label policy row 6: force majeure"
+    }
+  ],
+  "outOfScope": [
+    {
+      "topic": "late fee",
+      "quote": "A late fee of 10% of the monthly rent applies."
+    }
+  ],
+  "nearMisses": [
+    {
+      "quote": "Owner may enter the Dwelling for repairs between 8:00 a.m. and 7:30 p.m. after giving at least 24 hours' notice.",
+      "note": "inside 7:30-8:00 window"
+    }
+  ],
+  "approved": false
+}

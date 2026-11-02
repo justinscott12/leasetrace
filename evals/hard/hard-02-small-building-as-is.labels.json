@@ -1,0 +1,62 @@
+{
+  "lease": "hard-02-small-building-as-is.txt",
+  "split": "dev",
+  "summary": "Eight-unit building. An AS-IS clause removes the repair duty; the deposit deadline sits in a later section; holdover notice is 15 days.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "maintenance-waiver",
+      "citation": "83.51(1)",
+      "severity": "void",
+      "quote": "Landlord has no obligation to make repairs, replacements or improvements to the Unit or the building except those Landlord elects to make in its sole discretion.",
+      "note": "multi-unit building: the landlord's code, structural and plumbing duties can't be waived"
+    },
+    {
+      "ruleId": "periodic-termination-notice",
+      "citation": "83.57(3)",
+      "severity": "void",
+      "quote": "If Tenant remains in the Unit after the Lease term with Landlord's consent, the tenancy will be month-to-month at the rent then in effect, and either party may end it by giving the other at least fifteen (15) days' written notice.",
+      "note": "15 < 30 days for the month-to-month holdover"
+    },
+    {
+      "ruleId": "deposit-return-deadline",
+      "citation": "83.49(3)(a)",
+      "severity": "void",
+      "quote": "Within forty-five (45) days after Tenant vacates, Landlord will return the security deposit, less any amounts Landlord is entitled to deduct, together with an itemized statement of any deductions.",
+      "note": "45 > 15 days"
+    },
+    {
+      "ruleId": "deposit-claim-deadline",
+      "citation": "83.49(3)(a)",
+      "severity": "void",
+      "quote": "Within forty-five (45) days after Tenant vacates, Landlord will return the security deposit, less any amounts Landlord is entitled to deduct, together with an itemized statement of any deductions.",
+      "note": "the itemized statement is the claim notice: 45 > 30 days; arguable, since the clause never says 'claim'",
+      "optional": true
+    }
+  ],
+  "outOfScope": [
+    {
+      "topic": "late fees",
+      "quote": "If any rent is not received by 11:59 p.m. on the third day of the month, Tenant will pay an initial late charge of $75.00 plus $10.00 per day thereafter until paid, not to exceed $150.00 in total for any month. A $50.00 fee applies to any returned payment."
+    },
+    {
+      "topic": "pet rules and fees",
+      "quote": "No animals of any kind, including visiting animals, are allowed in the Unit without a signed animal addendum, except assistance animals approved as required by law. Approved pets require a nonrefundable pet fee of $350 and monthly pet rent of $35 per animal."
+    },
+    {
+      "topic": "guest limits",
+      "quote": "Guests may not stay in the Unit more than 7 consecutive nights or more than 14 nights in any six-month period without Landlord's written consent."
+    }
+  ],
+  "nearMisses": [
+    {
+      "quote": "Tenant must obtain and keep in force during the Lease term a renter's insurance policy with personal liability coverage of at least $100,000 and must provide proof of coverage before move-in and upon request. Landlord's property insurance covers the building, not Tenant's furniture, clothing, electronics or other belongings, and does not provide liability coverage for Tenant.",
+      "note": "landlord's insurance doesn't cover tenant property: a fact, not a release"
+    },
+    {
+      "quote": "Tenant will pay Landlord for the reasonable cost of repairing any damage to the Unit or the community, including stopped-up drains and broken windows, that is caused by Tenant, occupants, guests or animals, whether by negligence, misuse or violation of this Lease. Normal wear and tear is excepted.",
+      "note": "reimbursing tenant-caused damage: not a maintenance waiver"
+    }
+  ],
+  "approved": false
+}

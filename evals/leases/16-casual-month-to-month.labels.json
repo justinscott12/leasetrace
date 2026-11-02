@@ -1,0 +1,42 @@
+{
+  "lease": "16-casual-month-to-month.txt",
+  "split": "test",
+  "summary": "Texted garage-apartment rental: power shutoff for late rent, 7-day landlord termination notice.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "utility-shutoff",
+      "citation": "83.67(1)",
+      "severity": "violation",
+      "quote": "if rent isn't paid by the 10th the power to the apartment gets shut off until you're caught up.",
+      "note": "shutoff for nonpayment"
+    },
+    {
+      "ruleId": "periodic-termination-notice",
+      "citation": "83.57(3)",
+      "severity": "void",
+      "quote": "i can end it with 7 days' notice.",
+      "note": "7 < 30 days"
+    },
+    {
+      "ruleId": "landlord-address",
+      "citation": "83.50",
+      "severity": "notice",
+      "quote": null,
+      "note": "No notice address for the landlord; the property address might be read as his.",
+      "optional": true
+    }
+  ],
+  "outOfScope": [],
+  "nearMisses": [
+    {
+      "quote": "i'll text you at least a day ahead before coming in to fix anything, and i'll only come between 9 am and 7 pm.",
+      "note": "24h, inside the window"
+    },
+    {
+      "quote": "no deposit needed since you're a friend of the family.",
+      "note": "$0 deposit"
+    }
+  ],
+  "approved": false
+}

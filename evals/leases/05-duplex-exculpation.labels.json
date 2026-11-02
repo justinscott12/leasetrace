@@ -1,0 +1,39 @@
+{
+  "lease": "05-duplex-exculpation.txt",
+  "split": "dev",
+  "summary": "Duplex: plumbing shift allowed; broad exculpation void; third-party-crime clause fine; 12h entry notice.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "repair-entry-notice",
+      "citation": "83.53(2)",
+      "severity": "void",
+      "quote": "Lessor may enter the premises to make repairs after giving Lessee at least 12 hours' notice, between 8:00 a.m. and 8:00 p.m.",
+      "note": "12 < 24 hours"
+    },
+    {
+      "ruleId": "liability-exculpation",
+      "citation": "83.47(1)(b)",
+      "severity": "void",
+      "quote": "Lessor shall not be liable to Lessee, Lessee's family, or guests for any damage, injury, or loss to person or property from any cause whatsoever, including Lessor's own negligence.",
+      "note": "broad exculpation"
+    }
+  ],
+  "outOfScope": [
+    {
+      "topic": "pets",
+      "quote": "One cat is permitted. Dogs are not allowed."
+    }
+  ],
+  "nearMisses": [
+    {
+      "quote": "Lessee agrees in writing to make and pay for repairs to the plumbing serving the east unit, including the water heater.",
+      "note": "allowed for a duplex"
+    },
+    {
+      "quote": "Lessor is not responsible for loss or damage caused by the criminal acts of third parties, including burglary and vandalism.",
+      "note": "label policy row 8: third-party crime only"
+    }
+  ],
+  "approved": false
+}

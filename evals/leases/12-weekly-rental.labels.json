@@ -1,0 +1,44 @@
+{
+  "lease": "12-weekly-rental.txt",
+  "split": "dev",
+  "summary": "Week-to-week efficiency: 3-day termination notice, discretionary deposit handling, no disclosure, no address.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "periodic-termination-notice",
+      "citation": "83.57(4)",
+      "severity": "void",
+      "quote": "Either party may end this tenancy by giving the other 3 days' notice before the end of a rental week.",
+      "note": "3 < 7 days, week-to-week"
+    },
+    {
+      "ruleId": "deposit-holding",
+      "citation": "83.49(1)",
+      "severity": "violation",
+      "quote": "Manager may hold the deposit in whatever manner it sees fit.",
+      "note": "landlord discretion"
+    },
+    {
+      "ruleId": "deposit-disclosure",
+      "citation": "83.49(2)",
+      "severity": "notice",
+      "quote": null,
+      "note": "Deposit taken, no disclosure anywhere in the lease."
+    },
+    {
+      "ruleId": "landlord-address",
+      "citation": "83.50",
+      "severity": "notice",
+      "quote": null,
+      "note": "No landlord or agent notice address."
+    }
+  ],
+  "outOfScope": [
+    {
+      "topic": "occupancy limits",
+      "quote": "have more than two occupants"
+    }
+  ],
+  "nearMisses": [],
+  "approved": false
+}

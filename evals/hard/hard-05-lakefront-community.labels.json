@@ -1,0 +1,81 @@
+{
+  "lease": "hard-05-lakefront-community.txt",
+  "split": "test",
+  "summary": "Large community lease. Two removal rights hide in the entry-purpose list, a rekey-on-default remedy hides in the default section, plus force majeure and a crime-only disclaimer.",
+  "scope": "residential",
+  "findings": [
+    {
+      "ruleId": "property-removal",
+      "citation": "83.67(5)",
+      "severity": "violation",
+      "quote": "(d) removing perishable food from a refrigerator or freezer after a power outage;",
+      "note": "label policy row 5: entry purpose that removes the tenant's things"
+    },
+    {
+      "ruleId": "property-removal",
+      "citation": "83.67(5)",
+      "severity": "violation",
+      "quote": "(e) removing any item that blocks a smoke detector or fire sprinkler;",
+      "note": "label policy row 5: hazards included"
+    },
+    {
+      "ruleId": "lockout",
+      "citation": "83.67(2)",
+      "severity": "violation",
+      "quote": "upon termination of Resident's right of occupancy for default Management may change or rekey the locks to the Apartment Home.",
+      "note": "self-help lockout"
+    },
+    {
+      "ruleId": "liability-exculpation",
+      "citation": "83.47(1)(b)",
+      "severity": "review",
+      "quote": "Management will not be in default of this Lease, and its obligations will be suspended, while performance is prevented by hurricane, flood, fire, pandemic, governmental order, labor dispute or other causes beyond Management's reasonable control.",
+      "note": "label policy row 6: force majeure"
+    }
+  ],
+  "outOfScope": [
+    {
+      "topic": "late fees",
+      "quote": "If any rent is not received by 11:59 p.m. on the third day of the month, Resident will pay an initial late charge of $75.00 plus $10.00 per day thereafter until paid, not to exceed $150.00 in total for any month. A $50.00 fee applies to any returned payment."
+    },
+    {
+      "topic": "guest limits",
+      "quote": "Guests may not stay in the Apartment Home more than 7 consecutive nights or more than 14 nights in any six-month period without Management's written consent."
+    },
+    {
+      "topic": "pet rules and fees",
+      "quote": "No animals of any kind, including visiting animals, are allowed in the Apartment Home without a signed animal addendum, except assistance animals approved as required by law. Approved pets require a nonrefundable pet fee of $350 and monthly pet rent of $35 per animal."
+    },
+    {
+      "topic": "jury-trial waiver",
+      "quote": "To the extent permitted by law, Management and Resident waive trial by jury in any lawsuit arising out of this Lease or Resident's occupancy of the Apartment Home."
+    }
+  ],
+  "nearMisses": [
+    {
+      "quote": "Resident must obtain and keep in force during the Lease term a renter's insurance policy with personal liability coverage of at least $100,000 and must provide proof of coverage before move-in and upon request. Management's property insurance covers the building, not Resident's furniture, clothing, electronics or other belongings, and does not provide liability coverage for Resident.",
+      "note": "landlord's insurance doesn't cover tenant property: a fact, not a release"
+    },
+    {
+      "quote": "Management does not provide and has no duty to provide security guards or patrol services. Any gates, cameras or lighting are provided for convenience and may not work at all times. Resident should call 911 in any emergency and should take steps to protect Resident's own safety and property.",
+      "note": "no duty to provide guards: not a release of liability the law imposes"
+    },
+    {
+      "quote": "Management is not liable for loss or injury caused by the criminal conduct of other persons, unless otherwise provided by law.",
+      "note": "label policy row 8: third-party crime only"
+    },
+    {
+      "quote": "Resident will pay Management for the reasonable cost of repairing any damage to the Apartment Home or the community, including stopped-up drains and broken windows, that is caused by Resident, occupants, guests or animals, whether by negligence, misuse or violation of this Lease. Normal wear and tear is excepted.",
+      "note": "reimbursing tenant-caused damage: not a maintenance waiver"
+    },
+    {
+      "quote": "If Resident is locked out of the Apartment Home, Resident may call the office during business hours, or the after-hours courtesy line, and a staff member will let Resident in after verifying identity. A $50.00 service charge applies to after-hours lockouts.",
+      "note": "tenant locked out by accident; landlord lets them in: not a lockout"
+    },
+    {
+      "quote": "Management will remove personal property from the Apartment Home only after Resident surrenders or abandons it or after a lawful eviction.",
+      "note": "compliant removal, with the legend"
+    }
+  ],
+  "approved": false
+}
