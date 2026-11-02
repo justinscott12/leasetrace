@@ -37,20 +37,61 @@ federal fair housing, jury waivers, commercial leases.
   - `audit.ts`: extract → rules → trace events (the future replay format). Non-residential lease → no Part II findings.
   - SDK browser flag for the BYOK path confirmed in SDK 1.3.0: `dangerouslyAllowBrowser: true`.
 - [x] Tests with a fake client (no network, no cost): 95 passing.
-- [ ] **Next unchecked item:** first real call. Needs Justin's API key in his environment and his OK on spend
-      (~$0.20–0.30 per Opus call with a cold cache; cheaper once cached). Smoke test privately on a real lease in `private/`.
+- [x] First real call (2026-11-01), on a real 79K-character FAA-form lease in `private/` (details in `private/NOTES.md`):
+  - 2 free 400s first (schema limits) → generic fact list (DECISIONS.md). Then: all 21 facts reported, 17/17 quotes located
+    **exactly**, 0 invalid values, every boundary value correct.
+  - Opus 5.5, effort medium: **57 s, $0.41** (in 26.2K, cache write 31.8K, out 7.2K incl. thinking). Too slow for the live
+    path's feel and pricier than estimated. Next: sweep effort/model on the eval set; replays carry the demo either way.
+  - 4 findings, all on interpretation boundaries: 3 are the label questions below, plus 1 `review` on repair entry
+    (24h notice applies only when nobody's home) — tri-state working as designed.
+  - Cache hit not yet verified (a second call was deferred to stay inside the approved spend). Eval runs will show it.
+- [x] Justin answered the label questions; fact definitions, utility rule and tests updated.
+- [x] Re-ran the real lease twice after the label changes (2026-11-01):
+  - **Cache verified:** run 1 wrote 32.1K prefix tokens ($0.41, 55 s); run 2 read all 32.1K from cache ($0.27, 60 s).
+    Latency is dominated by ~7K output tokens, not input.
+  - Label-policy items now behave as decided (repair entry → void, fees → void, exculpation → void).
+  - **Two real problems found:**
+    1. *One slot per fact loses clauses.* Leases often have several clauses on one topic. The model picks one per fact,
+       and which one varies: the utility fact reported an electricity cutoff listed among entry purposes instead of the
+       repair-interruption clause; the property-removal fact reported a "remove prohibited items" entry purpose instead of the
+       compliant surrender/abandonment clause it picked last time.
+    2. *Run-to-run variance.* Same input, 6 vs 7 findings: run 2 alone flagged an ordinary "reimburse us for damage you
+       cause" clause as a maintenance waiver, which the definition explicitly excludes.
+  - Also: the repair-hours rule now adds a `review` for the same "someone home" branch already voided by repair-entry-notice
+    (double-counting one clause).
+- [x] Multi-instance clause facts: each clause-type fact holds a list of instances and the rules check each one
+      (DECISIONS.md). Also fixed the repair-hours double-count and tightened the maintenance-waiver definition. 110 tests.
+- [x] Re-ran the real lease with clause instances (2026-11-01, $0.44, 65 s, 8.7K output tokens):
+  - **Recall up:** 26 quotes located (25 exact, 1 normalized), every related clause now reported, including the
+    repair-interruption clause and the compliant surrender/abandonment clause that earlier runs dropped.
+  - **Precision down:** 13 findings. One was a definition gap ("interrupt utilities… to perform work" read as non-repair;
+    definition widened to repairs, maintenance or other work, not yet re-run). The "reimburse damage you cause" clause is
+    still flagged as a maintenance waiver despite the explicit exclusion. The rest are new interpretation questions (below).
+  - **Lesson:** stop tuning on one lease. Further prompt changes need the golden set and repeated runs to show a real delta;
+    otherwise this is overfitting to a single example.
+- [ ] **Next unchecked item:** Justin answers the new label questions below; then Decisions 4–5 (eval grading, citation
+      safety) and the golden set, with each case run several times and consistency reported.
 - [ ] Out-of-scope items: extracted and located; not yet shown anywhere.
 - [ ] Teach-mode Decisions 4–5 (eval grading, fabricated-citation prevention)
 - [ ] Golden set (Justin approves labels), dev/test split
 - [ ] `npm run eval`
 - [ ] First honest scores → recall ≥ 0.9, fabricated citations = 0
 
-### Label questions for Justin (legal interpretation, his call during label review)
-- A clause letting the landlord "interrupt utilities as needed to perform work": a 83.67(1) utility-interruption clause, or a
-  permitted repair interruption? The extractor definition currently targets shutoffs like "for late rent".
-- "We're not liable for… unless otherwise required by law": does the savings clause make it compliant under 83.47(1)(b)?
-- 83.49(1) requires a "Florida financial institution"; the statute text doesn't define it. A deposit at a national bank with an
-  out-of-state address is probably fine; note it, don't make it a rule.
+### Label policy — answered 2026-11-01, see docs/LABEL_POLICY.md
+Utility interruption for repairs only → review · broad exculpation with "unless required by law" → void · attorney-fee
+carve-out broader than 83.48's → void · no-notice repair entry when someone's home → void (reported as 0 hours' notice).
+Rules, fact definitions and tests updated (103 passing). Expected on the real lease now: 3 void + 1 review.
+
+### New label questions (from the multi-instance run) — Justin's call
+- **Entry-purpose removals:** a list of entry purposes includes "removing perishable foodstuffs if your electricity is
+  disconnected", "removing health or safety hazards… or items prohibited under our rules", "removing unauthorized window
+  coverings". Removal of tenant property under 83.67(5) (violation), or entry purposes outside it?
+- **Force majeure:** "we shall be excused from any further performance of obligations… to the full extent allowed under
+  applicable law". A liability release under 83.47(1)(b), or a performance excuse that isn't exculpation?
+- **"Cutting off electricity according to statute"** (an entry purpose): a 83.67(1) violation, review, or ignore?
+- **Narrow non-liability clauses:** "not liable for casualty loss, damage, or theft except for property removed under a
+  contractual lien" (a storage clause), and crime-related non-liability "unless otherwise provided by law". Void like the
+  broad clause, or compliant because they're limited?
 
 A private precision check on a real lease lives in `private/` (gitignored; see `private/NOTES.md` locally).
 
@@ -67,3 +108,7 @@ A private precision check on a real lease lives in `private/` (gitignored; see `
 ## Session log
 - 2026-10-28: Milestone A done except v1-legacy branch. Extraction pipeline built and unit-tested (no real API call yet). Nothing committed. Renamed LegalTrace → LeaseTrace locally (package, docs, decision logs). Folder renamed to `workspace/leasetrace`. GitHub repo still `justinscott12/legaltrace`; rename it there when v2 is pushed.
 - 2026-10-30: First commit on `v2`, pushed. Personal lease notes moved to gitignored `private/NOTES.md` before pushing.
+- 2026-11-01: First live audit works end to end (after a schema redesign forced by API grammar limits). 101 tests. Spend so far ≈ $0.43. Not committed.
+- 2026-11-01 (later): label policy implemented; 2 more live runs (cache verified). Found the one-slot-per-fact limitation and run-to-run variance. Spend so far ≈ $1.10.
+- 2026-11-01 (later): multi-instance clause facts built; 110 tests. No paid runs since the last two.
+- 2026-11-01 (later): live run with clause instances — recall fixed, precision exposed new label questions. Spend ≈ $1.54.

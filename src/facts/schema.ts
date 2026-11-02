@@ -17,6 +17,28 @@ export type Fact<T> =
   | { status: "absent" }
   | { status: "unclear"; note: string; span?: Span };
 
+/** One clause the extractor found: a value tied to lease text, or an unclear mention. */
+export type Instance<T> = Exclude<Fact<T>, { status: "absent" }>;
+
+/**
+ * Clause-type facts hold every matching clause, not one: leases often have several
+ * clauses on the same topic, and a single slot made the model pick one arbitrarily
+ * (DECISIONS.md, "multi-instance clause facts"). An empty list means none.
+ */
+export type Clauses<T> = Instance<T>[];
+
+export const CLAUSE_FACTS = [
+  "structuralMaintenanceWaiver",
+  "attorneyFeeWaiver",
+  "liabilityExculpation",
+  "utilityShutoffClause",
+  "lockoutClause",
+  "flagBan",
+  "retaliationClause",
+  "propertyRemovalClause",
+] as const;
+export type ClauseFactKey = (typeof CLAUSE_FACTS)[number];
+
 export type PropertyType = "single_family" | "duplex" | "multi_unit" | "other";
 export type TenancyType =
   | "fixed_term"
@@ -56,15 +78,16 @@ export interface LeaseFacts {
   /** Fixed-term leases: notice required before vacating at end of term. */
   endOfTermNoticeDays: Fact<{ tenant: number | null; landlord: number | null }>;
   /** Clause shifting 83.51(1) code/structural/plumbing duties off the landlord. */
-  structuralMaintenanceWaiver: Fact<true>;
-  attorneyFeeWaiver: Fact<true>;
-  liabilityExculpation: Fact<true>;
-  utilityShutoffClause: Fact<true>;
-  lockoutClause: Fact<true>;
-  flagBan: Fact<true>;
-  retaliationClause: Fact<true>;
+  structuralMaintenanceWaiver: Clauses<true>;
+  attorneyFeeWaiver: Clauses<true>;
+  liabilityExculpation: Clauses<true>;
+  /** Clause letting the landlord interrupt utilities; repairOrDamagePreventionOnly when limited to repairs / preventing damage. */
+  utilityShutoffClause: Clauses<{ repairOrDamagePreventionOnly: boolean }>;
+  lockoutClause: Clauses<true>;
+  flagBan: Clauses<true>;
+  retaliationClause: Clauses<true>;
   /** Clause letting landlord remove/dispose of tenant property. */
-  propertyRemovalClause: Fact<{ onlyAfterSurrenderAbandonmentOrEviction: boolean; legendPresent: boolean }>;
+  propertyRemovalClause: Clauses<{ onlyAfterSurrenderAbandonmentOrEviction: boolean; legendPresent: boolean }>;
   landlordNoticeAddress: Fact<string>;
 }
 
@@ -85,14 +108,14 @@ export function silentLease(): LeaseFacts {
     repairEntryWindow: a,
     periodicTerminationNoticeDays: a,
     endOfTermNoticeDays: a,
-    structuralMaintenanceWaiver: a,
-    attorneyFeeWaiver: a,
-    liabilityExculpation: a,
-    utilityShutoffClause: a,
-    lockoutClause: a,
-    flagBan: a,
-    retaliationClause: a,
-    propertyRemovalClause: a,
+    structuralMaintenanceWaiver: [],
+    attorneyFeeWaiver: [],
+    liabilityExculpation: [],
+    utilityShutoffClause: [],
+    lockoutClause: [],
+    flagBan: [],
+    retaliationClause: [],
+    propertyRemovalClause: [],
     landlordNoticeAddress: a,
   };
 }

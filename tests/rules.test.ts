@@ -1,13 +1,13 @@
 // Each rule is tested at the statute's boundary (e.g. 15 days ok, 16 void),
 // plus silence and "unclear" behavior.
 import { describe, expect, it } from "vitest";
-import { type Fact, type LeaseFacts, silentLease } from "../src/facts/schema.js";
+import { type Fact, type Instance, type LeaseFacts, silentLease } from "../src/facts/schema.js";
 import { runRules } from "../src/rules/engine.js";
 import { RULES } from "../src/rules/rules.js";
 
 const LEASE = "Sample clause text used for spans.";
 const span = { start: 0, end: 6, quote: "Sample" };
-const present = <T,>(value: T): Fact<T> => ({ status: "present", value, span });
+const present = <T,>(value: T): Instance<T> => ({ status: "present", value, span });
 const unclear: Fact<never> = { status: "unclear", note: "conflicting clauses" };
 
 function run(ruleId: string, patch: Partial<LeaseFacts>) {
@@ -135,39 +135,63 @@ describe("end-of-term-notice — 83.575(1): 30 to 60 days", () => {
 });
 
 describe("maintenance-waiver — 83.51(1) + 83.47(1)(a)", () => {
-  const waiver = { structuralMaintenanceWaiver: present(true as const) };
+  const waiver = { structuralMaintenanceWaiver: [present(true as const)] };
   it("allowed in writing for a single-family home (near-miss)", () =>
     expect(run("maintenance-waiver", { ...waiver, propertyType: present("single_family") })).toEqual([]));
   it("allowed for a duplex", () => expect(run("maintenance-waiver", { ...waiver, propertyType: present("duplex") })).toEqual([]));
   it("void for an apartment", () =>
     expect(severities("maintenance-waiver", { ...waiver, propertyType: present("multi_unit") })).toEqual(["void"]));
   it("review when property type unknown", () => expect(severities("maintenance-waiver", waiver)).toEqual(["review"]));
+  it("each waiver clause is its own finding", () =>
+    expect(
+      severities("maintenance-waiver", { structuralMaintenanceWaiver: [present(true as const), present(true as const)], propertyType: present("multi_unit") }),
+    ).toEqual(["void", "void"]));
 });
 
 describe("clause rules: present → finding, absent → nothing", () => {
   const cases = [
     ["attorney-fee-waiver", "attorneyFeeWaiver", "void", "83.48"],
     ["liability-exculpation", "liabilityExculpation", "void", "83.47(1)(b)"],
-    ["utility-shutoff", "utilityShutoffClause", "violation", "83.67(1)"],
     ["lockout", "lockoutClause", "violation", "83.67(2)"],
     ["flag-ban", "flagBan", "void", "83.67(4)"],
     ["retaliation", "retaliationClause", "violation", "83.64(1)"],
   ] as const;
   it.each(cases)("%s", (id, key, severity, citation) => {
     expect(run(id, {})).toEqual([]);
-    const [f] = run(id, { [key]: present(true as const) });
+    const [f] = run(id, { [key]: [present(true as const)] });
     expect(f).toMatchObject({ severity, citation, span, path: "code_rule" });
     expect(f?.suggestedFix).toBeTruthy();
+    expect(severities(id, { [key]: [{ status: "unclear", note: "vague" }] })).toEqual(["review"]);
   });
+});
+
+describe("utility-shutoff — 83.67(1) + label policy", () => {
+  const clause = (repairOnly: boolean) => present({ repairOrDamagePreventionOnly: repairOnly });
+  const u = (repairOnly: boolean) => ({ utilityShutoffClause: [clause(repairOnly)] });
+  it("absent → nothing", () => expect(run("utility-shutoff", {})).toEqual([]));
+  it("shutoff for any other purpose is a violation", () => {
+    const [f] = run("utility-shutoff", u(false));
+    expect(f).toMatchObject({ severity: "violation", citation: "83.67(1)", span });
+  });
+  it("interruptions limited to repairs / preventing damage → review (Justin's label call, 2026-11-01)", () =>
+    expect(severities("utility-shutoff", u(true))).toEqual(["review"]));
+  it("a lease with both kinds of clause gets both findings (seen on a real lease)", () =>
+    expect(severities("utility-shutoff", { utilityShutoffClause: [clause(true), clause(false)] })).toEqual(["review", "violation"]));
 });
 
 describe("property-removal — 83.67(5)", () => {
   const c = (only: boolean, legend: boolean) => ({
-    propertyRemovalClause: present({ onlyAfterSurrenderAbandonmentOrEviction: only, legendPresent: legend }),
+    propertyRemovalClause: [present({ onlyAfterSurrenderAbandonmentOrEviction: only, legendPresent: legend })],
   });
   it("after surrender with legend ok", () => expect(run("property-removal", c(true, true))).toEqual([]));
   it("after surrender without legend void", () => expect(severities("property-removal", c(true, false))).toEqual(["void"]));
   it("any time is a violation", () => expect(severities("property-removal", c(false, true))).toEqual(["violation"]));
+  it("a compliant clause doesn't hide a violating one", () =>
+    expect(
+      severities("property-removal", {
+        propertyRemovalClause: [...c(true, true).propertyRemovalClause, ...c(false, true).propertyRemovalClause],
+      }),
+    ).toEqual(["violation"]));
 });
 
 describe("landlord-address — 83.50", () => {
@@ -178,12 +202,12 @@ describe("landlord-address — 83.50", () => {
 describe("engine validation", () => {
   it("drops a finding whose span doesn't match the lease text", () => {
     const bad = { status: "present" as const, value: true as const, span: { start: 0, end: 6, quote: "Nope!!" } };
-    const { findings, dropped } = runRules({ ...silentLease(), lockoutClause: bad, landlordNoticeAddress: present("x") }, LEASE);
+    const { findings, dropped } = runRules({ ...silentLease(), lockoutClause: [bad], landlordNoticeAddress: present("x") }, LEASE);
     expect(findings).toEqual([]);
     expect(dropped[0]?.reason).toMatch(/span/);
   });
   it("keeps a finding whose span matches", () => {
-    const { findings } = runRules({ ...silentLease(), lockoutClause: present(true), landlordNoticeAddress: present("x") }, LEASE);
+    const { findings } = runRules({ ...silentLease(), lockoutClause: [present(true as const)], landlordNoticeAddress: present("x") }, LEASE);
     expect(findings.map((f) => f.ruleId)).toEqual(["lockout"]);
   });
 });

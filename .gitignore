@@ -6,3 +6,4 @@ dist/
 
 # Real leases with personal info. Never commit, never publish.
 private/
+!.env.example

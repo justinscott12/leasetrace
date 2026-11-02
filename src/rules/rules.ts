@@ -1,6 +1,6 @@
 // Deterministic rules, each written from a quoted statute subsection.
 // A rule that can't be traced to a quote doesn't ship (BUILD_PROMPT §3).
-import type { Fact, LeaseFacts, Span } from "../facts/schema.js";
+import type { ClauseFactKey, Clauses, Fact, Instance, LeaseFacts, Span } from "../facts/schema.js";
 import type { Finding, Rule, Severity } from "./types.js";
 
 type Base = Pick<Finding, "ruleId" | "citation" | "title">;
@@ -34,7 +34,7 @@ function clauseRule(r: {
   title: string;
   citation: string;
   quote: string;
-  fact: keyof LeaseFacts;
+  fact: ClauseFactKey;
   severity: Severity;
   problem: string;
   fix: string;
@@ -46,9 +46,9 @@ function clauseRule(r: {
     basis: [{ citation: r.citation, quote: r.quote }],
     facts: [r.fact],
     check(f) {
-      const fact = f[r.fact];
-      if (fact.status === "present") return [finding(base, r.severity, r.problem, fact.span, r.fix)];
-      return unclear(base, fact, r.title.toLowerCase());
+      return (f[r.fact] as Clauses<unknown>).flatMap((c) =>
+        c.status === "present" ? [finding(base, r.severity, r.problem, c.span, r.fix)] : unclear(base, c, r.title.toLowerCase()),
+      );
     },
   };
 }
@@ -343,6 +343,29 @@ const endOfTermNotice: Rule = {
   },
 };
 
+function maintenanceWaiverFindings(base: Base, w: Instance<true>, p: LeaseFacts["propertyType"]): Finding[] {
+  if (w.status === "unclear") return unclear(base, w, "who maintains the structure, plumbing and code compliance");
+  if (p.status === "present" && (p.value === "single_family" || p.value === "duplex")) return [];
+  if (p.status !== "present")
+    return [
+      finding(
+        base,
+        "review",
+        "The lease shifts the landlord's code, structural or plumbing duties to the tenant. That is allowed in writing only for a single-family home or duplex, and the lease doesn't make clear which this is.",
+        w.span,
+      ),
+    ];
+  return [
+    finding(
+      base,
+      "void",
+      "The lease shifts the landlord's code, structural or plumbing duties to the tenant. For a unit that is not a single-family home or duplex, these duties can't be waived.",
+      w.span,
+      "Landlord will comply with applicable building, housing, and health codes and keep the structural components and plumbing in good repair as required by s. 83.51(1), Florida Statutes.",
+    ),
+  ];
+}
+
 const maintenanceWaiver: Rule = {
   id: "maintenance-waiver",
   title: "Waiver of landlord's maintenance duties",
@@ -358,29 +381,9 @@ const maintenanceWaiver: Rule = {
     },
   ],
   facts: ["structuralMaintenanceWaiver", "propertyType"],
-  check({ structuralMaintenanceWaiver: w, propertyType: p }) {
+  check({ structuralMaintenanceWaiver: waivers, propertyType: p }) {
     const base = { ruleId: this.id, citation: "83.51(1)", title: this.title };
-    if (w.status === "unclear") return unclear(base, w, "who maintains the structure, plumbing and code compliance");
-    if (w.status === "absent") return [];
-    if (p.status === "present" && (p.value === "single_family" || p.value === "duplex")) return [];
-    if (p.status !== "present")
-      return [
-        finding(
-          base,
-          "review",
-          "The lease shifts the landlord's code, structural or plumbing duties to the tenant. That is allowed in writing only for a single-family home or duplex, and the lease doesn't make clear which this is.",
-          w.span,
-        ),
-      ];
-    return [
-      finding(
-        base,
-        "void",
-        "The lease shifts the landlord's code, structural or plumbing duties to the tenant. For a unit that is not a single-family home or duplex, these duties can't be waived.",
-        w.span,
-        "Landlord will comply with applicable building, housing, and health codes and keep the structural components and plumbing in good repair as required by s. 83.51(1), Florida Statutes.",
-      ),
-    ];
+    return waivers.flatMap((w) => maintenanceWaiverFindings(base, w, p));
   },
 };
 
@@ -406,17 +409,45 @@ const liability = clauseRule({
   fix: "Delete the clause. Each party remains responsible for its own obligations and liability under law.",
 });
 
-const utilities = clauseRule({
+// Label policy (docs/LABEL_POLICY.md): interruptions limited to repairs or preventing
+// damage are `review`, not a violation; 83.67(1) has no repair exception in its text,
+// but its target is shutoffs used against the tenant.
+const utilities: Rule = {
   id: "utility-shutoff",
   title: "Utility shutoff",
-  citation: "83.67(1)",
-  quote:
-    "shall not cause, directly or indirectly, the termination or interruption of any utility service furnished the tenant",
-  fact: "utilityShutoffClause",
-  severity: "violation",
-  problem: "The lease allows the landlord to shut off or interrupt utilities. Florida prohibits this, even when rent is late.",
-  fix: "Delete the clause. Landlord will not interrupt any utility service furnished to Tenant.",
-});
+  basis: [
+    {
+      citation: "83.67(1)",
+      quote: "shall not cause, directly or indirectly, the termination or interruption of any utility service furnished the tenant",
+    },
+  ],
+  facts: ["utilityShutoffClause"],
+  check({ utilityShutoffClause: clauses }) {
+    const base = { ruleId: this.id, citation: "83.67(1)", title: this.title };
+    return clauses.flatMap((c): Finding[] => {
+      if (c.status !== "present") return unclear(base, c, "interrupting utilities");
+      if (c.value.repairOrDamagePreventionOnly)
+        return [
+          finding(
+            base,
+            "review",
+            "The lease lets the landlord interrupt utilities to make repairs or prevent damage. Florida's statute bars any landlord-caused utility interruption and states no repair exception; temporary repair work is commonly treated differently, so a person should check how this clause is used.",
+            c.span,
+            "Landlord may temporarily interrupt a utility only as reasonably necessary for repairs or emergencies, with advance notice to Tenant when practical, and will restore service promptly.",
+          ),
+        ];
+      return [
+        finding(
+          base,
+          "violation",
+          "The lease allows the landlord to shut off or interrupt utilities. Florida prohibits this, even when rent is late.",
+          c.span,
+          "Delete the clause. Landlord will not interrupt any utility service furnished to Tenant.",
+        ),
+      ];
+    });
+  },
+};
 
 const lockout = clauseRule({
   id: "lockout",
@@ -469,30 +500,32 @@ const propertyRemoval: Rule = {
     },
   ],
   facts: ["propertyRemovalClause"],
-  check({ propertyRemovalClause: c }) {
+  check({ propertyRemovalClause: clauses }) {
     const base = { ruleId: this.id, citation: "83.67(5)", title: this.title };
-    if (c.status !== "present") return unclear(base, c, "removing the tenant's belongings");
-    if (!c.value.onlyAfterSurrenderAbandonmentOrEviction)
-      return [
-        finding(
-          base,
-          "violation",
-          "The lease lets the landlord remove the tenant's belongings without a surrender, abandonment or court eviction. Florida prohibits this.",
-          c.span,
-          "Landlord may remove Tenant's personal property only after surrender, abandonment, or a lawful eviction.",
-        ),
-      ];
-    if (!c.value.legendPresent)
-      return [
-        finding(
-          base,
-          "void",
-          "The lease says the landlord isn't responsible for belongings left after the tenant moves out, but it lacks the bold notice Florida requires for that waiver to work.",
-          c.span,
-          "Add the s. 83.67(5) legend in capital letters: “BY SIGNING THIS RENTAL AGREEMENT, THE TENANT AGREES THAT UPON SURRENDER, ABANDONMENT, OR RECOVERY OF POSSESSION…”.",
-        ),
-      ];
-    return [];
+    return clauses.flatMap((c): Finding[] => {
+      if (c.status !== "present") return unclear(base, c, "removing the tenant's belongings");
+      if (!c.value.onlyAfterSurrenderAbandonmentOrEviction)
+        return [
+          finding(
+            base,
+            "violation",
+            "The lease lets the landlord remove the tenant's belongings without a surrender, abandonment or court eviction. Florida prohibits this.",
+            c.span,
+            "Landlord may remove Tenant's personal property only after surrender, abandonment, or a lawful eviction.",
+          ),
+        ];
+      if (!c.value.legendPresent)
+        return [
+          finding(
+            base,
+            "void",
+            "The lease says the landlord isn't responsible for belongings left after the tenant moves out, but it lacks the bold notice Florida requires for that waiver to work.",
+            c.span,
+            "Add the s. 83.67(5) legend in capital letters: “BY SIGNING THIS RENTAL AGREEMENT, THE TENANT AGREES THAT UPON SURRENDER, ABANDONMENT, OR RECOVERY OF POSSESSION…”.",
+          ),
+        ];
+      return [];
+    });
   },
 };
 

@@ -1,73 +1,64 @@
 // The structured-output schema the model fills, and its mapping to LeaseFacts.
-// Kept flat (no discriminated unions) so it stays inside the structured-outputs
-// JSON Schema subset; tri-state is a `status` enum plus nullable fields.
+//
+// Structured outputs compile the schema into a grammar with hard size limits
+// (live 400s on 2026-11-01: >16 union parameters; then "compiled grammar is too
+// large" at ~16 typed fact objects). So the API-enforced schema is a small,
+// generic list — {fact, status, quote, note, value_json} — whose size doesn't
+// grow with the number of facts, and each fact's value is validated here in code
+// (DECISIONS.md, "generic fact list"). A missing or malformed fact becomes
+// `unclear`, never a guess.
 import { z } from "zod";
 import { locateQuote, type LocateMethod } from "./locate.js";
-import type { Fact, LeaseFacts, Span } from "./schema.js";
+import { CLAUSE_FACTS, type Fact, type Instance, type LeaseFacts, type Span } from "./schema.js";
 
-const status = z.enum(["present", "absent", "unclear"]);
-const evidence = {
-  status,
-  quote: z.string().nullable().describe("Verbatim text copied from the lease (one sentence or clause). Null unless present/unclear."),
-  note: z.string().nullable().describe("Why the fact is unclear. Null otherwise."),
-};
-const fact = <T extends z.ZodType>(value: T) => z.object({ ...evidence, value: value.nullable() });
-const clause = z.object(evidence);
-const parties = z.object({ tenant: z.number().int().nullable(), landlord: z.number().int().nullable() });
+const days = z.number().int().nullable();
+const clause = z.literal(true);
+
+/** Value schema per fact, checked locally after the model answers. */
+export const VALUE_SCHEMAS = {
+  propertyType: z.enum(["single_family", "duplex", "multi_unit", "other"]),
+  tenancyType: z.enum(["fixed_term", "week_to_week", "month_to_month", "quarter_to_quarter", "year_to_year"]),
+  securityDeposit: z.object({ amount: z.number().nullable() }),
+  depositHolding: z.enum(["separate_non_interest", "separate_interest", "surety_bond", "commingled", "unspecified_landlord_discretion"]),
+  depositDisclosure: z.object({ depositoryNamedOrBond: z.boolean(), interestStated: z.boolean(), statutoryNoticeIncluded: z.boolean() }),
+  depositReturnDays: z.number().int(),
+  depositClaimNoticeDays: z.number().int(),
+  nonpaymentNotice: z.object({ days: z.number().int(), excludesWeekendsAndHolidays: z.boolean().nullable() }),
+  repairEntryNoticeHours: z.number(),
+  repairEntryWindow: z.object({ startMinute: z.number().int().nullable(), endMinute: z.number().int().nullable() }),
+  periodicTerminationNoticeDays: z.object({ tenant: days, landlord: days }),
+  endOfTermNoticeDays: z.object({ tenant: days, landlord: days }),
+  structuralMaintenanceWaiver: clause,
+  attorneyFeeWaiver: clause,
+  liabilityExculpation: clause,
+  utilityShutoffClause: z.object({ repairOrDamagePreventionOnly: z.boolean() }),
+  lockoutClause: clause,
+  flagBan: clause,
+  retaliationClause: clause,
+  propertyRemovalClause: z.object({ onlyAfterSurrenderAbandonmentOrEviction: z.boolean(), legendPresent: z.boolean() }),
+  landlordNoticeAddress: z.string().min(1),
+} satisfies Record<keyof LeaseFacts, z.ZodType>;
+
+export const FACT_NAMES = Object.keys(VALUE_SCHEMAS) as [keyof LeaseFacts, ...(keyof LeaseFacts)[]];
 
 export const WireFacts = z.object({
   is_residential_lease: z.enum(["yes", "no", "unclear"]),
-  property_type: fact(z.enum(["single_family", "duplex", "multi_unit", "other"])),
-  tenancy_type: fact(z.enum(["fixed_term", "week_to_week", "month_to_month", "quarter_to_quarter", "year_to_year"])),
-  security_deposit: fact(z.object({ amount: z.number().nullable() })),
-  deposit_holding: fact(z.enum(["separate_non_interest", "separate_interest", "surety_bond", "commingled", "unspecified_landlord_discretion"])),
-  deposit_disclosure: fact(z.object({ depositoryNamedOrBond: z.boolean(), interestStated: z.boolean(), statutoryNoticeIncluded: z.boolean() })),
-  deposit_return_days: fact(z.number().int()),
-  deposit_claim_notice_days: fact(z.number().int()),
-  nonpayment_notice: fact(z.object({ days: z.number().int(), excludesWeekendsAndHolidays: z.boolean().nullable() })),
-  repair_entry_notice_hours: fact(z.number()),
-  repair_entry_window: fact(z.object({ startMinute: z.number().int().nullable(), endMinute: z.number().int().nullable() })),
-  periodic_termination_notice_days: fact(parties),
-  end_of_term_notice_days: fact(parties),
-  structural_maintenance_waiver: clause,
-  attorney_fee_waiver: clause,
-  liability_exculpation: clause,
-  utility_shutoff_clause: clause,
-  lockout_clause: clause,
-  flag_ban: clause,
-  retaliation_clause: clause,
-  property_removal_clause: fact(z.object({ onlyAfterSurrenderAbandonmentOrEviction: z.boolean(), legendPresent: z.boolean() })),
-  landlord_notice_address: fact(z.string()),
+  facts: z
+    .array(
+      z.object({
+        fact: z.enum(FACT_NAMES),
+        status: z.enum(["present", "absent", "unclear"]),
+        quote: z.string().describe('Verbatim text copied from the lease (one sentence or clause). "" when absent.'),
+        note: z.string().describe('Why the fact is unclear. "" otherwise.'),
+        value_json: z.string().describe('The value as JSON, in the format the instructions give for this fact. "null" when absent.'),
+      }),
+    )
+    .describe("At least one entry for every fact; clause facts get one entry per distinct clause."),
   out_of_scope: z
-    .array(z.object({ topic: z.string(), quote: z.string().nullable(), reason: z.string() }))
+    .array(z.object({ topic: z.string(), quote: z.string().describe('Verbatim lease text, or "".'), reason: z.string() }))
     .describe("Lease terms the checker can't evaluate under Part II (see instructions)."),
 });
 export type WireFacts = z.infer<typeof WireFacts>;
-
-/** wire key → LeaseFacts key. Clause facts map to Fact<true>. */
-const KEYS = {
-  property_type: "propertyType",
-  tenancy_type: "tenancyType",
-  security_deposit: "securityDeposit",
-  deposit_holding: "depositHolding",
-  deposit_disclosure: "depositDisclosure",
-  deposit_return_days: "depositReturnDays",
-  deposit_claim_notice_days: "depositClaimNoticeDays",
-  nonpayment_notice: "nonpaymentNotice",
-  repair_entry_notice_hours: "repairEntryNoticeHours",
-  repair_entry_window: "repairEntryWindow",
-  periodic_termination_notice_days: "periodicTerminationNoticeDays",
-  end_of_term_notice_days: "endOfTermNoticeDays",
-  structural_maintenance_waiver: "structuralMaintenanceWaiver",
-  attorney_fee_waiver: "attorneyFeeWaiver",
-  liability_exculpation: "liabilityExculpation",
-  utility_shutoff_clause: "utilityShutoffClause",
-  lockout_clause: "lockoutClause",
-  flag_ban: "flagBan",
-  retaliation_clause: "retaliationClause",
-  property_removal_clause: "propertyRemovalClause",
-  landlord_notice_address: "landlordNoticeAddress",
-} as const satisfies Record<string, keyof LeaseFacts>;
 
 export interface LocateLog {
   fact: keyof LeaseFacts;
@@ -81,41 +72,90 @@ export interface OutOfScopeItem {
   span?: Span;
 }
 
-/** Converts the model's output into LeaseFacts, locating every quote in the lease. */
-export function toLeaseFacts(wire: WireFacts, lease: string): { facts: LeaseFacts; locates: LocateLog[]; outOfScope: OutOfScopeItem[] } {
-  const locates: LocateLog[] = [];
-  const facts = {} as Record<keyof LeaseFacts, Fact<unknown>>;
+function parseValue(fact: keyof LeaseFacts, json: string): { ok: true; value: unknown } | { ok: false } {
+  let raw: unknown;
+  try {
+    raw = JSON.parse(json);
+  } catch {
+    return { ok: false };
+  }
+  const r = VALUE_SCHEMAS[fact].safeParse(raw);
+  return r.success ? { ok: true, value: r.data } : { ok: false };
+}
 
-  for (const [wk, fk] of Object.entries(KEYS) as [keyof typeof KEYS, keyof LeaseFacts][]) {
-    const w = wire[wk] as { status: "present" | "absent" | "unclear"; quote: string | null; note: string | null; value?: unknown };
-    const isClause = !("value" in w);
-    if (w.status === "absent") {
-      facts[fk] = { status: "absent" };
+type Item = WireFacts["facts"][number];
+
+/** Converts the model's output into LeaseFacts, validating values and locating every quote in the lease. */
+export function toLeaseFacts(
+  wire: WireFacts,
+  lease: string,
+): { facts: LeaseFacts; locates: LocateLog[]; outOfScope: OutOfScopeItem[]; problems: string[] } {
+  const locates: LocateLog[] = [];
+  const problems: string[] = [];
+  const facts = {} as Record<keyof LeaseFacts, Fact<unknown> | Instance<unknown>[]>;
+
+  /** One non-absent entry → a located, validated instance (or an unclear one, with the reason). */
+  const toInstance = (name: keyof LeaseFacts, item: Item): Instance<unknown> => {
+    const quote = item.quote.trim();
+    const loc = quote ? locateQuote(lease, quote) : null;
+    if (quote) locates.push({ fact: name, method: loc?.method ?? "not_found", ...(loc && { score: loc.score }) });
+    const parsed = item.status === "present" ? parseValue(name, item.value_json) : { ok: false as const };
+    if (item.status === "present" && !parsed.ok) problems.push(`${name}: invalid value ${item.value_json.slice(0, 80)}`);
+    if (item.status === "present" && loc && parsed.ok) return { status: "present", value: parsed.value, span: loc.span };
+    const why =
+      item.status === "unclear"
+        ? item.note.trim() || "the lease is ambiguous"
+        : !quote
+          ? "no supporting quote was given"
+          : !loc
+            ? "the supporting quote could not be found in the lease"
+            : "the value could not be read";
+    return { status: "unclear", note: why, ...(loc && { span: loc.span }) };
+  };
+
+  const byName = new Map<keyof LeaseFacts, Item[]>();
+  for (const item of wire.facts) byName.set(item.fact, [...(byName.get(item.fact) ?? []), item]);
+
+  for (const name of FACT_NAMES) {
+    const items = byName.get(name) ?? [];
+    const isClause = (CLAUSE_FACTS as readonly string[]).includes(name);
+    if (items.length === 0) {
+      problems.push(`${name}: not reported`);
+      const missing = { status: "unclear", note: "the extractor did not report this fact" } as const;
+      facts[name] = isClause ? [missing] : missing;
       continue;
     }
-    const loc = w.quote ? locateQuote(lease, w.quote) : null;
-    if (w.quote) locates.push({ fact: fk, method: loc?.method ?? "not_found", ...(loc && { score: loc.score }) });
-    const value = isClause ? true : w.value;
 
-    if (w.status === "present" && loc && value !== null && value !== undefined) {
-      facts[fk] = { status: "present", value, span: loc.span };
-    } else {
-      const why =
-        w.status === "unclear"
-          ? w.note ?? "the lease is ambiguous"
-          : !w.quote
-            ? "no supporting quote was given"
-            : !loc
-              ? "the supporting quote could not be found in the lease"
-              : "no value could be read from the clause";
-      facts[fk] = { status: "unclear", note: why, ...(loc && { span: loc.span }) };
+    if (isClause) {
+      // Every distinct clause is its own instance; the same clause quoted twice counts once.
+      const seen = new Set<string>();
+      const instances: Instance<unknown>[] = [];
+      for (const item of items) {
+        if (item.status === "absent") continue;
+        const inst = toInstance(name, item);
+        const key = inst.span ? `${inst.span.start}:${inst.span.end}` : `${inst.status}:${item.quote.trim()}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        instances.push(inst);
+      }
+      facts[name] = instances;
+      continue;
     }
+
+    // Single-valued facts: two different answers are a contradiction, not two clauses.
+    if (items.length > 1 && new Set(items.map((i) => `${i.status}|${i.value_json}`)).size > 1) {
+      problems.push(`${name}: reported ${items.length} times with different answers`);
+      facts[name] = { status: "unclear", note: "the extractor gave conflicting answers" };
+      continue;
+    }
+    const item = items[0]!;
+    facts[name] = item.status === "absent" ? { status: "absent" } : toInstance(name, item);
   }
 
   const outOfScope: OutOfScopeItem[] = wire.out_of_scope.map((o) => {
-    const loc = o.quote ? locateQuote(lease, o.quote) : null;
+    const loc = o.quote.trim() ? locateQuote(lease, o.quote) : null;
     return { topic: o.topic, reason: o.reason, ...(loc && { span: loc.span }) };
   });
 
-  return { facts: facts as unknown as LeaseFacts, locates, outOfScope };
+  return { facts: facts as unknown as LeaseFacts, locates, outOfScope, problems };
 }

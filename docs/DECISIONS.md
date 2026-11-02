@@ -51,3 +51,19 @@ Made in teach mode. Don't re-decide these without a new entry. Also logged in `w
 - Why: recovering near-misses is worth it, but a loose threshold can confidently highlight the wrong clause (v1's failure mode). C fits batch pipelines where an extra call is cheap.
 - Concept tags: fuzzy-matching, thresholds, fail-closed-vs-fail-open, precision-recall, observability
 - **Built:** tiers — exact → normalized exact (whitespace, quotes, dashes, case) → fuzzy on word-level edit distance (bigram pre-filter), only a unique best window ≥ 0.9 beating the runner-up by 0.05 → else `unclear`. Every locate method is logged in the trace for evals. Note: a first version scored fuzzy windows with character bigrams; a unit test caught it matching a window that straddled two similar sentences, because bigrams ignore word order.
+
+## 2026-11-01 · leasetrace · Fitting the fact schema inside structured-output limits (teach mode off)
+- Context: first live call → 400 "more than 16 union-typed parameters", then 400 "compiled grammar is too large". Bisected with 1-token probes: 12 typed fact objects compile, 16 don't; flattening doesn't help.
+- Options: A) sentinel values instead of nulls B) generic fact list with per-fact values validated in code C) split facts across calls
+- Decided: B (A was tried first; it fixed the union limit but not grammar size).
+- Why: the enforced grammar stays constant as facts grow, and nulls come back. Value types are checked locally (`VALUE_SCHEMAS` in `src/facts/wire.ts`); a missing, duplicated-and-conflicting, or invalid fact becomes `unclear` and is listed in `problems` in the trace. C multiplies lease input tokens per audit.
+- Concept tags: constrained-decoding, schema-design, api-limits, validation, fail-loud, bisection
+- **Guard:** `tests/pipeline.test.ts` fails if any union appears in the schema or it grows past 3,000 chars.
+
+## 2026-11-01 · leasetrace · Multi-instance clause facts (teach mode off)
+- Context: the real-lease re-runs showed clause-type facts dropping clauses: one slot per fact made the model choose among several matching clauses, and its choice varied between runs.
+- Options: A) one slot, model picks the worst clause B) clause facts are lists of instances, rules check each C) facts per clause location without topic grouping
+- Decided: B.
+- Why: A pushes severity judgment into the model (against Decision 2) and still hides clauses. Single-valued facts (notice days, deposit amount) keep one slot: two different answers there are a contradiction, so they stay `unclear`.
+- Concept tags: data-modeling, cardinality, one-to-many, nondeterminism, separation-of-concerns
+- **Built:** `Clauses<T>` / `CLAUSE_FACTS` in `src/facts/schema.ts`; the mapper turns each non-absent entry into an instance and merges same-span duplicates; the clause rules use `flatMap` over instances. The prompt marks "(clause fact)" and asks for one entry per distinct clause. Same change also: repair-entry window no longer re-reports the no-notice branch (that double-count lived in two rules), and the maintenance-waiver definition now says outright that reimbursing tenant-caused damage is never a waiver.

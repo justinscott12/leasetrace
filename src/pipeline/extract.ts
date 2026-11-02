@@ -28,6 +28,8 @@ export type ExtractResult =
       facts: LeaseFacts;
       outOfScope: OutOfScopeItem[];
       locates: LocateLog[];
+      /** Facts the model omitted, duplicated or gave an invalid value for (each became `unclear`). */
+      problems: string[];
       model: string;
       usage: ExtractUsage;
       latencyMs: number;
@@ -87,7 +89,7 @@ export async function extractFacts(messages: MessagesClient, lease: string, opts
   const wire = response.parsed_output;
   if (!wire) return fail("bad_output", "The model's output didn't match the expected schema.", t0);
 
-  const { facts, locates, outOfScope } = toLeaseFacts(wire, lease);
+  const { facts, locates, outOfScope, problems } = toLeaseFacts(wire, lease);
   const u = response.usage;
   return {
     ok: true,
@@ -95,6 +97,7 @@ export async function extractFacts(messages: MessagesClient, lease: string, opts
     facts,
     outOfScope,
     locates,
+    problems,
     model: response.model,
     usage: {
       inputTokens: u.input_tokens,

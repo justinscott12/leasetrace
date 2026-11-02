@@ -5,6 +5,8 @@ import type { WireFacts } from "../src/facts/wire.js";
 import { audit } from "../src/pipeline/audit.js";
 import { extractFacts, type MessagesClient } from "../src/pipeline/extract.js";
 import { costUsd } from "../src/pipeline/pricing.js";
+import { betaZodOutputFormat } from "@anthropic-ai/sdk/helpers/beta/zod";
+import { FACT_NAMES, WireFacts as WireSchema } from "../src/facts/wire.js";
 import { SYSTEM_PREFIX } from "../src/pipeline/prompt.js";
 import { quoteInCitation } from "../src/corpus/index.js";
 
@@ -14,37 +16,23 @@ If rent is late, Landlord may change the locks.
 Landlord may enter at any time to make repairs.
 Notices to Landlord: Palm Court LLC, 100 Main St, Tampa, FL 33602.`;
 
-const absent = { status: "absent", quote: null, note: null, value: null } as const;
-const clauseAbsent = { status: "absent", quote: null, note: null } as const;
+type Item = WireFacts["facts"][number];
+const present = (fact: Item["fact"], quote: string, value: unknown): Item => ({ fact, status: "present", quote, note: "", value_json: JSON.stringify(value) });
 
-function wire(over: Partial<WireFacts> = {}): WireFacts {
-  return {
-    is_residential_lease: "yes",
-    property_type: { status: "present", quote: "Unit 4B, Palm Court Apartments", note: null, value: "multi_unit" },
-    tenancy_type: absent,
-    security_deposit: { status: "present", quote: "Tenant shall pay a security deposit of $1,200.", note: null, value: { amount: 1200 } },
-    deposit_holding: absent,
-    deposit_disclosure: absent,
-    deposit_return_days: absent,
-    deposit_claim_notice_days: absent,
-    nonpayment_notice: absent,
-    repair_entry_notice_hours: absent,
-    repair_entry_window: { status: "present", quote: "Landlord may enter at any time to make repairs.", note: null, value: { startMinute: null, endMinute: null } },
-    periodic_termination_notice_days: absent,
-    end_of_term_notice_days: absent,
-    structural_maintenance_waiver: clauseAbsent,
-    attorney_fee_waiver: clauseAbsent,
-    liability_exculpation: clauseAbsent,
-    utility_shutoff_clause: clauseAbsent,
-    lockout_clause: { status: "present", quote: "If rent is late, Landlord may change the locks.", note: null },
-    flag_ban: clauseAbsent,
-    retaliation_clause: clauseAbsent,
-    property_removal_clause: absent,
-    landlord_notice_address: { status: "present", quote: "Notices to Landlord: Palm Court LLC, 100 Main St, Tampa, FL 33602.", note: null, value: "Palm Court LLC, 100 Main St, Tampa, FL 33602" },
-    out_of_scope: [],
-    ...over,
-  };
+/** Every fact absent except the ones given. */
+function wire(items: Item[] = DEFAULT_ITEMS, over: Partial<WireFacts> = {}): WireFacts {
+  const given = new Set(items.map((i) => i.fact));
+  const absent = FACT_NAMES.filter((f) => !given.has(f)).map((fact): Item => ({ fact, status: "absent", quote: "", note: "", value_json: "null" }));
+  return { is_residential_lease: "yes", facts: [...items, ...absent], out_of_scope: [], ...over };
 }
+
+const DEFAULT_ITEMS: Item[] = [
+  present("propertyType", "Unit 4B, Palm Court Apartments", "multi_unit"),
+  present("securityDeposit", "Tenant shall pay a security deposit of $1,200.", { amount: 1200 }),
+  present("repairEntryWindow", "Landlord may enter at any time to make repairs.", { startMinute: null, endMinute: null }),
+  present("lockoutClause", "If rent is late, Landlord may change the locks.", true),
+  present("landlordNoticeAddress", "Notices to Landlord: Palm Court LLC, 100 Main St, Tampa, FL 33602.", "Palm Court LLC, 100 Main St, Tampa, FL 33602"),
+];
 
 const usage = { input_tokens: 900, output_tokens: 1200, cache_creation_input_tokens: 0, cache_read_input_tokens: 24000 };
 
@@ -74,6 +62,102 @@ describe("prompt", () => {
   });
 });
 
+describe("schema", () => {
+  // Structured outputs reject schemas with more than 16 union-typed parameters
+  // (live 400 on 2026-11-01). Sentinels keep the count at zero so facts can grow.
+  it("has no union-typed parameters", () => {
+    const schema = (betaZodOutputFormat(WireSchema) as unknown as { schema: unknown }).schema;
+    const unions: string[] = [];
+    const walk = (n: unknown, path: string) => {
+      if (!n || typeof n !== "object") return;
+      const o = n as Record<string, unknown>;
+      if (o.anyOf || Array.isArray(o.type)) unions.push(path);
+      for (const [k, v] of Object.entries(o)) walk(v, `${path}/${k}`);
+    };
+    walk(schema, "");
+    expect(unions).toEqual([]);
+  });
+
+  it("keeps the schema small: one generic item shape regardless of fact count", () => {
+    const schema = (betaZodOutputFormat(WireSchema) as unknown as { schema: unknown }).schema;
+    expect(JSON.stringify(schema).length).toBeLessThan(3000);
+  });
+});
+
+describe("toLeaseFacts validation", () => {
+  const without = (f: Item["fact"]) => wire().facts.filter((i) => i.fact !== f);
+
+  it("a fact the model didn't report becomes unclear and is logged", async () => {
+    const r = await extractFacts(ok({ ...wire(), facts: without("tenancyType") }), LEASE);
+    if (!r.ok) throw new Error(r.message);
+    expect(r.facts.tenancyType).toEqual({ status: "unclear", note: "the extractor did not report this fact" });
+    expect(r.problems).toContain("tenancyType: not reported");
+  });
+
+  it("an invalid value becomes unclear and is logged", async () => {
+    const bad = [...DEFAULT_ITEMS.filter((i) => i.fact !== "propertyType"), present("propertyType", "Unit 4B, Palm Court Apartments", "castle")];
+    const r = await extractFacts(ok(wire(bad)), LEASE);
+    if (!r.ok) throw new Error(r.message);
+    expect(r.facts.propertyType).toMatchObject({ status: "unclear", note: "the value could not be read" });
+    expect(r.problems[0]).toMatch(/propertyType: invalid value/);
+  });
+
+  it("conflicting duplicate entries become unclear", async () => {
+    const dup = [...DEFAULT_ITEMS, present("propertyType", "Unit 4B, Palm Court Apartments", "duplex")];
+    const r = await extractFacts(ok(wire(dup)), LEASE);
+    if (!r.ok) throw new Error(r.message);
+    expect(r.facts.propertyType).toMatchObject({ status: "unclear", note: "the extractor gave conflicting answers" });
+  });
+
+  it("nulls inside values survive validation", async () => {
+    const r = await extractFacts(ok(wire()), LEASE);
+    if (!r.ok) throw new Error(r.message);
+    expect(r.facts.repairEntryWindow).toMatchObject({ status: "present", value: { startMinute: null, endMinute: null } });
+    expect(r.problems).toEqual([]);
+  });
+});
+
+describe("clause facts hold every clause", () => {
+  const LEASE2 = `${LEASE}
+Landlord may shut off water if rent is unpaid.
+Landlord may interrupt utilities to make repairs.`;
+  const shutoff = (quote: string, repairOnly: boolean) => present("utilityShutoffClause", quote, { repairOrDamagePreventionOnly: repairOnly });
+
+  it("several entries for one clause fact become separate instances", async () => {
+    const items = [...DEFAULT_ITEMS, shutoff("Landlord may shut off water if rent is unpaid.", false), shutoff("Landlord may interrupt utilities to make repairs.", true)];
+    const r = await extractFacts(ok(wire(items)), LEASE2);
+    if (!r.ok) throw new Error(r.message);
+    expect(r.facts.utilityShutoffClause.map((c) => c.status === "present" && c.value)).toEqual([
+      { repairOrDamagePreventionOnly: false },
+      { repairOrDamagePreventionOnly: true },
+    ]);
+    expect(r.problems).toEqual([]);
+  });
+
+  it("the same clause quoted twice counts once", async () => {
+    const q = "Landlord may shut off water if rent is unpaid.";
+    const r = await extractFacts(ok(wire([...DEFAULT_ITEMS, shutoff(q, false), shutoff(q, false)])), LEASE2);
+    if (!r.ok) throw new Error(r.message);
+    expect(r.facts.utilityShutoffClause).toHaveLength(1);
+  });
+
+  it("an unreported clause fact becomes one unclear instance", async () => {
+    const r = await extractFacts(ok({ ...wire(), facts: wire().facts.filter((i) => i.fact !== "flagBan") }), LEASE);
+    if (!r.ok) throw new Error(r.message);
+    expect(r.facts.flagBan).toEqual([{ status: "unclear", note: "the extractor did not report this fact" }]);
+  });
+
+  it("audit reports both utility clauses with the right severities", async () => {
+    const items = [...DEFAULT_ITEMS, shutoff("Landlord may shut off water if rent is unpaid.", false), shutoff("Landlord may interrupt utilities to make repairs.", true)];
+    const r = await audit(ok(wire(items)), LEASE2);
+    if (!r.ok) throw new Error("audit failed");
+    expect(r.findings.filter((f) => f.ruleId === "utility-shutoff").map((f) => [f.severity, f.span?.quote])).toEqual([
+      ["violation", "Landlord may shut off water if rent is unpaid."],
+      ["review", "Landlord may interrupt utilities to make repairs."],
+    ]);
+  });
+});
+
 describe("extractFacts", () => {
   it("sends the cached prefix, the lease after it, structured output and fallbacks", async () => {
     const c = ok(wire());
@@ -92,7 +176,8 @@ describe("extractFacts", () => {
   it("maps facts, locates spans, and prices the call", async () => {
     const r = await extractFacts(ok(wire()), LEASE);
     if (!r.ok) throw new Error(r.message);
-    expect(r.facts.lockoutClause.status).toBe("present");
+    expect(r.facts.lockoutClause.map((c) => c.status)).toEqual(["present"]);
+    expect(r.facts.flagBan).toEqual([]);
     expect(r.facts.tenancyType).toEqual({ status: "absent" });
     expect(r.usage.costUsd).toBeCloseTo(costUsd("claude-opus-5-5", usage)!, 10);
     expect(r.usage.cacheReadTokens).toBe(24000);
@@ -101,11 +186,11 @@ describe("extractFacts", () => {
 
   it("a present fact whose quote isn't in the lease becomes unclear, not invented", async () => {
     const r = await extractFacts(
-      ok(wire({ lockout_clause: { status: "present", quote: "Landlord may padlock the door at will.", note: null } })),
+      ok(wire([...DEFAULT_ITEMS.filter((i) => i.fact !== "lockoutClause"), present("lockoutClause", "Landlord may padlock the door at will.", true)])),
       LEASE,
     );
     if (!r.ok) throw new Error(r.message);
-    expect(r.facts.lockoutClause).toMatchObject({ status: "unclear", note: expect.stringMatching(/could not be found/) });
+    expect(r.facts.lockoutClause).toMatchObject([{ status: "unclear", note: expect.stringMatching(/could not be found/) }]);
     expect(r.locates).toContainEqual({ fact: "lockoutClause", method: "not_found" });
   });
 
@@ -148,7 +233,7 @@ describe("audit", () => {
   });
 
   it("a commercial lease gets no Part II findings", async () => {
-    const r = await audit(ok(wire({ is_residential_lease: "no" })), LEASE);
+    const r = await audit(ok(wire(DEFAULT_ITEMS, { is_residential_lease: "no" })), LEASE);
     expect(r).toMatchObject({ ok: true, scope: "not_residential", findings: [] });
   });
 

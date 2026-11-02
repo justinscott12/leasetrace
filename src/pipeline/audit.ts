@@ -48,6 +48,7 @@ export async function audit(
     normalized: ex.locates.filter((l) => l.method === "normalized").length,
     fuzzy: ex.locates.filter((l) => l.method === "fuzzy").length,
     notFound: ex.locates.filter((l) => l.method === "not_found").length,
+    extractionProblems: ex.problems,
   });
 
   // A non-residential lease is outside Part II entirely: no rule findings (v1's mistake).
