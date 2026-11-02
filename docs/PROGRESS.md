@@ -141,8 +141,15 @@ federal fair housing, jury waivers, commercial leases.
   - Replays recorded (`public/replays/*.json`, $0.51): every sample's findings match its labels. Playback runs at 4× or 8×
     (labeled) so the longest, 42 s, plays in ~5 s.
   - Total project API spend ≈ $16.82 (evals $14.77, replays $0.51, early real-lease runs $1.54). README rewritten. 135 tests; production build OK (first load 64 KB gzip).
-- [ ] **Next unchecked item:** Justin approves labels (`evals/REVIEW.md`, 30 cases); commit + push v2; swap `main` to v2,
-      enable GitHub Pages (Actions source), update the repo description; portfolio card + case study.
+- [x] Published 2026-11-02: v2 committed (5e31154, abb5d29 pins LF endings), `main` force-pointed at v2 (v1 kept on
+      `v1-legacy` @ 4f605fb), GitHub Pages on (Actions), repo description + homepage updated. Live and verified:
+      https://justinscott12.github.io/leasetrace/ (replays play and finish, evals and how pages load, no console errors).
+      Not verified live: check-your-own-lease (needs a real key; Claude doesn't enter keys).
+- [x] Portfolio (local, uncommitted until Justin OKs): LeaseTrace is the first card under Live & published in
+      `lib/projects.ts` (old LegalTrace prototype card removed), screenshot `public/projects/leasetrace.webp`, case study at
+      `app/projects/leasetrace/page.tsx`. Homepage "Featured work" unchanged (its subtitle claims real users).
+- [ ] **Next unchecked item:** Justin approves labels (`evals/REVIEW.md`, 30 cases; flip `"approved": true`, then
+      `npm run site:data` and push so the evals page drops "awaiting review"); one live BYOK check with his key.
 - [ ] Possible v2.1: deadline-style notice ("by the 15th") → report the shortest notice it allows; needs fresh held-out
       leases to re-measure, since the failure was found on a test lease. Re-run the model sweep on the final prompt (~$3).
 - [x] First honest scores → test recall ≥ 0.9, fabricated citations = 0 (met on the current set; see the saturation caveat)
