@@ -1,0 +1,6 @@
+# Lease texts are fingerprinted (sha256) in eval results and spans are character offsets:
+# keep LF everywhere so a Windows checkout does not change them.
+* text=auto eol=lf
+*.webp binary
+*.png binary
+*.pdf binary
