@@ -398,20 +398,54 @@ const attorneyFees = clauseRule({
   fix: "In any action to enforce this lease or Part II of Chapter 83, the prevailing party may recover reasonable attorney fees and court costs.",
 });
 
-const liability = clauseRule({
+// Label policy (docs/LABEL_POLICY.md): broad non-liability clauses are void even with a
+// savings phrase; force majeure is `review`; clauses limited to third-party crime or
+// stored property restate existing law and produce no finding.
+const liability: Rule = {
   id: "liability-exculpation",
   title: "Limit on landlord liability",
-  citation: "83.47(1)(b)",
-  quote: "Purports to limit or preclude any liability of the landlord to the tenant or of the tenant to the landlord, arising under law.",
-  fact: "liabilityExculpation",
-  severity: "void",
-  problem: "The lease tries to release the landlord from liability the law imposes. Florida makes this kind of clause void.",
-  fix: "Delete the clause. Each party remains responsible for its own obligations and liability under law.",
-});
+  basis: [
+    {
+      citation: "83.47(1)(b)",
+      quote: "Purports to limit or preclude any liability of the landlord to the tenant or of the tenant to the landlord, arising under law.",
+    },
+  ],
+  facts: ["liabilityExculpation"],
+  check({ liabilityExculpation: clauses }) {
+    const base = { ruleId: this.id, citation: "83.47(1)(b)", title: this.title };
+    return clauses.flatMap((c): Finding[] => {
+      if (c.status !== "present") return unclear(base, c, "a limit on liability");
+      switch (c.value.scope) {
+        case "broad":
+          return [
+            finding(
+              base,
+              "void",
+              "The lease tries to release the landlord from liability the law imposes. Florida makes this kind of clause void.",
+              c.span,
+              "Delete the clause. Each party remains responsible for its own obligations and liability under law.",
+            ),
+          ];
+        case "force_majeure":
+          return [
+            finding(
+              base,
+              "review",
+              "The lease excuses the landlord's performance after events beyond its control. That isn't a release of liability by itself, but if it's used to skip duties Florida says can't be waived (like maintenance under s. 83.51), it would be void. A person should check.",
+              c.span,
+              "Add: Nothing in this clause excuses Landlord's obligations under Part II of Chapter 83, Florida Statutes.",
+            ),
+          ];
+        default:
+          return [];
+      }
+    });
+  },
+};
 
 // Label policy (docs/LABEL_POLICY.md): interruptions limited to repairs or preventing
-// damage are `review`, not a violation; 83.67(1) has no repair exception in its text,
-// but its target is shutoffs used against the tenant.
+// damage, or "as permitted by law", are `review`; 83.67(1) states no exception, but its
+// target is shutoffs used against the tenant.
 const utilities: Rule = {
   id: "utility-shutoff",
   title: "Utility shutoff",
@@ -426,7 +460,17 @@ const utilities: Rule = {
     const base = { ruleId: this.id, citation: "83.67(1)", title: this.title };
     return clauses.flatMap((c): Finding[] => {
       if (c.status !== "present") return unclear(base, c, "interrupting utilities");
-      if (c.value.repairOrDamagePreventionOnly)
+      if (c.value.purpose === "as_permitted_by_law")
+        return [
+          finding(
+            base,
+            "review",
+            'The lease lets the landlord cut off a utility "according to statute" or as the law permits, without saying when. Florida bars landlord-caused utility interruptions, so a person should check what this clause is meant to allow.',
+            c.span,
+            "Name the specific lawful circumstance, or delete the clause.",
+          ),
+        ];
+      if (c.value.purpose === "repair_or_damage_prevention")
         return [
           finding(
             base,

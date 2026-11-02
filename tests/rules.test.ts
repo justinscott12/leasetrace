@@ -151,7 +151,6 @@ describe("maintenance-waiver — 83.51(1) + 83.47(1)(a)", () => {
 describe("clause rules: present → finding, absent → nothing", () => {
   const cases = [
     ["attorney-fee-waiver", "attorneyFeeWaiver", "void", "83.48"],
-    ["liability-exculpation", "liabilityExculpation", "void", "83.47(1)(b)"],
     ["lockout", "lockoutClause", "violation", "83.67(2)"],
     ["flag-ban", "flagBan", "void", "83.67(4)"],
     ["retaliation", "retaliationClause", "violation", "83.64(1)"],
@@ -166,8 +165,10 @@ describe("clause rules: present → finding, absent → nothing", () => {
 });
 
 describe("utility-shutoff — 83.67(1) + label policy", () => {
-  const clause = (repairOnly: boolean) => present({ repairOrDamagePreventionOnly: repairOnly });
+  const clause = (repairOnly: boolean) => present({ purpose: repairOnly ? ("repair_or_damage_prevention" as const) : ("other" as const) });
   const u = (repairOnly: boolean) => ({ utilityShutoffClause: [clause(repairOnly)] });
+  it('"according to statute" → review (label call, 2026-11-01)', () =>
+    expect(severities("utility-shutoff", { utilityShutoffClause: [present({ purpose: "as_permitted_by_law" as const })] })).toEqual(["review"]));
   it("absent → nothing", () => expect(run("utility-shutoff", {})).toEqual([]));
   it("shutoff for any other purpose is a violation", () => {
     const [f] = run("utility-shutoff", u(false));
@@ -177,6 +178,20 @@ describe("utility-shutoff — 83.67(1) + label policy", () => {
     expect(severities("utility-shutoff", u(true))).toEqual(["review"]));
   it("a lease with both kinds of clause gets both findings (seen on a real lease)", () =>
     expect(severities("utility-shutoff", { utilityShutoffClause: [clause(true), clause(false)] })).toEqual(["review", "violation"]));
+});
+
+describe("liability-exculpation — 83.47(1)(b) + label policy", () => {
+  const l = (scope: "broad" | "force_majeure" | "third_party_crime" | "stored_property") => ({ liabilityExculpation: [present({ scope })] });
+  it("absent → nothing", () => expect(run("liability-exculpation", {})).toEqual([]));
+  it("broad → void (even with a savings phrase)", () => {
+    const [f] = run("liability-exculpation", l("broad"));
+    expect(f).toMatchObject({ severity: "void", citation: "83.47(1)(b)", span });
+  });
+  it("force majeure → review", () => expect(severities("liability-exculpation", l("force_majeure"))).toEqual(["review"]));
+  it("third-party crime only → no finding", () => expect(run("liability-exculpation", l("third_party_crime"))).toEqual([]));
+  it("stored property only → no finding", () => expect(run("liability-exculpation", l("stored_property"))).toEqual([]));
+  it("unclear → review", () =>
+    expect(severities("liability-exculpation", { liabilityExculpation: [{ status: "unclear", note: "x" }] })).toEqual(["review"]));
 });
 
 describe("property-removal — 83.67(5)", () => {

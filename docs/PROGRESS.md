@@ -69,8 +69,10 @@ federal fair housing, jury waivers, commercial leases.
     still flagged as a maintenance waiver despite the explicit exclusion. The rest are new interpretation questions (below).
   - **Lesson:** stop tuning on one lease. Further prompt changes need the golden set and repeated runs to show a real delta;
     otherwise this is overfitting to a single example.
-- [ ] **Next unchecked item:** Justin answers the new label questions below; then Decisions 4–5 (eval grading, citation
-      safety) and the golden set, with each case run several times and consistency reported.
+- [x] Justin answered round 2 of label questions; rules, schema, prompt and tests updated (not re-run live).
+- [ ] **Next unchecked item:** Decisions 4–5 (eval grading, citation safety), then the golden set with each case run several
+      times and consistency reported. Known open precision issue: the "reimburse damage you cause" clause is still flagged as a
+      maintenance waiver; measure it in evals before changing the prompt again.
 - [ ] Out-of-scope items: extracted and located; not yet shown anywhere.
 - [ ] Teach-mode Decisions 4–5 (eval grading, fabricated-citation prevention)
 - [ ] Golden set (Justin approves labels), dev/test split
@@ -82,16 +84,10 @@ Utility interruption for repairs only → review · broad exculpation with "unle
 carve-out broader than 83.48's → void · no-notice repair entry when someone's home → void (reported as 0 hours' notice).
 Rules, fact definitions and tests updated (103 passing). Expected on the real lease now: 3 void + 1 review.
 
-### New label questions (from the multi-instance run) — Justin's call
-- **Entry-purpose removals:** a list of entry purposes includes "removing perishable foodstuffs if your electricity is
-  disconnected", "removing health or safety hazards… or items prohibited under our rules", "removing unauthorized window
-  coverings". Removal of tenant property under 83.67(5) (violation), or entry purposes outside it?
-- **Force majeure:** "we shall be excused from any further performance of obligations… to the full extent allowed under
-  applicable law". A liability release under 83.47(1)(b), or a performance excuse that isn't exculpation?
-- **"Cutting off electricity according to statute"** (an entry purpose): a 83.67(1) violation, review, or ignore?
-- **Narrow non-liability clauses:** "not liable for casualty loss, damage, or theft except for property removed under a
-  contractual lien" (a storage clause), and crime-related non-liability "unless otherwise provided by law". Void like the
-  broad clause, or compliant because they're limited?
+### Label policy round 2 — answered 2026-11-01 (docs/LABEL_POLICY.md rows 5–8)
+Entry-purpose removals → violation · force majeure → review · cutoff "according to statute" → review · non-liability limited
+to third-party crime or stored property → compliant. Encoded as values the rules decide on (`liabilityExculpation.scope`,
+`utilityShutoffClause.purpose`), not prompt-only exclusions, so they're unit-tested. 116 tests.
 
 A private precision check on a real lease lives in `private/` (gitignored; see `private/NOTES.md` locally).
 
@@ -112,3 +108,4 @@ A private precision check on a real lease lives in `private/` (gitignored; see `
 - 2026-11-01 (later): label policy implemented; 2 more live runs (cache verified). Found the one-slot-per-fact limitation and run-to-run variance. Spend so far ≈ $1.10.
 - 2026-11-01 (later): multi-instance clause facts built; 110 tests. No paid runs since the last two.
 - 2026-11-01 (later): live run with clause instances — recall fixed, precision exposed new label questions. Spend ≈ $1.54.
+- 2026-11-01 (later): label policy round 2 encoded (scope/purpose values); 116 tests. Not re-run live.

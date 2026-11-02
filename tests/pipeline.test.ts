@@ -121,15 +121,15 @@ describe("clause facts hold every clause", () => {
   const LEASE2 = `${LEASE}
 Landlord may shut off water if rent is unpaid.
 Landlord may interrupt utilities to make repairs.`;
-  const shutoff = (quote: string, repairOnly: boolean) => present("utilityShutoffClause", quote, { repairOrDamagePreventionOnly: repairOnly });
+  const shutoff = (quote: string, repairOnly: boolean) => present("utilityShutoffClause", quote, { purpose: repairOnly ? "repair_or_damage_prevention" : "other" });
 
   it("several entries for one clause fact become separate instances", async () => {
     const items = [...DEFAULT_ITEMS, shutoff("Landlord may shut off water if rent is unpaid.", false), shutoff("Landlord may interrupt utilities to make repairs.", true)];
     const r = await extractFacts(ok(wire(items)), LEASE2);
     if (!r.ok) throw new Error(r.message);
     expect(r.facts.utilityShutoffClause.map((c) => c.status === "present" && c.value)).toEqual([
-      { repairOrDamagePreventionOnly: false },
-      { repairOrDamagePreventionOnly: true },
+      { purpose: "other" },
+      { purpose: "repair_or_damage_prevention" },
     ]);
     expect(r.problems).toEqual([]);
   });

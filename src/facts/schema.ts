@@ -39,6 +39,9 @@ export const CLAUSE_FACTS = [
 ] as const;
 export type ClauseFactKey = (typeof CLAUSE_FACTS)[number];
 
+export type ExculpationScope = "broad" | "force_majeure" | "third_party_crime" | "stored_property";
+export type UtilityPurpose = "repair_or_damage_prevention" | "as_permitted_by_law" | "other";
+
 export type PropertyType = "single_family" | "duplex" | "multi_unit" | "other";
 export type TenancyType =
   | "fixed_term"
@@ -80,9 +83,10 @@ export interface LeaseFacts {
   /** Clause shifting 83.51(1) code/structural/plumbing duties off the landlord. */
   structuralMaintenanceWaiver: Clauses<true>;
   attorneyFeeWaiver: Clauses<true>;
-  liabilityExculpation: Clauses<true>;
-  /** Clause letting the landlord interrupt utilities; repairOrDamagePreventionOnly when limited to repairs / preventing damage. */
-  utilityShutoffClause: Clauses<{ repairOrDamagePreventionOnly: boolean }>;
+  /** Non-liability clause and its scope (label policy decides which scopes are void, review or fine). */
+  liabilityExculpation: Clauses<{ scope: ExculpationScope }>;
+  /** Clause letting the landlord interrupt utilities, and the purpose it states. */
+  utilityShutoffClause: Clauses<{ purpose: UtilityPurpose }>;
   lockoutClause: Clauses<true>;
   flagBan: Clauses<true>;
   retaliationClause: Clauses<true>;
