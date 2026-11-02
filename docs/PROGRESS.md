@@ -145,7 +145,7 @@ federal fair housing, jury waivers, commercial leases.
       `v1-legacy` @ 4f605fb), GitHub Pages on (Actions), repo description + homepage updated. Live and verified:
       https://justinscott12.github.io/leasetrace/ (replays play and finish, evals and how pages load, no console errors).
       Not verified live: check-your-own-lease (needs a real key; Claude doesn't enter keys).
-- [x] Portfolio (local, uncommitted until Justin OKs): LeaseTrace is the first card under Live & published in
+- [x] Portfolio, LIVE 2026-11-02 (portfolio main @ 22751a3, branch `leasetrace`): LeaseTrace is the first card under Live & published in
       `lib/projects.ts` (old LegalTrace prototype card removed), screenshot `public/projects/leasetrace.webp`, case study at
       `app/projects/leasetrace/page.tsx`. Homepage "Featured work" unchanged (its subtitle claims real users).
 - [ ] **Next unchecked item:** Justin approves labels (`evals/REVIEW.md`, 30 cases; flip `"approved": true`, then
